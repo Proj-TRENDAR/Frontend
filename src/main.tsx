@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import { RouterProvider } from 'react-router-dom'
 
 import { basicTheme } from '@layouts/theme.ts'
-import { GlobalStyle } from '@layouts/GloberStyle.ts'
+import { GlobalStyle } from '@layouts/GlobalStyle.ts'
 import router from './router.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
