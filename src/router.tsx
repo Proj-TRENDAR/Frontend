@@ -1,6 +1,7 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 
 import Layout from '@layouts/Layout'
+import LoginLayout from '@layouts/Login'
 import Home from '@pages/Home'
 import RoutineList from '@pages/RoutineList'
 import Login from '@pages/Login'
@@ -13,8 +14,10 @@ const router = createBrowserRouter(
         <Route path="" element={<Home />} />
         <Route path="routine-list" element={<RoutineList />} />
       </Route>
-      <Route path="login" element={<Login />} />
-      <Route path="guide" element={<Guide />} />
+      <Route element={<LoginLayout />}>
+        <Route path="login" element={<Login />} />
+        <Route path="guide" element={<Guide />} />
+      </Route>
     </>
   )
 )
