@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Logo from '@components/common/Logo'
-
+import Title from '@components/common/Title'
+import Button from '@/components/common/button'
 import * as S from './style'
 
 export default function Login() {
@@ -14,7 +15,8 @@ export default function Login() {
               <span id="slogan-bold">라이프 트렌드</span>를 그리는 곳
             </span>
             <S.Logo>
-              <Logo />
+              <Logo size={50} />
+              <Title />
             </S.Logo>
           </S.LogoDiv>
         </S.LogoWrapper>
