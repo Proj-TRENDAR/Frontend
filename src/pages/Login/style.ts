@@ -3,7 +3,6 @@ import { styled } from 'styled-components'
 export const Layout = styled.div`
   width: 20rem;
   gap: 64px;
-  border: 1px solid;
 
   display: flex;
   flex-direction: column;
@@ -44,6 +43,24 @@ export const LogoDiv = styled.div`
     font-weight: 600;
     line-height: 180%;
   }
+  #round-button {
+    width: 230px;
+    height: 39px;
+
+    border-radius: 22px;
+  }
+`
+
+export const Logo = styled.div`
+  gap: 6.55px;
+  width: 90px;
+  height: 90px;
+  padding: 8.328px 17.532px 12.032px 16.699px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const SocialLogin = styled.div`
@@ -57,32 +74,26 @@ export const SocialLogin = styled.div`
   align-self: stretch;
 
   border-top: 1px solid var(--grayLine, #ededed);
+
+  #text {
+    color: var(--textInfo, #7c7c7c);
+    text-align: center;
+    font-family: NanumSquareRound;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 22.5px */
+  }
 `
 export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
-  align-self: stretch;
-`
-// 밑에는 수정 필요
-export const Logo = styled.div`
+
   display: flex;
-  width: 110px;
-  height: 110px;
-  padding: 10.178px 21.428px 14.706px 20.41px;
   justify-content: center;
   align-items: center;
+  align-self: stretch;
 
-  #icon {
-    display: flex;
-    width: 61.111px;
-    height: 61.111px;
-    padding: 4.722px 0.728px 4.184px 0.728px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-  }
-  #title {
+  #kakao-logo {
+    cursor: pointer;
   }
 `

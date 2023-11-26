@@ -6,14 +6,14 @@ interface Props {
   children: React.ReactNode
   color?: string
   size?: string
-  outline?: boolean
-  fullWidth?: boolean
+  $outline?: boolean
+  $fullwidth?: boolean
   [prop: string]: any
 }
 
-export default function Button({ children, color, size, outline, fullWidth, ...props }: Props) {
+export default function Button({ children, color, size, outline, fullwidth, ...props }: Props) {
   return (
-    <S.Button color={color} size={size} outline={outline} fullWidth={fullWidth} {...props}>
+    <S.Button color={color} size={size} $outline={outline} $fullwidth={fullwidth} {...props}>
       {children}
     </S.Button>
   )
@@ -22,5 +22,5 @@ export default function Button({ children, color, size, outline, fullWidth, ...p
 Button.defaultProps = {
   size: 'medium',
   outline: false,
-  fullWidth: false,
+  fullwidth: false,
 }

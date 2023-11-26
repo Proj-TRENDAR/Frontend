@@ -48,16 +48,16 @@ const sizeStyles = css`
   `}
 `
 
-const fullWidthStyle = css`
+const fullwidthStyle = css`
   ${props =>
-    props.fullWidth &&
+    props.fullwidth &&
     css`
       width: 100%;
       justify-content: center;
     `}
 `
 
-export const Button = styled.button<{ size?: string }>`
+export const Button = styled.button<{ size?: string; color?: string; outline?: boolean; fullWidth?: boolean }>`
   /* 공통 스타일 */
   padding: 0.5rem 1rem;
 
@@ -77,5 +77,5 @@ export const Button = styled.button<{ size?: string }>`
   ${colorStyle}
   
   /* 기타 */
-  ${fullWidthStyle}
+  ${fullwidthStyle}
 `
