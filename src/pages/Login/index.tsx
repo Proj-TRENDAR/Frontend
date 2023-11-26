@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import Logo from '@components/common/Logo'
 import Title from '@components/common/Title'
 import Button from '@/components/common/button'
+import KakaoLogo from '@/assets/image/kakaoLogo.svg'
+
 import * as S from './style'
 
 export default function Login() {
@@ -18,15 +20,20 @@ export default function Login() {
               <Logo size={50} />
               <Title />
             </S.Logo>
+            <Link to="/guide">
+              <Button outline={true} fullwidth={true} id="round-button">
+                트렌더 살펴보기
+              </Button>
+            </Link>
           </S.LogoDiv>
         </S.LogoWrapper>
         <S.SocialLogin>
-          <span>간편 로그인으로 빠르게 시작해보세요</span>
-          <S.ButtonWrapper>image</S.ButtonWrapper>
+          <span id="text">간편 로그인으로 빠르게 시작해보세요</span>
+          <S.ButtonWrapper>
+            <img src={KakaoLogo} alt="Kakao Logo" id="kakao-logo" />
+          </S.ButtonWrapper>
         </S.SocialLogin>
       </S.Layout>
-      <h1>로그인 페이지</h1>
-      <Link to="/guide">트랜더 살펴보기</Link>
     </>
   )
 }
