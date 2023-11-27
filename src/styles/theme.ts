@@ -34,6 +34,7 @@ export const basicTheme: DefaultTheme = {
   text: '#333333',
   texInfo: '#7C7C7C',
   textLight: '#CBCBCB',
+  textRed: '#E43636',
 }
 
 // TODO: 다른 컬러테마 추가
