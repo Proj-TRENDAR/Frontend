@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import Logo from '@components/common/Logo'
-import Title from '@components/common/Title'
 import Button from '@/components/common/button'
 import KakaoLogo from '@/assets/image/kakaoLogo.svg'
+import TrendarLogo from '@/assets/image/trendarLogo.svg?react'
+import TrendarTitle from '@/assets/image/trendarTitle.svg?react'
 
 import * as S from './style'
 
@@ -17,8 +17,8 @@ export default function Login() {
               <span id="slogan-bold">라이프 트렌드</span>를 그리는 곳
             </span>
             <S.Logo>
-              <Logo size={50} />
-              <Title />
+              <TrendarLogo />
+              <TrendarTitle />
             </S.Logo>
             <Link to="/guide">
               <Button outline={true} fullwidth={true} id="round-button">
