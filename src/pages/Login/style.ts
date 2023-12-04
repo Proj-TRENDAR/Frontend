@@ -92,8 +92,4 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   align-self: stretch;
-
-  #kakao-logo {
-    cursor: pointer;
-  }
 `

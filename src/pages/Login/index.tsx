@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Button from '@/components/common/button'
-import KakaoLogo from '@/assets/image/kakaoLogo.svg'
+import KakaoLogin from '@/components/common/Login/Kakao'
 import TrendarLogo from '@/assets/image/trendarLogo.svg?react'
 import TrendarTitle from '@/assets/image/trendarTitle.svg?react'
 
@@ -30,7 +30,7 @@ export default function Login() {
         <S.SocialLogin>
           <span id="text">간편 로그인으로 빠르게 시작해보세요</span>
           <S.ButtonWrapper>
-            <img src={KakaoLogo} alt="Kakao Logo" id="kakao-logo" />
+            <KakaoLogin />
           </S.ButtonWrapper>
         </S.SocialLogin>
       </S.Layout>

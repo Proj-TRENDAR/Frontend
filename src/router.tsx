@@ -5,6 +5,7 @@ import LoginLayout from '@layouts/Login'
 import Home from '@pages/Home'
 import RoutineList from '@pages/RoutineList'
 import Login from '@pages/Login'
+import KakaoLogin from '@pages/Login/Kakao'
 import Guide from '@pages/Guide'
 
 const router = createBrowserRouter(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
       <Route element={<LoginLayout />}>
         <Route path="login" element={<Login />} />
         <Route path="guide" element={<Guide />} />
+        <Route path="login/kakao" element={<KakaoLogin />} />
       </Route>
     </>
   )
