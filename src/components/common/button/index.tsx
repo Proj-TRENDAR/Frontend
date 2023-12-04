@@ -13,7 +13,7 @@ interface Props {
 
 export default function Button({ children, color, size, outline, fullwidth, ...props }: Props) {
   return (
-    <S.Button color={color} size={size} $outline={outline} $fullwidth={fullwidth} {...props}>
+    <S.Button color={color} size={size} outline={outline} $fullwidth={fullwidth} {...props}>
       {children}
     </S.Button>
   )
