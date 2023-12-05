@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Button from '@/components/common/button'
 import KakaoLogin from '@/components/common/Login/Kakao'
 import TrendarLogo from '@/assets/image/trendarLogo.svg?react'
@@ -7,6 +7,11 @@ import TrendarTitle from '@/assets/image/trendarTitle.svg?react'
 import * as S from './style'
 
 export default function Login() {
+  const navigate = useNavigate()
+  const goToGuide = () => {
+    navigate('/guide')
+  }
+
   return (
     <>
       <S.Layout>
@@ -20,11 +25,9 @@ export default function Login() {
               <TrendarLogo />
               <TrendarTitle />
             </S.Logo>
-            <Link to="/guide">
-              <Button outline={true} fullwidth={true} id="round-button">
-                트렌더 살펴보기
-              </Button>
-            </Link>
+            <Button $outline={true} $fullwidth={true} id="round-button" onClick={goToGuide}>
+              트렌더 살펴보기
+            </Button>
           </S.LogoDiv>
         </S.LogoWrapper>
         <S.SocialLogin>
