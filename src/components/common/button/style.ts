@@ -13,7 +13,7 @@ const colorStyle = css`
         background: ${darken(0.1, selected)};
       }
       ${props =>
-        props.outline &&
+        props.$outline &&
         css`
           color: ${selected};
           background: none;
@@ -50,7 +50,7 @@ const sizeStyles = css`
 
 const fullwidthStyle = css`
   ${props =>
-    props.fullwidth &&
+    props.$fullwidth &&
     css`
       width: 100%;
       justify-content: center;
