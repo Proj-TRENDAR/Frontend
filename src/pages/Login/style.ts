@@ -44,7 +44,6 @@ export const LogoDiv = styled.div`
     line-height: 180%;
   }
   #round-button {
-    width: 230px;
     height: 39px;
 
     border-radius: 22px;

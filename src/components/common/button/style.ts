@@ -53,7 +53,10 @@ const fullwidthStyle = css`
     props.$fullwidth &&
     css`
       width: 100%;
+
+      display: flex;
       justify-content: center;
+      align-items: center;
     `}
 `
 
