@@ -1,12 +1,13 @@
-import UserIcon from '@components/common/UserIcon'
-import IconButton from '@components/common/button/IconButton'
-import * as S from './style'
-import ButtonsModal from '@components/common/ButtonsModal'
 import { useNavigate } from 'react-router'
 
+import UserIcon from '@components/common/UserIcon'
+import IconButton from '@components/common/button/IconButton'
+import ButtonsModal from '@components/common/ButtonsModal'
+import * as S from './style'
+
 export default function Header() {
-  let userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
   const navigate = useNavigate()
+  let userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
 
   return (
     <S.Header>
