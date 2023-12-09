@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router'
 
 import UserIcon from '@components/common/UserIcon'
 import IconButton from '@components/common/button/IconButton'
-import ButtonsModal from '@components/common/ButtonsModal'
+import ButtonsModal from '@components/common/modal/ButtonsModal'
 import * as S from './style'
 
 export default function Header() {
