@@ -5,6 +5,7 @@ import Home from '@pages/Home'
 import RoutineList from '@pages/RoutineList'
 import Login from '@pages/Login'
 import Guide from '@pages/Guide'
+import ComponentsGuide from '@pages/ComponentsGuide'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="guide" element={<Guide />} />
+      <Route path="components-guide" element={<ComponentsGuide />} />
     </>
   )
 )
