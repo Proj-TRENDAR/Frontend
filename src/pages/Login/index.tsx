@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import Button from '@/components/common/button'
+import Button from '@components/common/button/Button'
 import KakaoLogin from '@/components/common/Login/Kakao'
 import TrendarLogo from '@/assets/image/trendarLogo.svg?react'
 import TrendarTitle from '@/assets/image/trendarTitle.svg?react'
