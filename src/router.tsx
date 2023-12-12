@@ -7,6 +7,7 @@ import RoutineList from '@pages/RoutineList'
 import Login from '@pages/Login'
 import KakaoLogin from '@pages/Login/Kakao'
 import Guide from '@pages/Guide'
+import ComponentsGuide from '@pages/ComponentsGuide'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
         <Route path="guide" element={<Guide />} />
         <Route path="login/kakao" element={<KakaoLogin />} />
       </Route>
+      <Route path="components-guide" element={<ComponentsGuide />} />
     </>
   )
 )

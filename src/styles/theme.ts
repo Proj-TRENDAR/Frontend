@@ -6,6 +6,7 @@ import NANUM_BARUN_GOTHIC_ULTRA_LIGHT from '@assets/font/nanumbarungothicultrali
 
 export const basicTheme: DefaultTheme = {
   point: '#1FC6D0',
+  pointHover: '#00ABB5',
   point2: '#B1E7DD',
   point3: '#F8FFFF',
   pointBg: '#F3F9FA',
@@ -34,6 +35,8 @@ export const basicTheme: DefaultTheme = {
   text: '#333333',
   texInfo: '#7C7C7C',
   textLight: '#CBCBCB',
+  textRed: '#E43636',
+  textRedDark: '#CC1212',
 }
 
 // TODO: 다른 컬러테마 추가
