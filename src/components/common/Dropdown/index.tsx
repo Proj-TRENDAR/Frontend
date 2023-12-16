@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import * as S from './style'
 import useToggleOpenWithExternalClick from '@/Hooks/useToggleOpenWithExternalClick'
+import Arrow from '@assets/image/icon/ic-arrow_down.svg?react'
 
 export interface DropdownItems {
   id: string // id를 기준으로 현재 아이탬을 표시합니다
@@ -42,6 +43,7 @@ export default function Dropdown({ items, currentItemId = '', placeholder, child
           setIsOpen(!isOpenModal)
         }}
       >
+        <Arrow />
         {currentItemTitle !== '' ? currentItemTitle : placeholder}
       </button>
       <ul className={isOpenModal ? '' : 'closed'}>{children}</ul>
