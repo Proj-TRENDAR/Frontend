@@ -1,5 +1,6 @@
-import * as S from '@components/Home/style'
 import { Link } from 'react-router-dom'
+
+import * as S from '@components/Home/style'
 import { AccordionItem } from '@components/Accordion'
 
 interface Props {

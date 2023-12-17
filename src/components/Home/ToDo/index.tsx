@@ -1,5 +1,6 @@
-import { AccordionItem } from '@components/Accordion'
 import { Link } from 'react-router-dom'
+
+import { AccordionItem } from '@components/Accordion'
 import * as S from '@components/Home/ToDo/style'
 
 interface Props {
