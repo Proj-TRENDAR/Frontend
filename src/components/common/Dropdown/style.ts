@@ -12,9 +12,12 @@ export const DropDownWrapper = styled.div`
     width: 100%;
     height: 38px;
 
+    display: flex;
+    align-items: center;
+
     background-color: #fff;
     border: none;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
 
     text-align: left;
 
@@ -37,7 +40,7 @@ export const DropDownWrapper = styled.div`
     overflow: hidden;
 
     background-color: #fff;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
     border-radius: 0 0 20px 20px;
 
     &.closed {
