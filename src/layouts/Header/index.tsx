@@ -1,17 +1,32 @@
 import { useNavigate } from 'react-router'
+import { useEffect, useState } from 'react'
 
 import UserIcon from '@components/common/UserIcon'
 import IconButton from '@components/common/button/IconButton'
 import ButtonsModal from '@components/common/modal/ButtonsModal'
 import * as S from './style'
+import Dropdown, { DropdownItem, DropdownItems } from '@components/common/Dropdown'
 
 interface Props {
   [key: string]: any
 }
 
+interface Calendar extends DropdownItems {
+  url: string
+}
+
 export default function Header({ ...props }: Props) {
   const navigate = useNavigate()
+  const [calendar, setCalendar] = useState<Calendar[]>([])
+  const [currentCalendar, setCurrentCalendar] = useState<string>('')
   let userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
+
+  useEffect(() => {
+    // TODO: 캘린더 공유 구현시, 캘린더 정보 받아와야함. 지금은 dummy 사용
+    setCalendar(dummy)
+    // TODO: 캘린더 공유 구현시, 현재 출력되는 캘린더와 일치하는 캘린더 id를 저장해야함. 지금은 '내 캘린더' 출력함(어떤 방식으로 구현할지 의논 필요)
+    setCurrentCalendar(dummy[0].id)
+  }, [])
 
   return (
     <S.Header>
@@ -42,7 +57,43 @@ export default function Header({ ...props }: Props) {
           </button>
         </li>
       </ButtonsModal>
-      캘린더 목록
+      <Dropdown items={calendar} placeholder="캘린더 목록" currentItemId={currentCalendar}>
+        {calendar.map(item => {
+          if (item.url && item.url.length > 0) {
+            return (
+              <DropdownItem key={item.id} title={item.title} url={item.url} disabled={item.id === currentCalendar} />
+            )
+          } else {
+            return (
+              <DropdownItem
+                key={item.id}
+                title={item.title}
+                onClick={props.handleOpenForComingSoonModal}
+                disabled={item.id === currentCalendar}
+              />
+            )
+          }
+        })}
+      </Dropdown>
     </S.Header>
   )
 }
+
+// TODO: 캘린더 공유 구현시, dummy 삭제
+const dummy = [
+  {
+    id: 'calendar1',
+    title: '내 캘린더',
+    url: '/',
+  },
+  {
+    id: 'calendar2',
+    title: '모임 캘린더',
+    url: '',
+  },
+  {
+    id: 'calendar3',
+    title: '친구 캘린더',
+    url: '',
+  },
+]
