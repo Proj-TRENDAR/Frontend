@@ -4,16 +4,24 @@ import AlertModal from '@components/common/modal/AlertModal'
 
 // 모달 출력 : 준비중
 export default function GuideAlertModal() {
-  const [handleOpenForComingSoonModal, handleCloseForComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] =
-    useAlertModal({
-      alertMessageKey: 'comingSoon',
-    })
+  const [setIsOpenForComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] = useAlertModal({
+    alertMessageKey: 'comingSoon',
+  })
 
   return (
     <>
-      <ButtonInAlert type="cancel" text="준비중 모달 출력하기" size="large" onClick={handleOpenForComingSoonModal} />
+      <ButtonInAlert
+        type="cancel"
+        text="준비중 모달 출력하기"
+        size="large"
+        onClick={() => {
+          setIsOpenForComingSoonModal(true)
+        }}
+      />
       <AlertModal
-        handleClose={handleCloseForComingSoonModal}
+        handleClose={() => {
+          setIsOpenForComingSoonModal(false)
+        }}
         isOpenModal={isComingSoonModalOpen}
         message={messageOfComingSoonModal}
       />

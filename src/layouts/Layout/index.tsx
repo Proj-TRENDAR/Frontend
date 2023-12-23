@@ -8,15 +8,18 @@ import { useAlertModal } from '@/Hooks/useAlertModal'
 import * as S from './style'
 
 export default function HomeLayout() {
-  const [handleOpenForComingSoonModal, handleCloseForComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] =
-    useAlertModal({
-      alertMessageKey: 'comingSoon',
-    })
+  const [setIsOpenComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] = useAlertModal({
+    alertMessageKey: 'comingSoon',
+  })
 
   return (
     <>
       <S.Layout>
-        <Header handleOpenForComingSoonModal={handleOpenForComingSoonModal} />
+        <Header
+          handleOpenForComingSoonModal={() => {
+            setIsOpenComingSoonModal(true)
+          }}
+        />
         <Calendar id="calendar" />
         <main id="right-bar">
           <Outlet />
@@ -40,7 +43,9 @@ export default function HomeLayout() {
         </ul>
       </footer>
       <AlertModal
-        handleClose={handleCloseForComingSoonModal}
+        handleClose={() => {
+          setIsOpenComingSoonModal(false)
+        }}
         isOpenModal={isComingSoonModalOpen}
         message={messageOfComingSoonModal}
       />
