@@ -5,11 +5,13 @@ import * as S from './style'
 interface Props {
   children: React.ReactNode
   color?: string
-  size?: string
+  size?: Size
   $outline?: boolean
   $fullwidth?: boolean
   [prop: string]: any
 }
+
+export type Size = 'large' | 'medium' | 'small'
 
 export default function Button({ children, color, size, outline, fullwidth, ...props }: Props) {
   return (

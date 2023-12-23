@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { darken, lighten } from 'polished'
+import { Size } from '@components/common/button/Button/index'
 
 const colorStyle = css`
   ${({ theme, color }) => {
@@ -27,26 +28,19 @@ const colorStyle = css`
   }}
 `
 const sizes = {
-  large: {
-    height: '3rem',
-    fontSize: '1.25rem',
-  },
-  medium: {
-    height: '2rem',
-    fontSize: '1rem',
-  },
-  small: {
-    height: '1.75rem',
-    fontSize: '0.875rem',
-  },
+  large: css`
+    height: 3rem;
+    font-size: 1.25rem;
+  `,
+  medium: css`
+    height: 2rem;
+    font-size: 1rem;
+  `,
+  small: css`
+    height: 1.75rem;
+    font-size: 0.875rem;
+  `,
 }
-
-const sizeStyles = css`
-  ${({ size }) => css`
-    height: ${sizes[size].height};
-    font-size: ${sizes[size].fontSize};
-  `}
-`
 
 const fullwidthStyle = css`
   ${props =>
@@ -60,7 +54,7 @@ const fullwidthStyle = css`
     `}
 `
 
-export const Button = styled.button<{ size?: string; color?: string; outline?: boolean; fullWidth?: boolean }>`
+export const Button = styled.button<{ size?: Size; color?: string; outline?: boolean; fullWidth?: boolean }>`
   /* 공통 스타일 */
   padding: 0.5rem 1rem;
 
@@ -74,7 +68,7 @@ export const Button = styled.button<{ size?: string; color?: string; outline?: b
 
   cursor: pointer;
   /* 크기 */
-  ${sizeStyles}
+  ${({ size }) => size && sizes[size]}
 
   /* 색상 */
   ${colorStyle}
