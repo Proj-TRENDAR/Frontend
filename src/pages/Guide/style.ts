@@ -3,7 +3,7 @@ import stars from '@/assets/image/guide/stars.png'
 
 export const GuideContainer = styled.div`
   min-width: 60rem;
-  padding: 0px 99px;
+  padding: 0 99px;
 
   display: flex;
   flex-direction: column;
@@ -40,7 +40,6 @@ export const GuideImage = styled.div<{ $path: string }>`
 export const GuideTextHeader = styled.span`
   text-align: center;
 
-  font-family: NanumBarunGothic;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -51,7 +50,6 @@ export const GuideTextTitle = styled.span`
   text-align: center;
   position: relative;
 
-  font-family: NanumBarunGothic;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -62,7 +60,6 @@ export const GuideText = styled.span`
   text-align: center;
   position: relative;
 
-  font-family: NanumBarunGothic;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;

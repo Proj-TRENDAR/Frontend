@@ -30,7 +30,6 @@ export const LogoDiv = styled.div`
   #slogan {
     color: var(--text, #333);
     text-align: center;
-    font-family: NanumBarunGothic;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -38,7 +37,6 @@ export const LogoDiv = styled.div`
   }
   #slogan-bold {
     color: var(--text, #333);
-    font-family: NanumBarunGothic;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -59,7 +57,7 @@ export const Logo = styled.div`
 `
 
 export const SocialLogin = styled.div`
-  padding: 36px 0px;
+  padding: 36px 0;
   gap: 24px;
 
   display: flex;
@@ -73,7 +71,6 @@ export const SocialLogin = styled.div`
   #text {
     color: var(--textInfo, #7c7c7c);
     text-align: center;
-    font-family: NanumSquareRound;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
