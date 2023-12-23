@@ -27,7 +27,7 @@ export default function Login() {
               <TrendarLogo />
               <TrendarTitle />
             </S.Logo>
-            <Button $outline={true} $fullwidth={true} id="round-button" onClick={goToGuide}>
+            <Button id="round-button" $round={true} size="large" $outline={true} $fullwidth={true} onClick={goToGuide}>
               트렌더 살펴보기
             </Button>
           </S.LogoDiv>

@@ -86,8 +86,8 @@ export default function Guide() {
               <Plus />
               <img src={CalendarLogo} alt="Calendar Logo" />
             </S.LogoDetail>
-            <Button $outline={true} $fullwidth={true} id="round-button" onClick={goToLogin}>
-              트렌더 로그인 하기
+            <Button id="round-button" size="large" $outline={true} $round={true} onClick={goToLogin}>
+              트렌더 시작하기
             </Button>
           </div>
         </div>

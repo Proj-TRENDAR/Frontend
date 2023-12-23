@@ -19,6 +19,7 @@ export const LogoWrapper = styled.div`
   gap: 32px;
 `
 export const LogoDiv = styled.div`
+  width: 100%;
   gap: 18px;
 
   display: flex;
@@ -42,11 +43,6 @@ export const LogoDiv = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 180%;
-  }
-  #round-button {
-    height: 39px;
-
-    border-radius: 22px;
   }
 `
 

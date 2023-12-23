@@ -24,9 +24,6 @@ export const GuideColumnWrapper = styled.div<any>`
 
   #round-button {
     width: 182px;
-    height: 39px;
-
-    border-radius: 22px;
   }
 `
 
@@ -100,7 +97,7 @@ export const Stars = styled.div`
 `
 
 export const LogoDetail = styled.div`
-  padding: 75px 0px 38px 0px;
+  padding: 75px 0 38px 0;
   gap: 31px;
 
   display: inline-flex;
