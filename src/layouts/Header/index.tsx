@@ -8,14 +8,14 @@ import * as S from './style'
 import Dropdown, { DropdownItem, DropdownItems } from '@components/common/Dropdown'
 
 interface Props {
-  [key: string]: any
+  handleOpenForComingSoonModal: () => void
 }
 
 interface Calendar extends DropdownItems {
   url: string
 }
 
-export default function Header({ ...props }: Props) {
+export default function Header({ handleOpenForComingSoonModal }: Props) {
   const navigate = useNavigate()
   const [calendar, setCalendar] = useState<Calendar[]>([])
   const [currentCalendar, setCurrentCalendar] = useState<string>('')
@@ -39,11 +39,11 @@ export default function Header({ ...props }: Props) {
       >
         <li>
           {/* TODO: 프로필 페이지 생성시 Link로 수정하기 */}
-          <button onClick={props.handleOpenForComingSoonModal}>프로필</button>
+          <button onClick={handleOpenForComingSoonModal}>프로필</button>
         </li>
         <li>
           {/* TODO: 캘린더 관리 페이지 생성시 Link로 수정하기 */}
-          <button onClick={props.handleOpenForComingSoonModal}>캘린더 관리</button>
+          <button onClick={handleOpenForComingSoonModal}>캘린더 관리</button>
         </li>
         <li>
           <button
@@ -68,7 +68,7 @@ export default function Header({ ...props }: Props) {
               <DropdownItem
                 key={item.id}
                 title={item.title}
-                onClick={props.handleOpenForComingSoonModal}
+                onClick={handleOpenForComingSoonModal}
                 disabled={item.id === currentCalendar}
               />
             )

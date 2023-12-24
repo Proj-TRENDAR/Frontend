@@ -4,7 +4,7 @@ import * as S from './style'
 
 interface Props {
   children: React.ReactNode
-  [prop: string]: any
+  style?: React.CSSProperties
 }
 
 export default function IconButton({ children, ...props }: Props) {

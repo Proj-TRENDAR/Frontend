@@ -7,7 +7,7 @@ import Arrow from '@assets/image/icon/ic-arrow_down.svg?react'
 export interface DropdownItems {
   id: string // id를 기준으로 현재 아이탬을 표시합니다
   title: string
-  [key: string]: any
+  style?: React.CSSProperties
 }
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
   children: React.ReactNode // DropdownItem 컴포넌트들을 자식으로 받습니다
 }
 
-export default function Dropdown({ items, currentItemId = '', placeholder, children }: Props) {
+export default function Dropdown({ items, currentItemId = '', placeholder, children, ...props }: Props) {
   const [isOpenModal, setIsOpen, isExternalClickDetected] = useToggleOpenWithExternalClick()
   const [currentItemTitle, setCurrenItemTitle] = useState('')
 
@@ -36,6 +36,7 @@ export default function Dropdown({ items, currentItemId = '', placeholder, child
       onClick={(e: { currentTarget: HTMLElement }) => {
         isExternalClickDetected(e.currentTarget)
       }}
+      {...props}
     >
       <button
         className={isOpenModal ? '' : 'closed'}
