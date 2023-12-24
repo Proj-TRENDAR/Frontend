@@ -1,45 +1,49 @@
-import { useRef, useEffect, useCallback } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 
-export default function useScrollFadeIn(
-  direction: 'up' | 'down' | 'left' | 'right',
+type ScrollDirection = 'up' | 'down' | 'left' | 'right' | 'center'
+
+export default function useScrollFadeIn<T extends HTMLElement>(
+  direction: ScrollDirection,
   duration: number,
   delay: number
 ): {
-  ref: React.RefObject<any>
+  ref: React.RefObject<T>
   style: React.CSSProperties
 } {
-  const element = useRef()
-  const handleDirection = (name: string): string | undefined => {
+  const element = useRef<T>(null)
+  const handleDirection = (name: ScrollDirection): string | undefined => {
     switch (name) {
       case 'up':
-        return 'translate3d(0, 50%, 0)'
+        return 'translate3d(0, 30%, 0)'
       case 'down':
-        return 'translate3d(0, -50%, 0)'
+        return 'translate3d(0, -30%, 0)'
       case 'left':
-        return 'translate3d(50%, 0, 0)'
+        return 'translate3d(20%, 0, 0)'
       case 'right':
-        return 'translate3d(-50%, 0, 0)'
+        return 'translate3d(-20%, 0, 0)'
+      case 'center':
+        return 'translate3d(0, 0, 0) scale(0.9)'
       default:
         return undefined
     }
   }
 
   const onScroll = useCallback(
-    ([entry]: any) => {
-      const { current }: any = element
-      if (entry.isIntersecting) {
+    ([entry]: IntersectionObserverEntry[]) => {
+      const { current } = element
+      if (current && entry.isIntersecting) {
         current.style.transitionProperty = 'all'
         current.style.transitionDuration = `${duration}s`
         current.style.transitionTimingFunction = 'cubic-bezier(0, 0, 0.2, 1)'
         current.style.transitionDelay = `${delay}s`
-        current.style.opacity = 1
+        current.style.opacity = '1'
         current.style.transform = 'translate3d(0, 0, 0)'
       }
     },
     [delay, duration]
   )
   useEffect(() => {
-    let observer: any
+    let observer: IntersectionObserver
 
     if (element.current) {
       observer = new IntersectionObserver(onScroll, { threshold: 0.3 })

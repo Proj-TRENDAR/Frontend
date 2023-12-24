@@ -13,7 +13,7 @@ export const GuideContainer = styled.div`
   background: var(--pointBg, #f3f9fa);
 `
 
-export const GuideColumnWrapper = styled.div<any>`
+export const GuideColumnWrapper = styled.div`
   width: 811px;
   height: 800px;
 
@@ -65,7 +65,7 @@ export const GuideText = styled.span`
   font-weight: 400;
   line-height: 180%;
 `
-export const GuideWrapper = styled.div<any>`
+export const GuideWrapper = styled.div`
   width: 811px;
   height: 800px;
 
@@ -79,6 +79,39 @@ export const FixedLocationImage = styled.div<{ $path: string }>`
   background-image: url(${props => props.$path});
   background-repeat: no-repeat;
   background-position: center;
+`
+
+export const RoutineImage1 = styled(FixedLocationImage)`
+  width: 314px;
+  height: 472px;
+  top: 123px;
+  left: 240px;
+`
+export const RoutineImage2 = styled(FixedLocationImage)`
+  width: 236px;
+  height: 472px;
+  top: 193px;
+  left: 575px;
+`
+export const ScheduleImage1 = styled(FixedLocationImage)`
+  width: 212px;
+  height: 545px;
+  top: 66px;
+  left: 31px;
+`
+export const ScheduleImage2 = styled(FixedLocationImage)`
+  width: 212px;
+  height: 471px;
+  top: 217px;
+  left: 296px;
+`
+export const ScheduleText = styled.div`
+  height: 471px;
+  margin: 5.73rem 0 1.65rem 0;
+  top: 193px;
+  left: 561px;
+
+  position: absolute;
 `
 
 export const Stars = styled.div`
