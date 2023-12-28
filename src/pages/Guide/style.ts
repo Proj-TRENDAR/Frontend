@@ -3,7 +3,7 @@ import stars from '@/assets/image/guide/stars.png'
 
 export const GuideContainer = styled.div`
   min-width: 60rem;
-  padding: 0px 99px;
+  padding: 0 99px;
 
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@ export const GuideContainer = styled.div`
   background: var(--pointBg, #f3f9fa);
 `
 
-export const GuideColumnWrapper = styled.div<any>`
+export const GuideColumnWrapper = styled.div`
   width: 811px;
   height: 800px;
 
@@ -24,9 +24,6 @@ export const GuideColumnWrapper = styled.div<any>`
 
   #round-button {
     width: 182px;
-    height: 39px;
-
-    border-radius: 22px;
   }
 `
 
@@ -43,7 +40,6 @@ export const GuideImage = styled.div<{ $path: string }>`
 export const GuideTextHeader = styled.span`
   text-align: center;
 
-  font-family: NanumBarunGothic;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -54,7 +50,6 @@ export const GuideTextTitle = styled.span`
   text-align: center;
   position: relative;
 
-  font-family: NanumBarunGothic;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -65,13 +60,12 @@ export const GuideText = styled.span`
   text-align: center;
   position: relative;
 
-  font-family: NanumBarunGothic;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: 180%;
 `
-export const GuideWrapper = styled.div<any>`
+export const GuideWrapper = styled.div`
   width: 811px;
   height: 800px;
 
@@ -87,6 +81,39 @@ export const FixedLocationImage = styled.div<{ $path: string }>`
   background-position: center;
 `
 
+export const RoutineImage1 = styled(FixedLocationImage)`
+  width: 314px;
+  height: 472px;
+  top: 123px;
+  left: 240px;
+`
+export const RoutineImage2 = styled(FixedLocationImage)`
+  width: 236px;
+  height: 472px;
+  top: 193px;
+  left: 575px;
+`
+export const ScheduleImage1 = styled(FixedLocationImage)`
+  width: 212px;
+  height: 545px;
+  top: 66px;
+  left: 31px;
+`
+export const ScheduleImage2 = styled(FixedLocationImage)`
+  width: 212px;
+  height: 471px;
+  top: 217px;
+  left: 296px;
+`
+export const ScheduleText = styled.div`
+  height: 471px;
+  margin: 5.73rem 0 1.65rem 0;
+  top: 193px;
+  left: 561px;
+
+  position: absolute;
+`
+
 export const Stars = styled.div`
   width: 196px;
   height: 130px;
@@ -100,7 +127,7 @@ export const Stars = styled.div`
 `
 
 export const LogoDetail = styled.div`
-  padding: 75px 0px 38px 0px;
+  padding: 75px 0 38px 0;
   gap: 31px;
 
   display: inline-flex;

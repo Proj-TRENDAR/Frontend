@@ -2,18 +2,27 @@ import React from 'react'
 
 import * as S from './style'
 
-interface Props {
+export interface Props {
   children: React.ReactNode
-  color?: string
-  size?: string
+  size?: 'large' | 'medium' | 'small'
   $outline?: boolean
   $fullwidth?: boolean
+  $round?: boolean
+  color?: string
   [prop: string]: any
 }
 
-export default function Button({ children, color, size, outline, fullwidth, ...props }: Props) {
+export default function Button({
+  children,
+  size = 'medium',
+  outline = false,
+  fullwidth = false,
+  round = false,
+  color,
+  ...props
+}: Props) {
   return (
-    <S.Button color={color} size={size} $outline={outline} $fullwidth={fullwidth} {...props}>
+    <S.Button $round={round} color={color} size={size} $outline={outline} $fullwidth={fullwidth} {...props}>
       {children}
     </S.Button>
   )
@@ -23,4 +32,5 @@ Button.defaultProps = {
   size: 'medium',
   outline: false,
   fullwidth: false,
+  round: false,
 }

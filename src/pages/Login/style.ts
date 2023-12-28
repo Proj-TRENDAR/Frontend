@@ -19,6 +19,7 @@ export const LogoWrapper = styled.div`
   gap: 32px;
 `
 export const LogoDiv = styled.div`
+  width: 100%;
   gap: 18px;
 
   display: flex;
@@ -29,7 +30,6 @@ export const LogoDiv = styled.div`
   #slogan {
     color: var(--text, #333);
     text-align: center;
-    font-family: NanumBarunGothic;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -37,16 +37,10 @@ export const LogoDiv = styled.div`
   }
   #slogan-bold {
     color: var(--text, #333);
-    font-family: NanumBarunGothic;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
     line-height: 180%;
-  }
-  #round-button {
-    height: 39px;
-
-    border-radius: 22px;
   }
 `
 
@@ -63,7 +57,7 @@ export const Logo = styled.div`
 `
 
 export const SocialLogin = styled.div`
-  padding: 36px 0px;
+  padding: 36px 0;
   gap: 24px;
 
   display: flex;
@@ -77,7 +71,6 @@ export const SocialLogin = styled.div`
   #text {
     color: var(--textInfo, #7c7c7c);
     text-align: center;
-    font-family: NanumSquareRound;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;

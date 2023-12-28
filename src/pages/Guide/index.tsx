@@ -23,56 +23,60 @@ export default function Guide() {
   }
   return (
     <S.GuideContainer>
-      <S.GuideColumnWrapper>
+      <S.GuideColumnWrapper {...useScrollFadeIn<HTMLDivElement>('center', 1, 0.1)}>
         <S.GuideTextHeader style={{ margin: '5.67rem 0 0.75rem 0' }}>
           나의 하루를 한 눈에 보고
           <br /> 간편하게 기록해요
         </S.GuideTextHeader>
         <S.GuideImage $path={Guide1} />
       </S.GuideColumnWrapper>
-      <S.GuideColumnWrapper {...useScrollFadeIn('up', 1, 0.2)}>
+      <S.GuideColumnWrapper {...useScrollFadeIn<HTMLDivElement>('up', 1, 0.1)}>
         <S.GuideTextTitle style={{ margin: '5.73rem 0 1.65rem 0' }}>일정 관리</S.GuideTextTitle>
         <S.GuideText style={{ marginBottom: '1.7rem' }}>
           직관적인 일정 등록으로 시간을 효율적으로 관리해보세요
         </S.GuideText>
         <S.GuideImage $path={Guide2} />
       </S.GuideColumnWrapper>
-      <S.GuideWrapper {...useScrollFadeIn('left', 1, 0.3)}>
-        <S.GuideTextTitle style={{ margin: '5.73rem 0 1.65rem 0', top: 166 }}>루틴 관리</S.GuideTextTitle>
-        <S.GuideText style={{ top: 191 }}>
-          <br />
-          일상 속 작은 목표를 달성해보세요
-          <br /> <br />
-          긍정적인 변화가 하나 둘,
-          <br /> 쌓이는 모습을 즐기며
-          <br /> 더 나은 습관을 만들어보세요.
-        </S.GuideText>
+      <S.GuideWrapper>
+        <div {...useScrollFadeIn<HTMLDivElement>('left', 1, 0.4)}>
+          <S.GuideTextTitle style={{ margin: '5.73rem 0 1.65rem 0', top: 166 }}>루틴 관리</S.GuideTextTitle>
+          <S.GuideText style={{ top: 191 }}>
+            <br />
+            일상 속 작은 목표를 달성해보세요
+            <br /> <br />
+            긍정적인 변화가 하나 둘,
+            <br /> 쌓이는 모습을 즐기며
+            <br /> 더 나은 습관을 만들어보세요.
+          </S.GuideText>
+        </div>
         <S.Stars />
-        <S.FixedLocationImage $path={Routine1} style={{ top: 123, left: 240, width: 314, height: 472 }} />
-        <S.FixedLocationImage $path={Routine2} style={{ top: 193, left: 575, width: 236, height: 472 }} />
+        <S.RoutineImage1 {...useScrollFadeIn<HTMLDivElement>('left', 1, 0.6)} $path={Routine1} />
+        <S.RoutineImage2 {...useScrollFadeIn<HTMLDivElement>('left', 1, 0.8)} $path={Routine2} />
       </S.GuideWrapper>
-      <S.GuideWrapper {...useScrollFadeIn('right', 1, 0.3)}>
-        <S.FixedLocationImage $path={Todo1} style={{ top: 66, left: 31, width: 212, height: 545 }} />
-        <S.FixedLocationImage $path={Todo2} style={{ top: 217, left: 296, width: 212, height: 471 }} />
-        <S.GuideTextTitle style={{ margin: '5.73rem 0 1.65rem 0', top: 193, left: 561 }}>할일 관리</S.GuideTextTitle>
-        <S.GuideText style={{ top: 217, left: 561 }}>
-          <br />
-          루틴과 일정과 함께
-          <br />
-          오늘의 할 일을 빠르게 확인해보세요.
-          <br />
-          <br />
-          또한 주간 목록을 통해
-          <br />
-          일주일을 점검할 수 있어요
-        </S.GuideText>
+      <S.GuideWrapper>
+        <S.ScheduleImage1 {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.2)} $path={Todo1} />
+        <S.ScheduleImage2 {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.3)} $path={Todo2} />
+        <S.ScheduleText {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.5)}>
+          <S.GuideTextTitle>할일 관리</S.GuideTextTitle>
+          <S.GuideText>
+            <br />
+            루틴과 일정과 함께
+            <br />
+            오늘의 할 일을 빠르게 확인해보세요.
+            <br />
+            <br />
+            또한 주간 목록을 통해
+            <br />
+            일주일을 점검할 수 있어요
+          </S.GuideText>
+        </S.ScheduleText>
       </S.GuideWrapper>
-      <S.GuideColumnWrapper {...useScrollFadeIn('up', 1, 0.3)}>
+      <S.GuideColumnWrapper {...useScrollFadeIn<HTMLDivElement>('up', 1, 0.3)}>
         <S.GuideText>마음에 드는 색상을 선택해 나만의 스타일로 TRANDAR를 사용해보세요.</S.GuideText>
         <S.GuideImage $path={StyleGroup} style={{ backgroundSize: 'auto', height: 410 }} />
       </S.GuideColumnWrapper>
       <S.GuideColumnWrapper>
-        <div {...useScrollFadeIn('up', 1, 0.3)}>
+        <div {...useScrollFadeIn<HTMLDivElement>('up', 1, 0.3)}>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <S.GuideTextTitle>
               일상의 모든 기록을 한 곳에서 관리할 수 있는 <span style={{ color: '#4482F9' }}>TRENDAR</span>로
@@ -86,8 +90,8 @@ export default function Guide() {
               <Plus />
               <img src={CalendarLogo} alt="Calendar Logo" />
             </S.LogoDetail>
-            <Button $outline={true} $fullwidth={true} id="round-button" onClick={goToLogin}>
-              트렌더 로그인 하기
+            <Button id="round-button" size="large" $outline={true} $round={true} onClick={goToLogin}>
+              트렌더 시작하기
             </Button>
           </div>
         </div>
