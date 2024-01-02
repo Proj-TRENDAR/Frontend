@@ -2,15 +2,10 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
-import { atomWithStorage } from 'jotai/utils'
+import { userInfoAtom } from '@/store'
 
 const KakaoLogin = () => {
   const navigate = useNavigate()
-  const userInfoAtom = atomWithStorage('userInfo', {
-    accessToken: null,
-    userName: null,
-    id: null,
-  })
   const [, setUserInfo] = useAtom(userInfoAtom)
 
   useEffect(() => {
