@@ -1,11 +1,14 @@
+import axios from 'axios'
 import { useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
+import { useAtom } from 'jotai'
 
 import UserIcon from '@components/common/UserIcon'
 import IconButton from '@components/common/button/IconButton'
 import ButtonsModal from '@components/common/modal/ButtonsModal'
 import * as S from './style'
 import Dropdown, { DropdownItem, DropdownItems } from '@components/common/Dropdown'
+import { userInfoAtom } from '@/store'
 
 interface Props {
   [key: string]: any
@@ -19,6 +22,7 @@ export default function Header({ ...props }: Props) {
   const navigate = useNavigate()
   const [calendar, setCalendar] = useState<Calendar[]>([])
   const [currentCalendar, setCurrentCalendar] = useState<string>('')
+  const [, setUserInfo] = useAtom(userInfoAtom)
   let userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
 
   useEffect(() => {
@@ -49,8 +53,27 @@ export default function Header({ ...props }: Props) {
           <button
             className="red"
             onClick={() => {
-              // TODO : 로그아웃 구현
-              navigate('/login')
+              const config = {
+                method: 'post',
+                url: '/web-server/auth/logout',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }
+              axios(config)
+                .then((res: any) => {
+                  console.log(res)
+                  setUserInfo({
+                    accessToken: null,
+                    userName: null,
+                    id: null,
+                  })
+                  navigate('/login')
+                })
+                .catch((err: any) => {
+                  console.log(err)
+                  // TODO: 로그인 실패 모달 띄우기
+                })
             }}
           >
             로그아웃

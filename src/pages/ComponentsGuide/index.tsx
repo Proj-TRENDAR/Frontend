@@ -2,14 +2,15 @@ import * as S from './style'
 import ButtonInAlert from '@components/common/button/ButtonInAlert'
 import GuideAlertModal from './modal/GuideAlertModal'
 import GuideAlertModal2 from './modal/GuideAlertModal2'
+import Button from '@components/common/button/Button'
 
 export default function ComponentsGuide() {
   return (
     <S.GuideWrapper>
-      {/* 컴포넌트 가이드 작성 구조 예시 */}
+      {/* 컴포넌트 가이드 작성 구조 예시 START */}
       <S.FolderWrapper>
         <h1>폴더명</h1>
-        😄 이 구조를 복사해서 사용하시면 작성하기 편할겁니다..!
+        컴포넌트 가이드 작성 구조 예시 😄 이 구조를 복사해서 사용하시면 작성하기 편할겁니다..!
         <br />
         바로 이 페이지에서 컴포넌트를 출력해도 되고,
         <br />
@@ -26,9 +27,65 @@ export default function ComponentsGuide() {
           </S.ExampleWrapper>
         </S.ComponentWrapper>
       </S.FolderWrapper>
+      {/* 컴포넌트 가이드 작성 구조 예시 END */}
 
       <S.FolderWrapper>
         <h1>button</h1>
+        <S.ComponentWrapper>
+          <h2>Button</h2>
+          <S.ExampleWrapper>
+            <h3>size= "small" | "meduim" | "large"</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Button size="small">작은 버튼</Button>
+              <Button size="medium">중간 버튼(default)</Button>
+              <Button size="large">큰 버튼</Button>
+            </div>
+          </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>$outline= true | false</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Button $outline={false}>기본(false)</Button>
+              <Button $outline={true}>테두리</Button>
+            </div>
+          </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>$round= true | false</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Button $round={false} $outline={true} size="large">
+                기본(false)
+              </Button>
+              <Button $round={true} $outline={true} size="large">
+                동글게
+              </Button>
+            </div>
+          </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>$fullwidth= true | false</h3>
+            <div>
+              <Button $fullwidth={false} $outline={true} size="large">
+                기본(false)
+              </Button>
+            </div>
+            <div>
+              <Button $fullwidth={true} $outline={true} size="large">
+                설정시
+              </Button>
+            </div>
+          </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>color= '#E66A77'</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Button color="#E66A77">색상 #E66A77</Button>
+              <Button color="#E66A77" $outline={true}>
+                색상 #E66A77
+              </Button>
+              <Button color="#CEDB9E">색상 #CEDB9E</Button>
+              <Button color="#CEDB9E" $outline={true}>
+                색상 #CEDB9E
+              </Button>
+            </div>
+          </S.ExampleWrapper>
+        </S.ComponentWrapper>
         <S.ComponentWrapper>
           <h2>ButtonInAlert</h2>
           <S.ExampleWrapper>
