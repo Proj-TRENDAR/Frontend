@@ -45,8 +45,9 @@ interface ItemProps {
   header: React.ReactElement // 여닫는 버튼 옆에 출력됩니다
   children: React.ReactElement // 닫히는 영역에 출력됩니다
   moreStyle?: RuleSet<object>
+  arrowColor?: string
 }
-export function AccordionItem({ id, header, children, moreStyle }: ItemProps) {
+export function AccordionItem({ id, header, children, moreStyle, arrowColor }: ItemProps) {
   const [isOpened, setIsOpened] = useState<boolean>(true)
   const { isAllClosed, setIsAllClosed } = useContext(ItemClosedContext)
 
@@ -65,7 +66,7 @@ export function AccordionItem({ id, header, children, moreStyle }: ItemProps) {
             }
           }}
         >
-          <Arrow />
+          {arrowColor ? <Arrow stroke={arrowColor} /> : <Arrow />}
         </button>
         <div className="header-wrapper">{header}</div>
       </S.ItemHeader>

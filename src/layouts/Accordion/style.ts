@@ -6,8 +6,6 @@ export const AccordionWrapper = styled.div<{ height: string }>`
   display: flex;
   flex-direction: column;
 
-  background-color: ${({ theme }) => theme.pointBg};
-
   @media (min-width: 768px) {
     min-height: unset;
     height: ${({ height }) => height || '100vh'};
@@ -26,8 +24,9 @@ export const AccordionItem = styled.section<{ $isOpened: boolean; $moreStyle: Ru
 `
 
 export const ItemHeader = styled.div`
-  display: flex;
   padding: 5px 8px;
+
+  display: flex;
   .header-wrapper {
     flex-grow: 1;
   }
@@ -52,8 +51,10 @@ export const ItemHeader = styled.div`
 `
 export const ItemContent = styled.div<{ $isOpened: boolean }>`
   height: ${({ $isOpened }) => ($isOpened ? 'auto' : 0)};
+  padding: 0 8px;
 
+  display: flex;
+  justify-content: center;
   flex-grow: 1;
-
   overflow: hidden;
 `

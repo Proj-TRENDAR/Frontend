@@ -1,4 +1,4 @@
-import Accordion from '@components/Accordion'
+import Accordion from '@layouts/Accordion'
 import Routine from '@components/Home/Routine'
 import Schedule from '@components/Home/Schedule'
 import ToDo from '@components/Home/ToDo'

@@ -13,9 +13,6 @@ export const Layout = styled.div`
     width: 100%;
     min-height: calc(85% - 64px);
   }
-  #right-bar {
-    background-color: ${({ theme }) => theme.pointBg};
-  }
 
   @media (min-width: 768px) {
     height: 100vh;
