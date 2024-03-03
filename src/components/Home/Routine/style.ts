@@ -24,7 +24,7 @@ export const EmptyContent = styled.div`
   .exam-title {
     margin-top: 10px;
 
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     line-height: 150%;
     color: ${({ theme }) => theme.point};
@@ -38,6 +38,16 @@ export const EmptyContent = styled.div`
     border-radius: 7px;
 
     pointer-events: none;
+    ul {
+      li {
+        span {
+          font-size: 14px;
+        }
+        button.more {
+          display: none;
+        }
+      }
+    }
   }
 `
 

@@ -3,6 +3,8 @@ import * as S from '@components/Home/ToDo/style'
 import { PageHeader } from '@layouts/PageHeader'
 import IconButton from '@components/common/button/IconButton'
 import Add from '@assets/image/icon/ic-add.svg?react'
+import { ITodoList } from '@/types'
+import TodoList from '@components/common/TodoList'
 
 interface Props {
   id: string
@@ -44,7 +46,21 @@ function EmptyContent() {
       </p>
       <div className="exam-content">
         <h2 className="exam-title">TODO 예시</h2>
+        <TodoList list={ExamDummy} />
       </div>
     </S.EmptyContent>
   )
 }
+
+const ExamDummy: ITodoList[] = [
+  {
+    title: '2024년 다이어리 구매',
+    isDone: false,
+    sequence: 1,
+  },
+  {
+    title: '1주차 회의 준비',
+    isDone: false,
+    sequence: 2,
+  },
+]

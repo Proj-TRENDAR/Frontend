@@ -51,9 +51,23 @@ export const EmptyContent = styled.div`
 
       content: '';
     }
+
+    ul {
+      li {
+        span {
+          font-size: 14px;
+          color: ${({ theme }) => theme.textInfo};
+        }
+        button.more {
+          display: none;
+        }
+      }
+    }
   }
   .exam-title {
-    font-size: 13px;
+    margin-bottom: 4px;
+
+    font-size: 14px;
     font-weight: 500;
     line-height: 150%;
     text-align: center;

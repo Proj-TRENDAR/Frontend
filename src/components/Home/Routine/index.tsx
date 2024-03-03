@@ -3,6 +3,8 @@ import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import IconButton from '@components/common/button/IconButton'
 import * as S from '@components/Home/Routine/style'
+import RoutineList from '@components/common/RoutineList'
+import { IRoutineList } from '@/types'
 
 interface Props {
   id: string
@@ -43,7 +45,24 @@ function EmptyContent() {
         루틴을 설정하고 좋은 습관을 들여보세요
       </p>
       <h2 className="exam-title">ROUTINE 예시</h2>
-      <div className="exam-content"></div>
+      <div className="exam-content">
+        <RoutineList list={ExamDummy} />
+      </div>
     </S.EmptyContent>
   )
 }
+
+const ExamDummy: IRoutineList[] = [
+  {
+    title: '아침 운동하기',
+    isDone: false,
+    sequence: 1,
+    color: 'r1',
+  },
+  {
+    title: '독서하기',
+    isDone: false,
+    sequence: 2,
+    color: 'r3',
+  },
+]
