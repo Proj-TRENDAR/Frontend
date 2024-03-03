@@ -42,7 +42,7 @@ function EmptyContent() {
         <br />
         루틴을 설정하고 좋은 습관을 들여보세요
       </p>
-      <h2 className="exam-title">TODO 예시</h2>
+      <h2 className="exam-title">ROUTINE 예시</h2>
       <div className="exam-content"></div>
     </S.EmptyContent>
   )
