@@ -17,6 +17,7 @@ export const ContentWrapper = styled.div`
   width: 100%;
   padding: 12px 8px;
   margin-bottom: 8px;
+  min-height: 219px;
 
   background-color: ${({ theme }) => theme.basicBg};
   border-radius: 6px;

@@ -7,7 +7,7 @@ export const RoutineWrapper = css`
 `
 
 export const EmptyContent = styled.div`
-  margin: 4px 0;
+  margin: 4px 0 14px;
   gap: 6px;
 
   display: flex;
