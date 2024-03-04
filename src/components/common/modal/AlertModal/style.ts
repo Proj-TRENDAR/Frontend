@@ -7,7 +7,7 @@ export const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 9999; // AlertModal이 최상위에 있어야함
   overflow: hidden;
 
   .white-box {
