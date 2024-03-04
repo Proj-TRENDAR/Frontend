@@ -1,12 +1,14 @@
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
+
 import { userInfoAtom } from '@/store'
 
 const KakaoLogin = () => {
   const navigate = useNavigate()
-  const [, setUserInfo] = useAtom(userInfoAtom)
+  const [userInfo, setUserInfo] = useAtom(userInfoAtom)
+  const [isRequest, setRequest] = useState(false)
 
   useEffect(() => {
     const params = new URL(document.location.toString()).searchParams
@@ -19,28 +21,35 @@ const KakaoLogin = () => {
       },
       params: { code, social: 'kakao' },
     }
+
     axios(config)
       .then((res: any) => {
-        console.log(res)
+        console.debug(res)
         setUserInfo({
           accessToken: res.data.accessToken,
           userName: res.data.userName,
           id: res.data.id,
         })
-        navigate('/')
       })
       .catch((err: any) => {
-        console.log(err)
-        setUserInfo({
-          accessToken: null,
-          userName: null,
-          id: null,
-        })
-        //temp
-        alert('로그인에 실패하였습니다.')
-        navigate('/login')
+        console.debug(err)
+      })
+      .then(() => {
+        setRequest(true)
       })
   }, [])
+
+  useEffect(() => {
+    if (isRequest) {
+      if (userInfo.accessToken) {
+        navigate('/')
+      } else {
+        alert('로그인에 실패하였습니다.')
+        navigate('/login')
+      }
+    }
+  }, [isRequest])
+
   return <></>
 }
 
