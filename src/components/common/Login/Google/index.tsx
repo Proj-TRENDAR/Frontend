@@ -5,16 +5,22 @@ import AlertModal from '@components/common/modal/AlertModal'
 // TODO: 구글 로그인 구현
 // 구현예정이라 준비중 모달 띄움
 export default function GoogleLogin() {
-  const [handleOpenForComingSoonModal, handleCloseForComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] =
-    useAlertModal({
-      alertMessageKey: 'comingSoon',
-    })
+  const [handleComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] = useAlertModal({
+    alertMessageKey: 'comingSoon',
+  })
 
   return (
     <>
-      <GoogleLogo style={{ cursor: 'pointer' }} onClick={handleOpenForComingSoonModal}></GoogleLogo>
+      <GoogleLogo
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          handleComingSoonModal(true)
+        }}
+      ></GoogleLogo>
       <AlertModal
-        handleClose={handleCloseForComingSoonModal}
+        handleClose={() => {
+          handleComingSoonModal(false)
+        }}
         isOpenModal={isComingSoonModalOpen}
         message={messageOfComingSoonModal}
       />
