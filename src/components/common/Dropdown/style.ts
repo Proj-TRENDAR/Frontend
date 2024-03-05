@@ -38,6 +38,7 @@ export const DropDownWrapper = styled.div`
     left: 0;
     list-style: none;
     overflow: hidden;
+    z-index: 1;
 
     background-color: #fff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);

@@ -22,17 +22,9 @@ const ALERT_MESSAGE = {
 export function useAlertModal({
   alertMessageKey,
   message,
-}: AlertMessageProps | MessageProps): [() => void, () => void, boolean, string | React.ReactElement] {
+}: AlertMessageProps | MessageProps): [(isOpen: boolean) => void, boolean, string | React.ReactElement] {
   const [isOpenModal, setIsOpenModal] = useToggleOpenWithExternalClick()
   const modalMessage = alertMessageKey ? ALERT_MESSAGE[alertMessageKey] : message
 
-  const handleOpen = () => {
-    setIsOpenModal(true)
-  }
-
-  const handleClose = () => {
-    setIsOpenModal(false)
-  }
-
-  return [handleOpen, handleClose, isOpenModal, modalMessage]
+  return [setIsOpenModal, isOpenModal, modalMessage]
 }
