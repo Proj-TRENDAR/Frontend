@@ -33,7 +33,7 @@ export const basicTheme: DefaultTheme = {
   grayBt: '#A9A9A9',
   grayBtLight: '#F0F0F0',
   text: '#333333',
-  texInfo: '#7C7C7C',
+  textInfo: '#7C7C7C',
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
