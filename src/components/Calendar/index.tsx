@@ -1,6 +1,8 @@
 import CalendarLayout from '@layouts/Calendar'
 import { useState } from 'react'
 import { ITabList } from '@components/common/button/TabButton'
+import WeeklyCalendar from '@components/Calendar/WeeklyCalendar'
+import MonthlyCalendar from '@components/Calendar/MonthlyCalendar'
 
 export default function Calendar({ ...props }) {
   const [viewToggle, setViewToggle] = useState('monthly')
@@ -24,8 +26,8 @@ export default function Calendar({ ...props }) {
   ]
   return (
     <CalendarLayout tabList={tabList} defaultTabKey="monthly" {...props}>
-      {viewToggle === 'weekly' && <h1> 주간 캘린더</h1>}
-      {viewToggle === 'monthly' && <h1> 월간 캘린더</h1>}
+      {viewToggle === 'weekly' && <WeeklyCalendar />}
+      {viewToggle === 'monthly' && <MonthlyCalendar />}
     </CalendarLayout>
   )
 }
