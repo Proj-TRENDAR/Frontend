@@ -1,19 +1,20 @@
-import { AccordionItem } from '@layouts/Accordion'
-import * as S from '@components/Home/ToDo/style'
-import { PageHeader } from '@layouts/PageHeader'
-import IconButton from '@components/common/button/IconButton'
-import Button from '@components/common/button/Button'
-import Add from '@assets/image/icon/ic-add.svg?react'
-import Arrow from '@assets/image/icon/ic-arrow_down.svg?react'
 import { ITodoList } from '@/types'
+
+import { AccordionItem } from '@layouts/Accordion'
+import { PageHeader } from '@layouts/PageHeader'
+import Add from '@assets/image/icon/ic-add.svg?react'
 import TodoList from '@components/common/TodoList'
+import IconButton from '@components/common/button/IconButton'
+
+import * as S from '@components/Home/ToDo/style'
 
 interface Props {
   id: string
 }
 
 export default function ToDo({ id }: Props) {
-  const todoList = null
+  // TODO: ExamDummy대신 api로 가져온 값 넣기
+  const todoList = ExamDummy
   return (
     <AccordionItem
       moreStyle={S.ToDoWrapper}
@@ -34,25 +35,13 @@ export default function ToDo({ id }: Props) {
       }
     >
       {/* TODO: 투두 목록 여부에 따라 출력이 달라져야함. 지금은 우선 목록이 없는 경우로만 출력함 */}
-      {todoList ? <Content /> : <EmptyContent />}
+      {todoList.length ? <Content list={todoList} /> : <EmptyContent />}
     </AccordionItem>
   )
 }
 
-function Content() {
-  return (
-    <S.Content>
-      <button className={'prev-button'}>
-        <Arrow stroke={'#A9A9A9'} />
-      </button>
-      <Button size={'small'} $outline={true} $round={true} $fullwidth={true}>
-        날짜
-      </Button>
-      <button className={'next-button'}>
-        <Arrow stroke={'#A9A9A9'} />
-      </button>
-    </S.Content>
-  )
+function Content({ list }: { list: ITodoList[] }) {
+  return <TodoList list={list} />
 }
 
 function EmptyContent() {
