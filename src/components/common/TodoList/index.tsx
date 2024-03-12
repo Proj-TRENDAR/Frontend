@@ -13,17 +13,20 @@ export default function TodoList({ list }: Props) {
   const theme = useTheme()
   return (
     <S.TodoList>
-      {list.map(todo => (
-        <S.Todo key={todo.sequence}>
-          <button>
-            {todo.isDone ? <CheckedIcon fill={theme.grayBtLight} /> : <UncheckedIcon fill={theme.grayBtLight} />}
-          </button>
-          <span>{todo.title}</span>
-          <button className="more">
-            <MoreIcon fill={theme.grayBtLight} />
-          </button>
-        </S.Todo>
-      ))}
+      {list
+        .sort((a, b) => a.sequence - b.sequence)
+        .map(todo => (
+          <S.Todo key={todo.sequence}>
+            <button>
+              {/*TODO: CheckedIcon fill 값 theme로 뺄껀지 체크*/}
+              {todo.isDone ? <CheckedIcon fill={'#1DB993'} /> : <UncheckedIcon fill={theme.grayBtLight} />}
+            </button>
+            <span className={todo.isDone ? 'done' : ''}>{todo.title}</span>
+            <button className="more">
+              <MoreIcon fill={theme.grayBtLight} />
+            </button>
+          </S.Todo>
+        ))}
     </S.TodoList>
   )
 }
