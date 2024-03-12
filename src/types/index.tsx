@@ -6,7 +6,9 @@ export interface IRoutineList {
 }
 
 export interface ITodoList {
+  idx: number
   title: string
   isDone: boolean
   sequence: number
+  appliedAt: string
 }

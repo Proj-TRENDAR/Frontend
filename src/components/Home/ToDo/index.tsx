@@ -69,16 +69,20 @@ function EmptyContent() {
     </S.EmptyContent>
   )
 }
-
+// TODO: Backend get Todo 수정 후 api 연결
 const ExamDummy: ITodoList[] = [
   {
+    idx: 1,
     title: '2024년 다이어리 구매',
     isDone: false,
-    sequence: 1,
+    sequence: 2,
+    appliedAt: '2024-03-12 00:00:00',
   },
   {
+    idx: 2,
     title: '1주차 회의 준비',
-    isDone: false,
-    sequence: 2,
+    isDone: true,
+    sequence: 1,
+    appliedAt: '2024-03-13 12:34:00',
   },
 ]
