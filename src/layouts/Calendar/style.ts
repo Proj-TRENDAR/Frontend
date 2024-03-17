@@ -32,6 +32,7 @@ export const Calendar = styled.section`
 
       flex-direction: row;
       & > .toggle-wrapper {
+        width: auto;
         top: 50%;
         right: 10px;
         transform-origin: right;
