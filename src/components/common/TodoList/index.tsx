@@ -19,7 +19,7 @@ export default function TodoList({ list }: Props) {
           <S.Todo key={todo.sequence}>
             <button>
               {/*TODO: CheckedIcon fill 값 theme로 뺄껀지 체크*/}
-              {todo.isDone ? <CheckedIcon fill={'#1DB993'} /> : <UncheckedIcon fill={theme.grayBtLight} />}
+              {todo.isDone ? <CheckedIcon fill={theme.checkedColor} /> : <UncheckedIcon fill={theme.grayBtLight} />}
             </button>
             <span className={todo.isDone ? 'done' : ''}>{todo.title}</span>
             <button className="more">

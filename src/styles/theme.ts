@@ -37,6 +37,8 @@ export const basicTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
+  checkedColor: '#1DB993',
+  checkedTextColor: '#DDDDDD',
 }
 
 // TODO: 다른 컬러테마 추가

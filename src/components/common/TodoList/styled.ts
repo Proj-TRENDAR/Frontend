@@ -15,7 +15,6 @@ export const Todo = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
-  //justify-content: space-between
 
   border-radius: 8px;
 
@@ -45,7 +44,7 @@ export const Todo = styled.li`
   }
 
   .done {
-    color: #dddddd;
+    color: ${({ theme }) => theme.checkedTextColor};
     text-decoration: line-through;
   }
 `
