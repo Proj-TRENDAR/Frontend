@@ -1,12 +1,204 @@
 import * as S from './style'
 import Calendar from '@/utils/calendar'
+import { useTheme } from 'styled-components'
+import React from 'react'
+
+interface ILongScheduleDummy {
+  key: string
+  title: string
+  color: number
+  being: number
+  isLong: boolean
+}
+
+interface IShortScheduleDummy {
+  key: string
+  title: string
+  isLong: boolean
+}
 
 export default function MonthlyCalendar() {
   const thisDate = new Date()
   const calendar = new Calendar()
   const { prevMonthDates, thisMonthDates, nextMonthDates } = calendar.getMonthDates(thisDate)
   const monthlyDates = [...prevMonthDates, ...thisMonthDates, ...nextMonthDates]
+  const theme = useTheme()
 
+  // FIXME: 현재 더미로 임시 출력해둠. api 연동 후 삭제해야함
+  const longScheduleDummy: ILongScheduleDummy[][] = [
+    [], // 1주차
+    [
+      { key: 'schedule1', title: '일정더미1(월)', color: 1, being: 3, isLong: true },
+      { key: 'schedule2', title: '일정더미2(월)', color: 3, being: 2, isLong: true },
+    ],
+    [],
+    [{ key: 'schedule3', title: '일정더미1(수)', color: 7, being: 1, isLong: true }],
+    [{ key: 'schedule4', title: '일정더미1(목)', color: 2, being: 2, isLong: true }],
+    [{ key: 'schedule5', title: '일정더미1(금)', color: 4, being: 2, isLong: true }],
+    [{ key: 'schedule6', title: '일정더미1(토)', color: 5, being: 1, isLong: true }],
+    [], // 2주차
+    [{ key: 'schedule7', title: '일정더미1(월)', color: 6, being: 1, isLong: true }],
+    [],
+    [],
+    [{ key: 'schedule8', title: '일정더미1(목)', color: 2, being: 3, isLong: true }],
+    [{ key: 'schedule9', title: '일정더미1(금)', color: 4, being: 2, isLong: true }],
+    [],
+    [], // 3주차
+    [],
+    [],
+    [{ key: 'schedule10', title: '일정더미1(수)', color: 7, being: 1, isLong: true }],
+    [],
+    [{ key: 'schedule11', title: '일정더미1(금)', color: 4, being: 2, isLong: true }],
+    [{ key: 'schedule12', title: '일정더미1(토)', color: 5, being: 1, isLong: true }],
+    [], // 4주차
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [], // 5주차
+    [{ key: 'schedule13', title: '일정더미1(월)', color: 1, being: 2, isLong: true }],
+    [],
+    [{ key: 'schedule14', title: '일정더미1(수)', color: 7, being: 1, isLong: true }],
+    [],
+    [],
+    [{ key: 'schedule15', title: '일정더미1(토)', color: 5, being: 1, isLong: true }],
+    [], // 6주차
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+  ]
+  const shortScheduleDummy: IShortScheduleDummy[][] = [
+    [{ key: 'schedule1', title: '하루일정더미1(일)', isLong: false }], // 1주차
+    [{ key: 'schedule2', title: '하루일정더미1(월)', isLong: false }],
+    [
+      { key: 'schedule3', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule4', title: '하루일정더미1(화)', isLong: false },
+    ],
+    [
+      { key: 'schedule5', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule6', title: '하루일정더미1(수)', isLong: false },
+    ],
+    [{ key: 'schedule7', title: '하루일정더미1(목)', isLong: false }],
+    [{ key: 'schedule8', title: '하루일정더미1(금)', isLong: false }],
+    [],
+    [{ key: 'schedule9', title: '하루일정더미1(일)', isLong: false }], // 2주차
+    [{ key: 'schedule10', title: '하루일정더미1(월)', isLong: false }],
+    [
+      { key: 'schedule11', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule12', title: '하루일정더미1(화)', isLong: false },
+    ],
+    [
+      { key: 'schedule13', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule14', title: '하루일정더미1(수)', isLong: false },
+    ],
+    [{ key: 'schedule15', title: '하루일정더미1(목)', isLong: false }],
+    [{ key: 'schedule16', title: '하루일정더미1(금)', isLong: false }],
+    [],
+    [{ key: 'schedule17', title: '하루일정더미1(일)', isLong: false }], // 3주차
+    [{ key: 'schedule18', title: '하루일정더미1(월)', isLong: false }],
+    [
+      { key: 'schedule19', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule20', title: '하루일정더미1(화)', isLong: false },
+    ],
+    [
+      { key: 'schedule21', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule22', title: '하루일정더미1(수)', isLong: false },
+    ],
+    [{ key: 'schedule23', title: '하루일정더미1(목)', isLong: false }],
+    [{ key: 'schedule24', title: '하루일정더미1(금)', isLong: false }],
+    [],
+    [{ key: 'schedule25', title: '하루일정더미1(일)', isLong: false }], // 4주차
+    [{ key: 'schedule26', title: '하루일정더미1(월)', isLong: false }],
+    [
+      { key: 'schedule27', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule28', title: '하루일정더미1(화)', isLong: false },
+    ],
+    [
+      { key: 'schedule29', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule30', title: '하루일정더미1(수)', isLong: false },
+    ],
+    [{ key: 'schedule31', title: '하루일정더미1(목)', isLong: false }],
+    [{ key: 'schedule32', title: '하루일정더미1(금)', isLong: false }],
+    [],
+    [{ key: 'schedule33', title: '하루일정더미1(일)', isLong: false }], // 5주차
+    [{ key: 'schedule34', title: '하루일정더미1(월)', isLong: false }],
+    [
+      { key: 'schedule35', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule36', title: '하루일정더미1(화)', isLong: false },
+    ],
+    [
+      { key: 'schedule37', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule38', title: '하루일정더미1(수)', isLong: false },
+    ],
+    [{ key: 'schedule39', title: '하루일정더미1(목)', isLong: false }],
+    [{ key: 'schedule40', title: '하루일정더미1(금)', isLong: false }],
+    [],
+    [{ key: 'schedule41', title: '하루일정더미1(일)', isLong: false }], // 6주차
+    [{ key: 'schedule42', title: '하루일정더미1(월)', isLong: false }],
+    [
+      { key: 'schedule43', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule44', title: '하루일정더미1(화)', isLong: false },
+    ],
+    [
+      { key: 'schedule45', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule46', title: '하루일정더미1(수)', isLong: false },
+    ],
+    [{ key: 'schedule47', title: '하루일정더미1(목)', isLong: false }],
+    [{ key: 'schedule48', title: '하루일정더미1(금)', isLong: false }],
+    [],
+  ]
+
+  // rowColStackNum: 각 하루 칸 안에서 하루종일 일정이 차지하는 줄의 수를 저장합니다.
+  // 이 값을 참고하여 '하루 내 일정'을 '하루종일 일정' 아래줄에 렌더합니다.
+  const rowColStackNum: number[][] = []
+
+  const getSortedLongScheduleDummy = (weekNum: number) => {
+    rowColStackNum.push([0, 0, 0, 0, 0, 0, 0])
+    const schedule = JSON.parse(JSON.stringify(longScheduleDummy.slice(weekNum * 7, weekNum * 7 + 7)))
+    const newSorted = []
+    let startNum = 0
+    let rowNum = 0
+
+    while (schedule.flat().length > 0) {
+      if (schedule[startNum].length === 0) {
+        startNum++
+        if (startNum > 6) {
+          startNum = 0
+          rowNum++
+        }
+        continue
+      }
+      const firstSchedule = schedule[startNum].shift()
+      newSorted.push({ ...firstSchedule, start: startNum, row: rowNum })
+
+      for (let i = 0; i < firstSchedule.being ?? 0; i++) {
+        rowColStackNum[rowColStackNum.length - 1][startNum + i]++
+      }
+
+      startNum += firstSchedule.being
+      if (startNum > 6) {
+        startNum = 0
+        rowNum++
+      }
+    }
+
+    return newSorted
+  }
+
+  const getSortedShortScheduleDummy = (weekNum: number) => {
+    const schedule = JSON.parse(JSON.stringify(shortScheduleDummy.slice(weekNum * 7, weekNum * 7 + 7)))
+
+    return schedule.map((daySchedules: IShortScheduleDummy[], i: number) =>
+      daySchedules.length === 0
+        ? daySchedules
+        : daySchedules.map((schedule, j) => ({ ...schedule, start: i, row: rowColStackNum[weekNum][i] + j }))
+    )
+  }
   return (
     <S.Monthly>
       {/* 요일 */}
@@ -19,41 +211,25 @@ export default function MonthlyCalendar() {
         <li className="weekdays fri">금</li>
         <li className="weekend sat">토</li>
       </S.DayHeader>
-      {/* 날짜 */}
 
+      {/* 날짜 */}
       <S.Week className="week-wrapper">
         {monthlyDates
           // 1. 하루는 li로 렌터
           .map((date, i) => {
-            if (i % 7 === 0) {
-              return (
-                <li
-                  className={`weekend sun ${thisDate.getMonth() !== date.getMonth() ? 'ghost' : ''}`}
-                  key={date.getTime()}
-                >
-                  {date.getDate()}
-                </li>
-              )
-            }
-            if (i % 7 === 6) {
-              return (
-                <li
-                  className={`weekend sat ${thisDate.getMonth() !== date.getMonth() ? 'ghost' : ''}`}
-                  key={date.getTime()}
-                >
-                  {date.getDate()}
-                </li>
-              )
-            }
+            const weekColor = i % 7 === 0 ? 'sun' : i % 7 === 6 ? 'sat' : ''
+            const ghost = thisDate.getMonth() !== date.getMonth() ? 'ghost' : ''
+
             return (
-              <li className={`weekdays ${thisDate.getMonth() !== date.getMonth() ? 'ghost' : ''}`} key={date.getTime()}>
+              <li className={`weekend ${weekColor} ${ghost}`} key={date.getTime()}>
                 {date.getDate()}
+                {/* TODO: 일일 루틴 표시 */}
               </li>
             )
           })
           // 2. 일주일씩 묶어서
           .reduce(
-            (acc: any[][], date) => {
+            (acc: React.ReactElement[][], date) => {
               if (acc[acc.length - 1].length < 7) {
                 acc[acc.length - 1].push(date)
               } else {
@@ -66,49 +242,49 @@ export default function MonthlyCalendar() {
           // 3. ul로 렌더
           .map((week, weekNum) => (
             <div key={weekNum}>
+              {/* 주간 날짜 렌더 */}
               <ul className="date-wrapper">{week}</ul>
-              {/* FIXME: 아래 schedule-wrapper는 더미임!
-               */}
+
+              {/* 주간 일정 렌더 */}
               <ul className="schedule-wrapper">
                 {/* 4. 여러날 이어지는 일정 먼저 렌더 */}
-                {[
-                  [
-                    { key: 'schedule1', title: '일정더미1(월)', being: 2 },
-                    { key: 'schedule2', title: '일정더미2(월)', being: 4 },
-                  ],
-                  [],
-                  [],
-                  [],
-                  [{ key: 'schedule1', title: '일정더미1(금)', being: 2 }],
-                  [],
-                  [],
-                ].map((schedules, dayNum) =>
-                  schedules.map((schedule, i) => {
-                    // gridArea: gridRowStart / 시작일 / gridRowStart + 1 / 종료일
+                {getSortedLongScheduleDummy(weekNum).map((schedule, i) => {
+                  console.debug(`${weekNum}째주의 하루종일 일정 ${i}`, schedule)
 
-                    // TODO: 날짜별 최소 gridRowStart 위치를 가지고 있어야 다른 일정과 안겹치게 그릴 수 있을것같음..
-                    // 각 날짜 몇번째줄이 사용중인지 저장해야함. -> 같은 줄에 여러일정이 겹치지 않기 위함
-                    // 날짜별로 종료일을 따로 저장해놔야가능함. -> 아래 4번 렌더시 일정과 겹치지 않기 위함
-                    return (
+                  return (
+                    schedule && (
                       <li
                         key={`${schedule.title}${i}`}
                         className="long-schedule"
-                        style={{ gridArea: `${i + 1} / ${dayNum + 1} / ${i + 2} / ${dayNum + 1 + schedule.being}` }}
+                        style={{
+                          // gridArea: gridRowStart / 시작일 / gridRowStart + 1 / 종료일
+                          gridArea: `${schedule.row + 1} / ${schedule.start + 1} / ${schedule.row + 2} / ${schedule.start + 1 + (schedule.being ?? 0)}`,
+                          backgroundColor: theme[`s${schedule.color}`],
+                        }}
+                      >
+                        <span>{schedule.title}</span>
+                      </li>
+                    )
+                  )
+                })}
+                {/* 5. 하루중에 일어나는 일정 렌더 */}
+                {getSortedShortScheduleDummy(weekNum).map(
+                  (schedules: (IShortScheduleDummy & { row: number; start: number })[], i: number) => {
+                    console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, schedules)
+
+                    return schedules.map(schedule => (
+                      <li
+                        key={`${schedule.key}${i}`}
+                        style={{
+                          gridColumnStart: schedule.start + 1,
+                          gridRowStart: schedule.row + 1,
+                        }}
                       >
                         {schedule.title}
                       </li>
-                    )
-                  })
+                    ))
+                  }
                 )}
-                {/* 4. 하루중에 일어나는 일정 렌더 */}
-                <li style={{ gridColumnStart: 1 }}>하루일정더미1(월)</li>
-                <li style={{ gridColumnStart: 2 }}>하루일정더미1(화)</li>
-                <li style={{ gridColumnStart: 2 }}>하루일정더미2(화)</li>
-                <li style={{ gridColumnStart: 3, gridRowStart: 3 }}>하루일정더미1(수)</li>
-                <li style={{ gridColumnStart: 3 }}>하루일정더미2(수)</li>
-                <li style={{ gridColumnStart: 4, gridRowStart: 3 }}>하루일정더미1(목)</li>
-                <li style={{ gridColumnStart: 5, gridRowStart: 2 }}>하루일정더미1(금)</li>
-                <li style={{ gridColumnStart: 7, gridRowStart: 1 }}>하루일정더미1(일)</li>
               </ul>
             </div>
           ))}

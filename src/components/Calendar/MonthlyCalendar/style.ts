@@ -65,6 +65,7 @@ export const Week = styled.div`
     }
     & > .ghost {
       background-color: unset;
+      opacity: 0.3;
     }
   }
   .schedule-wrapper {
@@ -83,14 +84,25 @@ export const Week = styled.div`
       z-index: 1;
 
       font-size: 13px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     & > .long-schedule {
       display: flex;
       align-items: center;
 
+      // 컬러가 없는 경우 기본으로 아래 컬러가 출력됩니다.
+      // 실제 컬러는 MonthlyCalendar 컴포넌트에서 인라인으로 관리됩니다.
       background-color: ${({ theme }) => theme.s1};
 
       border-radius: 20px;
+
+      & > span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
   }
 `
