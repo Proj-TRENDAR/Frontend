@@ -10,9 +10,28 @@ const dateListStyle = css`
     width: 100%;
     padding: 4px;
 
+    position: relative;
+
     font-size: 11px;
 
     background-color: ${({ theme }) => theme.basicBg};
+    &.current:after {
+      width: 100%;
+      height: 151px;
+      top: 0;
+      left: 0;
+
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+
+      border: solid 2px ${({ theme }) => theme.point};
+      border-radius: 7px;
+
+      z-index: 2;
+      pointer-events: none;
+      content: '';
+    }
   }
   & > .weekdays {
     color: ${({ theme }) => theme.dayColorOfWeekday};
@@ -23,6 +42,7 @@ const dateListStyle = css`
   & > .sat {
     color: ${({ theme }) => theme.dayColorOfSat};
   }
+
   @media (min-width: 768px) {
     & > li {
       padding: 8px;

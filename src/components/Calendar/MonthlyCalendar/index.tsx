@@ -20,7 +20,7 @@ interface IShortScheduleDummy {
 }
 
 export default function MonthlyCalendar() {
-  const [calendarInfo] = useAtom(calendarInfoAtom)
+  const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
   const calendar = new Calendar()
   const { prevMonthDates, thisMonthDates, nextMonthDates } = calendar.getMonthDates(new Date(calendarInfo.selectedDate))
   const monthlyDates = [...prevMonthDates, ...thisMonthDates, ...nextMonthDates]
@@ -219,11 +219,24 @@ export default function MonthlyCalendar() {
         {monthlyDates
           // 1. 하루는 li로 렌터
           .map((date, i) => {
+            const selectedDate = new Date(calendarInfo.selectedDate)
             const weekColor = i % 7 === 0 ? 'sun' : i % 7 === 6 ? 'sat' : ''
-            const ghost = new Date(calendarInfo.selectedDate).getMonth() !== date.getMonth() ? 'ghost' : ''
+            const ghost = selectedDate.getMonth() !== date.getMonth() ? 'ghost' : ''
+            const current =
+              selectedDate.getFullYear() === date.getFullYear() &&
+              selectedDate.getMonth() === date.getMonth() &&
+              selectedDate.getDate() === date.getDate()
+                ? 'current'
+                : ''
 
             return (
-              <li className={`weekend ${weekColor} ${ghost}`} key={date.getTime()}>
+              <li
+                className={`weekend ${weekColor} ${ghost} ${current}`}
+                key={date.getTime()}
+                onClick={() => {
+                  setCalendarInfo({ selectedDate: date })
+                }}
+              >
                 {date.getDate()}
                 {/* TODO: 일일 루틴 표시 */}
               </li>
