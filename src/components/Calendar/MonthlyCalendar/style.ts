@@ -17,7 +17,7 @@ const dateListStyle = css`
     background-color: ${({ theme }) => theme.basicBg};
     &.current:after {
       width: 100%;
-      height: 151px;
+      height: 122px;
       top: 0;
       left: 0;
 
@@ -31,6 +31,10 @@ const dateListStyle = css`
       z-index: 2;
       pointer-events: none;
       content: '';
+
+      @media (min-width: 768px) {
+        height: 151px;
+      }
     }
   }
   & > .weekdays {

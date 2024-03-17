@@ -45,13 +45,25 @@ const sizes = {
   large: css`
     padding: 0.4em 1.2em;
 
-    font-size: 1.3333rem;
-    line-height: 1.3333rem;
+    font-size: 1rem;
+    @media (min-width: 768px) {
+      padding: 0.4em 1.2em;
+
+      font-size: 1.3333rem;
+      line-height: 1.3333rem;
+    }
   `,
   medium: css`
     padding: 0.4em 1.2em;
 
     font-size: 1rem;
+    @media (min-width: 768px) {
+      & > li {
+        padding: 8px;
+
+        font-size: 13px;
+      }
+    }
   `,
 }
 

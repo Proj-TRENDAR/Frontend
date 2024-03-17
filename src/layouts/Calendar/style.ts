@@ -2,35 +2,63 @@ import { styled } from 'styled-components'
 
 export const Calendar = styled.section`
   .calendar-header {
-    height: 64px; // FIXME: 임의임. 모바일 사이즈 달라야함
     padding: 7px 0;
 
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    flex-direction: column;
 
     & > .title-button-wrapper {
       display: flex;
       justify-content: center;
     }
     & > .toggle-wrapper {
-      top: 50%;
-      right: 10px;
-      transform-origin: right;
-      transform: translateY(-50%) scale(0.8);
+      width: 100%;
 
-      position: absolute;
+      display: flex;
+      justify-content: flex-end;
+      & > div {
+        transform: scale(0.8);
 
-      @media (min-width: 768px) {
-        right: 18px;
-        transform: translateY(-50%) scale(1);
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+  @media (min-width: 468px) {
+    .calendar-header {
+      height: 64px;
+
+      flex-direction: row;
+      & > .toggle-wrapper {
+        top: 50%;
+        right: 10px;
+        transform-origin: right;
+
+        position: absolute;
+        & > div {
+          transform: translateY(-50%) scale(0.8);
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .calendar-header {
+      & > .toggle-wrapper {
+        & > div {
+          transform: translateY(-50%) scale(1);
+        }
       }
     }
   }
   .calendar-body {
-    height: calc(100vh - 64px);
+    height: auto;
 
     overflow: auto;
+
+    @media (min-width: 768px) {
+      height: calc(100vh - 64px);
+    }
   }
 `
