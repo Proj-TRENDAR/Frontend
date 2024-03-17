@@ -2,6 +2,8 @@ import * as S from './style'
 import Calendar from '@/utils/calendar'
 import { useTheme } from 'styled-components'
 import React from 'react'
+import { calendarInfoAtom } from '@/store'
+import { useAtom } from 'jotai'
 
 interface ILongScheduleDummy {
   key: string
@@ -18,9 +20,9 @@ interface IShortScheduleDummy {
 }
 
 export default function MonthlyCalendar() {
-  const thisDate = new Date()
+  const [calendarInfo] = useAtom(calendarInfoAtom)
   const calendar = new Calendar()
-  const { prevMonthDates, thisMonthDates, nextMonthDates } = calendar.getMonthDates(thisDate)
+  const { prevMonthDates, thisMonthDates, nextMonthDates } = calendar.getMonthDates(new Date(calendarInfo.selectedDate))
   const monthlyDates = [...prevMonthDates, ...thisMonthDates, ...nextMonthDates]
   const theme = useTheme()
 
@@ -218,7 +220,7 @@ export default function MonthlyCalendar() {
           // 1. 하루는 li로 렌터
           .map((date, i) => {
             const weekColor = i % 7 === 0 ? 'sun' : i % 7 === 6 ? 'sat' : ''
-            const ghost = thisDate.getMonth() !== date.getMonth() ? 'ghost' : ''
+            const ghost = new Date(calendarInfo.selectedDate).getMonth() !== date.getMonth() ? 'ghost' : ''
 
             return (
               <li className={`weekend ${weekColor} ${ghost}`} key={date.getTime()}>
