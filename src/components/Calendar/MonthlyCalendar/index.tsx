@@ -280,7 +280,7 @@ export default function MonthlyCalendar() {
                           gridRowStart: schedule.row + 1,
                         }}
                       >
-                        {schedule.title}
+                        <span>{schedule.title}</span>
                       </li>
                     ))
                   }

@@ -7,8 +7,10 @@ const dateListStyle = css`
   display: flex;
   justify-content: space-between;
   & > li {
-    padding: 8px;
     width: 100%;
+    padding: 4px;
+
+    font-size: 11px;
 
     background-color: ${({ theme }) => theme.basicBg};
   }
@@ -20,6 +22,13 @@ const dateListStyle = css`
   }
   & > .sat {
     color: ${({ theme }) => theme.dayColorOfSat};
+  }
+  @media (min-width: 768px) {
+    & > li {
+      padding: 8px;
+
+      font-size: 13px;
+    }
   }
 `
 
@@ -47,7 +56,7 @@ export const Week = styled.div`
       border-bottom: solid 1px ${({ theme }) => theme.grayLine};
       &::before {
         width: 100%;
-        height: 118px;
+        height: 100px;
         bottom: -1px;
         left: 0;
         transform: translateY(100%);
@@ -69,7 +78,7 @@ export const Week = styled.div`
     }
   }
   .schedule-wrapper {
-    height: 118px;
+    height: 100px;
     padding: 4px;
     gap: 4px;
 
@@ -80,28 +89,71 @@ export const Week = styled.div`
     & > li {
       padding: 0 8px;
 
+      display: flex;
+      align-items: center;
       position: relative;
       z-index: 1;
 
-      font-size: 13px;
+      font-size: 11px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-    }
-    & > .long-schedule {
-      display: flex;
-      align-items: center;
 
-      // 컬러가 없는 경우 기본으로 아래 컬러가 출력됩니다.
-      // 실제 컬러는 MonthlyCalendar 컴포넌트에서 인라인으로 관리됩니다.
-      background-color: ${({ theme }) => theme.s1};
-
+      border: solid 1px transparent;
       border-radius: 20px;
 
+      transition:
+        box-shadow 0.2s ease-in-out,
+        border 0.2s ease-in-out;
+
+      &:hover,
+      &:active {
+        border: solid 1px ${({ theme }) => theme.grayBt + 50};
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+      }
+      &:before {
+        width: 4px;
+        height: 4px;
+        margin-right: 4px;
+        transform: translateY(-1px);
+
+        display: inline-block;
+
+        background-color: ${({ theme }) => theme.grayBt + 50};
+        border-radius: 2px;
+
+        vertical-align: top;
+
+        content: '';
+      }
       & > span {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+    }
+    & > .long-schedule {
+      // 컬러가 없는 경우 기본으로 아래 컬러가 출력됩니다.
+      // 실제 컬러는 MonthlyCalendar 컴포넌트에서 인라인으로 관리됩니다.
+      background-color: ${({ theme }) => theme.s1};
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .date-wrapper {
+      & > li {
+        &::before {
+          height: 118px;
+        }
+      }
+    }
+    .schedule-wrapper {
+      height: 118px;
+      & > li {
+        font-size: 13px;
       }
     }
   }
