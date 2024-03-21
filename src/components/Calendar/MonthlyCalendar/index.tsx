@@ -5,18 +5,19 @@ import React from 'react'
 import { calendarInfoAtom } from '@/store'
 import { useAtom } from 'jotai'
 
+// FIXME: api 연동하고 리팩토링 하겠습니다..!!
 interface ILongScheduleDummy {
   key: string
   title: string
   color: number
   being: number
-  isLong: boolean
+  isAllDay: boolean
 }
 
 interface IShortScheduleDummy {
   key: string
   title: string
-  isLong: boolean
+  isAllDay: boolean
 }
 
 export default function MonthlyCalendar() {
@@ -30,28 +31,28 @@ export default function MonthlyCalendar() {
   const longScheduleDummy: ILongScheduleDummy[][] = [
     [], // 1주차
     [
-      { key: 'schedule1', title: '일정더미1(월)', color: 1, being: 3, isLong: true },
-      { key: 'schedule2', title: '일정더미2(월)', color: 3, being: 2, isLong: true },
+      { key: 'schedule1', title: '일정더미1(월)', color: 1, being: 3, isAllDay: true },
+      { key: 'schedule2', title: '일정더미2(월)', color: 3, being: 2, isAllDay: true },
     ],
     [],
-    [{ key: 'schedule3', title: '일정더미1(수)', color: 7, being: 1, isLong: true }],
-    [{ key: 'schedule4', title: '일정더미1(목)', color: 2, being: 2, isLong: true }],
-    [{ key: 'schedule5', title: '일정더미1(금)', color: 4, being: 2, isLong: true }],
-    [{ key: 'schedule6', title: '일정더미1(토)', color: 5, being: 1, isLong: true }],
+    [{ key: 'schedule3', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
+    [{ key: 'schedule4', title: '일정더미1(목)', color: 2, being: 2, isAllDay: true }],
+    [{ key: 'schedule5', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
+    [{ key: 'schedule6', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
     [], // 2주차
-    [{ key: 'schedule7', title: '일정더미1(월)', color: 6, being: 1, isLong: true }],
+    [{ key: 'schedule7', title: '일정더미1(월)', color: 6, being: 1, isAllDay: true }],
     [],
     [],
-    [{ key: 'schedule8', title: '일정더미1(목)', color: 2, being: 3, isLong: true }],
-    [{ key: 'schedule9', title: '일정더미1(금)', color: 4, being: 2, isLong: true }],
+    [{ key: 'schedule8', title: '일정더미1(목)', color: 2, being: 3, isAllDay: true }],
+    [{ key: 'schedule9', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
     [],
     [], // 3주차
     [],
     [],
-    [{ key: 'schedule10', title: '일정더미1(수)', color: 7, being: 1, isLong: true }],
+    [{ key: 'schedule10', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
     [],
-    [{ key: 'schedule11', title: '일정더미1(금)', color: 4, being: 2, isLong: true }],
-    [{ key: 'schedule12', title: '일정더미1(토)', color: 5, being: 1, isLong: true }],
+    [{ key: 'schedule11', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
+    [{ key: 'schedule12', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
     [], // 4주차
     [],
     [],
@@ -60,12 +61,12 @@ export default function MonthlyCalendar() {
     [],
     [],
     [], // 5주차
-    [{ key: 'schedule13', title: '일정더미1(월)', color: 1, being: 2, isLong: true }],
+    [{ key: 'schedule13', title: '일정더미1(월)', color: 1, being: 2, isAllDay: true }],
     [],
-    [{ key: 'schedule14', title: '일정더미1(수)', color: 7, being: 1, isLong: true }],
+    [{ key: 'schedule14', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
     [],
     [],
-    [{ key: 'schedule15', title: '일정더미1(토)', color: 5, being: 1, isLong: true }],
+    [{ key: 'schedule15', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
     [], // 6주차
     [],
     [],
@@ -75,83 +76,83 @@ export default function MonthlyCalendar() {
     [],
   ]
   const shortScheduleDummy: IShortScheduleDummy[][] = [
-    [{ key: 'schedule1', title: '하루일정더미1(일)', isLong: false }], // 1주차
-    [{ key: 'schedule2', title: '하루일정더미1(월)', isLong: false }],
+    [{ key: 'schedule1', title: '하루일정더미1(일)', isAllDay: false }], // 1주차
+    [{ key: 'schedule2', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule3', title: '하루일정더미1(화)', isLong: false },
-      { key: 'schedule4', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule3', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'schedule4', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule5', title: '하루일정더미1(수)', isLong: false },
-      { key: 'schedule6', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule5', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'schedule6', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule7', title: '하루일정더미1(목)', isLong: false }],
-    [{ key: 'schedule8', title: '하루일정더미1(금)', isLong: false }],
+    [{ key: 'schedule7', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'schedule8', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule9', title: '하루일정더미1(일)', isLong: false }], // 2주차
-    [{ key: 'schedule10', title: '하루일정더미1(월)', isLong: false }],
+    [{ key: 'schedule9', title: '하루일정더미1(일)', isAllDay: false }], // 2주차
+    [{ key: 'schedule10', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule11', title: '하루일정더미1(화)', isLong: false },
-      { key: 'schedule12', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule11', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'schedule12', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule13', title: '하루일정더미1(수)', isLong: false },
-      { key: 'schedule14', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule13', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'schedule14', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule15', title: '하루일정더미1(목)', isLong: false }],
-    [{ key: 'schedule16', title: '하루일정더미1(금)', isLong: false }],
+    [{ key: 'schedule15', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'schedule16', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule17', title: '하루일정더미1(일)', isLong: false }], // 3주차
-    [{ key: 'schedule18', title: '하루일정더미1(월)', isLong: false }],
+    [{ key: 'schedule17', title: '하루일정더미1(일)', isAllDay: false }], // 3주차
+    [{ key: 'schedule18', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule19', title: '하루일정더미1(화)', isLong: false },
-      { key: 'schedule20', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule19', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'schedule20', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule21', title: '하루일정더미1(수)', isLong: false },
-      { key: 'schedule22', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule21', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'schedule22', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule23', title: '하루일정더미1(목)', isLong: false }],
-    [{ key: 'schedule24', title: '하루일정더미1(금)', isLong: false }],
+    [{ key: 'schedule23', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'schedule24', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule25', title: '하루일정더미1(일)', isLong: false }], // 4주차
-    [{ key: 'schedule26', title: '하루일정더미1(월)', isLong: false }],
+    [{ key: 'schedule25', title: '하루일정더미1(일)', isAllDay: false }], // 4주차
+    [{ key: 'schedule26', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule27', title: '하루일정더미1(화)', isLong: false },
-      { key: 'schedule28', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule27', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'schedule28', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule29', title: '하루일정더미1(수)', isLong: false },
-      { key: 'schedule30', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule29', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'schedule30', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule31', title: '하루일정더미1(목)', isLong: false }],
-    [{ key: 'schedule32', title: '하루일정더미1(금)', isLong: false }],
+    [{ key: 'schedule31', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'schedule32', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule33', title: '하루일정더미1(일)', isLong: false }], // 5주차
-    [{ key: 'schedule34', title: '하루일정더미1(월)', isLong: false }],
+    [{ key: 'schedule33', title: '하루일정더미1(일)', isAllDay: false }], // 5주차
+    [{ key: 'schedule34', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule35', title: '하루일정더미1(화)', isLong: false },
-      { key: 'schedule36', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule35', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'schedule36', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule37', title: '하루일정더미1(수)', isLong: false },
-      { key: 'schedule38', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule37', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'schedule38', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule39', title: '하루일정더미1(목)', isLong: false }],
-    [{ key: 'schedule40', title: '하루일정더미1(금)', isLong: false }],
+    [{ key: 'schedule39', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'schedule40', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule41', title: '하루일정더미1(일)', isLong: false }], // 6주차
-    [{ key: 'schedule42', title: '하루일정더미1(월)', isLong: false }],
+    [{ key: 'schedule41', title: '하루일정더미1(일)', isAllDay: false }], // 6주차
+    [{ key: 'schedule42', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule43', title: '하루일정더미1(화)', isLong: false },
-      { key: 'schedule44', title: '하루일정더미1(화)', isLong: false },
+      { key: 'schedule43', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'schedule44', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule45', title: '하루일정더미1(수)', isLong: false },
-      { key: 'schedule46', title: '하루일정더미1(수)', isLong: false },
+      { key: 'schedule45', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'schedule46', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule47', title: '하루일정더미1(목)', isLong: false }],
-    [{ key: 'schedule48', title: '하루일정더미1(금)', isLong: false }],
+    [{ key: 'schedule47', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'schedule48', title: '하루일정더미1(금)', isAllDay: false }],
     [],
   ]
 
