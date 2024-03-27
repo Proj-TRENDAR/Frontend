@@ -25,9 +25,9 @@ export const basicTheme: DefaultTheme = {
   s5: '#E8F6D6',
   s6: '#FFEFD1',
   s7: '#E2ECF6',
-  dayColorOfSat: '#4573E9',
-  dayColorOfSun: '#E43636',
-  dayColorOfWeekday: '#484848',
+  dayColorOfSat: '#4573E9', // 토요일 색
+  dayColorOfSun: '#E43636', // 일요일 색
+  dayColorOfWeekday: '#484848', // 주간 색
   basicBg: '#FFFFFF',
   grayLine: '#EDEDED',
   grayBt: '#A9A9A9',

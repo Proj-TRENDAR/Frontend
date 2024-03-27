@@ -1,6 +1,6 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 
-import Layout from '@layouts/Layout'
+import MainLayout from '@layouts/Main'
 import LoginLayout from '@layouts/Login'
 import GuideLayout from '@layouts/Guide'
 import Home from '@pages/Home'
@@ -14,7 +14,7 @@ import TodoList from '@pages/TodoList'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route element={<Layout />}>
+      <Route element={<MainLayout />}>
         <Route path="" element={<Home />} />
         <Route path="routine-list" element={<RoutineList />} />
         <Route path="to-do-list" element={<TodoList />} />

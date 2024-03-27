@@ -14,7 +14,7 @@ export const Layout = styled.div`
     min-height: calc(85% - 64px);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1000px) {
     height: 100vh;
 
     display: grid;

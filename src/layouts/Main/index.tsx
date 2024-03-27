@@ -7,7 +7,7 @@ import AlertModal from '@components/common/modal/AlertModal'
 import { useAlertModal } from '@/Hooks/useAlertModal'
 import * as S from './style'
 
-export default function HomeLayout() {
+export default function MainLayout() {
   const [setIsOpenComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] = useAlertModal({
     alertMessageKey: 'comingSoon',
   })
