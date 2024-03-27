@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect, Dispatch, SetStateAction } from 'react'
+import React, { useState, createContext, useContext, useEffect, Dispatch, SetStateAction } from 'react'
 import { RuleSet } from 'styled-components'
 
 import * as S from './style'
