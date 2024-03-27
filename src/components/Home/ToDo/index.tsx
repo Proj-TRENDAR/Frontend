@@ -1,17 +1,45 @@
-import { AccordionItem } from '@layouts/Accordion'
-import * as S from '@components/Home/ToDo/style'
-import { PageHeader } from '@layouts/PageHeader'
-import IconButton from '@components/common/button/IconButton'
-import Add from '@assets/image/icon/ic-add.svg?react'
+import React, { useEffect, useState } from 'react'
 import { ITodoList } from '@/types'
+
+import { AccordionItem } from '@layouts/Accordion'
+import { PageHeader } from '@layouts/PageHeader'
+import Add from '@assets/image/icon/ic-add.svg?react'
 import TodoList from '@components/common/TodoList'
+import IconButton from '@components/common/button/IconButton'
+import { getTodoList } from '@/api/Todo/todoApi.ts'
+
+import * as S from '@components/Home/ToDo/style'
 
 interface Props {
   id: string
 }
 
 export default function ToDo({ id }: Props) {
-  const todoList = null
+  const [todoList, setTodoList] = useState<ITodoList[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  // let todoList = []
+  const getTodos = async () => {
+    try {
+      setError(null)
+      setTodoList([])
+      setLoading(true)
+      const { data } = await getTodoList()
+      setTodoList(data)
+    } catch (err) {
+      console.debug('err', err)
+      // setError(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getTodos()
+  }, [])
+
+  if (loading) return <div>로딩중..</div>
+  if (error) return <div>에러가 발생했습니다</div>
   return (
     <AccordionItem
       moreStyle={S.ToDoWrapper}
@@ -21,9 +49,9 @@ export default function ToDo({ id }: Props) {
           title={<PageHeader.InnerListTitle title="TO DO" url="to-do-list" />}
           button={
             <IconButton
-              onClick={() => {
-                // TODO: 투두 추가 기능 구현
-              }}
+            // onClick={() => {
+            //   // TODO: 투두 추가 기능 구현
+            // }}
             >
               <Add />
             </IconButton>
@@ -31,10 +59,19 @@ export default function ToDo({ id }: Props) {
         />
       }
     >
-      {/* TODO: 투두 목록 여부에 따라 출력이 달라져야함. 지금은 우선 목록이 없는 경우로만 출력함 */}
-      {todoList ? <>컨텐츠</> : <EmptyContent />}
+      {todoList.length ? <Content list={todoList} setTodoList={setTodoList} /> : <EmptyContent />}
     </AccordionItem>
   )
+}
+
+function Content({
+  list,
+  setTodoList,
+}: {
+  list: ITodoList[]
+  setTodoList: React.Dispatch<React.SetStateAction<ITodoList[]>>
+}) {
+  return <TodoList list={list} setTodoList={setTodoList} />
 }
 
 function EmptyContent() {
@@ -51,16 +88,20 @@ function EmptyContent() {
     </S.EmptyContent>
   )
 }
-
+// TODO: Backend get Todo 수정 후 api 연결
 const ExamDummy: ITodoList[] = [
   {
+    idx: 1,
     title: '2024년 다이어리 구매',
     isDone: false,
-    sequence: 1,
+    sequence: 2,
+    appliedAt: '2024-03-12 00:00:00',
   },
   {
+    idx: 2,
     title: '1주차 회의 준비',
-    isDone: false,
-    sequence: 2,
+    isDone: true,
+    sequence: 1,
+    appliedAt: '2024-03-13 12:34:00',
   },
 ]

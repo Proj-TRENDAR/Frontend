@@ -5,7 +5,14 @@ import { PageHeader } from '@layouts/PageHeader/style'
 export const ToDoWrapper = css`
   background-color: ${({ theme }) => theme.basicBg};
 `
+export const Content = styled.div`
+  margin: 8px 4px;
 
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  align-items: center;
+`
 export const EmptyContent = styled.div`
   margin: 14px 0;
   gap: 20px;

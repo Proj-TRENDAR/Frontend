@@ -42,6 +42,6 @@
     "vite-plugin-svgr": "^4.2.0"
   },
   "main": "index.js",
-  "author": "soohyeon <su132489@gmail.com>",
+  "author": "soohyeon <su132489@gmail.com>, ohseong <bkks1004@naver.com>",
   "license": "MIT"
 }
