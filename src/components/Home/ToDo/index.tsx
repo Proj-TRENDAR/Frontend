@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ITodoList } from '@/types'
 
 import { AccordionItem } from '@layouts/Accordion'
@@ -49,9 +49,9 @@ export default function ToDo({ id }: Props) {
           title={<PageHeader.InnerListTitle title="TO DO" url="to-do-list" />}
           button={
             <IconButton
-              onClick={() => {
-                // TODO: 투두 추가 기능 구현
-              }}
+            // onClick={() => {
+            //   // TODO: 투두 추가 기능 구현
+            // }}
             >
               <Add />
             </IconButton>
@@ -59,14 +59,19 @@ export default function ToDo({ id }: Props) {
         />
       }
     >
-      {/* TODO: 투두 목록 여부에 따라 출력이 달라져야함. 지금은 우선 목록이 없는 경우로만 출력함 */}
-      {todoList.length ? <Content list={todoList} /> : <EmptyContent />}
+      {todoList.length ? <Content list={todoList} setTodoList={setTodoList} /> : <EmptyContent />}
     </AccordionItem>
   )
 }
 
-function Content({ list }: { list: ITodoList[] }) {
-  return <TodoList list={list} />
+function Content({
+  list,
+  setTodoList,
+}: {
+  list: ITodoList[]
+  setTodoList: React.Dispatch<React.SetStateAction<ITodoList[]>>
+}) {
+  return <TodoList list={list} setTodoList={setTodoList} />
 }
 
 function EmptyContent() {

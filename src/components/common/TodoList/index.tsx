@@ -1,3 +1,4 @@
+import React from 'react'
 import { useTheme } from 'styled-components'
 
 import * as S from './styled'
@@ -5,34 +6,36 @@ import { ITodoList } from '@/types'
 import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'
 import MoreIcon from '@assets/image/icon/ic-more.svg?react'
-import { useEffect, useState } from 'react'
+import { updateTodo } from '@/api/Todo/todoApi.ts'
 
 interface Props {
   list: ITodoList[]
+  setTodoList?: React.Dispatch<React.SetStateAction<ITodoList[]>>
 }
-export default function TodoList({ list }: Props) {
+export default function TodoList({ list, setTodoList }: Props) {
   const theme = useTheme()
-  // 각 todo 항목의 상태를 관리할 useState 선언
-  const [todos, setTodos] = useState(list)
 
-  useEffect(() => {
-    setTodos(list)
-  }, [list])
   const toggleTodoDone = (index: number) => {
-    // 해당 todo의 isDone 상태를 토글
-    const updatedTodos = todos.map((todo, i) => {
+    const updatedTodos = list.map(async (todo, i) => {
       if (i === index) {
-        return { ...todo, isDone: !todo.isDone }
+        todo = { ...todo, isDone: !todo.isDone }
+        const result = await updateTodo(todo)
+        return result.data
       }
       return todo
     })
-    // // 변경된 todo 목록을 상태에 업데이트
-    setTodos(updatedTodos)
+    if (setTodoList) {
+      Promise.all(updatedTodos).then(updatedTodosArray => {
+        // 변경된 todo 목록을 상태에 업데이트
+        setTodoList(updatedTodosArray)
+      })
+    }
+    // 변경된 todo 목록을 상태에 업데이트
   }
 
   return (
     <S.TodoList>
-      {todos
+      {list
         .sort((a, b) => a.sequence - b.sequence)
         .map((todo, index) => (
           <S.Todo key={todo.sequence}>
