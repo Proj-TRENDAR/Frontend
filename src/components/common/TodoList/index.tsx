@@ -7,6 +7,9 @@ import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'
 import MoreIcon from '@assets/image/icon/ic-more.svg?react'
 import { updateTodo } from '@/api/Todo/todoApi.ts'
+import { calendarInfoAtom } from '@/store'
+import { useAtom } from 'jotai/index'
+import Calendar from '@/utils/calendar.ts'
 
 interface Props {
   list: ITodoList[]
@@ -14,7 +17,9 @@ interface Props {
 }
 export default function TodoList({ list, setTodoList }: Props) {
   const theme = useTheme()
-
+  const [calendarInfo] = useAtom(calendarInfoAtom)
+  const calendar = new Calendar()
+  const { thisYear, thisMonth, thisDay } = calendar.getDateInfo(new Date(calendarInfo.selectedDate))
   const toggleTodoDone = (index: number) => {
     const updatedTodos = list.map(async (todo, i) => {
       if (i === index) {
@@ -34,6 +39,14 @@ export default function TodoList({ list, setTodoList }: Props) {
   return (
     <S.TodoList>
       {list
+        .filter(item => {
+          const itemDate = new Date(item.appliedAt)
+          return (
+            thisYear === itemDate.getFullYear() &&
+            thisMonth === itemDate.getMonth() + 1 &&
+            thisDay === itemDate.getDate()
+          )
+        })
         .sort((a, b) => a.sequence - b.sequence)
         .map((todo, index) => (
           <S.Todo key={todo.sequence}>
