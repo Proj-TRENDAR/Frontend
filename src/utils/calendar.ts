@@ -1,5 +1,18 @@
 export default class Calendar {
   day = ['일', '월', '화', '수', '목', '금', '토']
+  getDateInfo = (
+    thisDate: Date
+  ): {
+    thisYear: number
+    thisMonth: number
+    thisDay: number
+  } => {
+    const thisYear: number = thisDate.getFullYear()
+    const thisMonth: number = thisDate.getMonth() + 1
+    const thisDay: number = thisDate.getDate()
+
+    return { thisYear, thisMonth, thisDay }
+  }
   getMonthDates = (
     thisDate: Date
   ): {
