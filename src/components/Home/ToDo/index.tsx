@@ -28,7 +28,7 @@ export default function ToDo({ id }: Props) {
       setTodoList(data)
     } catch (err) {
       console.debug('err', err)
-      // setError(err)
+      setError(err)
     } finally {
       setLoading(false)
     }
@@ -88,7 +88,7 @@ function EmptyContent() {
     </S.EmptyContent>
   )
 }
-// TODO: Backend get Todo 수정 후 api 연결
+
 const ExamDummy: ITodoList[] = [
   {
     idx: 1,

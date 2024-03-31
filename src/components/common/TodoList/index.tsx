@@ -26,11 +26,9 @@ export default function TodoList({ list, setTodoList }: Props) {
     })
     if (setTodoList) {
       Promise.all(updatedTodos).then(updatedTodosArray => {
-        // 변경된 todo 목록을 상태에 업데이트
         setTodoList(updatedTodosArray)
       })
     }
-    // 변경된 todo 목록을 상태에 업데이트
   }
 
   return (
@@ -39,7 +37,6 @@ export default function TodoList({ list, setTodoList }: Props) {
         .sort((a, b) => a.sequence - b.sequence)
         .map((todo, index) => (
           <S.Todo key={todo.sequence}>
-            {/*TODO: onClick todo 수정 api 연결*/}
             <button onClick={() => toggleTodoDone(index)}>
               {todo.isDone ? <CheckedIcon fill={theme.checkedColor} /> : <UncheckedIcon fill={theme.grayBtLight} />}
             </button>
