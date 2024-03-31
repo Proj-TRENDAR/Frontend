@@ -22,7 +22,7 @@ export const Todo = styled.li`
     margin-bottom: 2px;
   }
 
-  button {
+  .done-button {
     margin: 0;
     padding: 0;
 

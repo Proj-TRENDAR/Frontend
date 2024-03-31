@@ -18,7 +18,7 @@ export default function ToDo({ id }: Props) {
   const [todoList, setTodoList] = useState<ITodoList[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  // let todoList = []
+
   const getTodos = async () => {
     try {
       setError(null)

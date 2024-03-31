@@ -1,4 +1,5 @@
 import React from 'react'
+import { useAtom } from 'jotai/index'
 import { useTheme } from 'styled-components'
 
 import * as S from './styled'
@@ -8,8 +9,10 @@ import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'
 import MoreIcon from '@assets/image/icon/ic-more.svg?react'
 import { updateTodo } from '@/api/Todo/todoApi.ts'
 import { calendarInfoAtom } from '@/store'
-import { useAtom } from 'jotai/index'
 import Calendar from '@/utils/calendar.ts'
+import ButtonsModal from '@components/common/modal/ButtonsModal'
+import AlertModal from '@components/common/modal/AlertModal'
+import { useAlertModal } from '@/Hooks/useAlertModal.ts'
 
 interface Props {
   list: ITodoList[]
@@ -20,6 +23,9 @@ export default function TodoList({ list, setTodoList }: Props) {
   const [calendarInfo] = useAtom(calendarInfoAtom)
   const calendar = new Calendar()
   const { thisYear, thisMonth, thisDay } = calendar.getDateInfo(new Date(calendarInfo.selectedDate))
+  const [handleComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] = useAlertModal({
+    alertMessageKey: 'comingSoon',
+  })
   const toggleTodoDone = (index: number) => {
     const updatedTodos = list.map(async (todo, i) => {
       if (i === index) {
@@ -50,13 +56,40 @@ export default function TodoList({ list, setTodoList }: Props) {
         .sort((a, b) => a.sequence - b.sequence)
         .map((todo, index) => (
           <S.Todo key={todo.sequence}>
-            <button onClick={() => toggleTodoDone(index)}>
+            <button className="done-button" onClick={() => toggleTodoDone(index)}>
               {todo.isDone ? <CheckedIcon fill={theme.checkedColor} /> : <UncheckedIcon fill={theme.grayBtLight} />}
             </button>
             <span className={todo.isDone ? 'done' : ''}>{todo.title}</span>
-            <button className="more">
-              <MoreIcon fill={theme.grayBtLight} />
-            </button>
+            <div className="more">
+              <ButtonsModal button={<MoreIcon fill={theme.grayBtLight} />} position={{ left: '-30px' }}>
+                <li>
+                  <button
+                    onClick={() => {
+                      handleComingSoonModal(true)
+                    }}
+                  >
+                    수정
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="red"
+                    onClick={() => {
+                      handleComingSoonModal(true)
+                    }}
+                  >
+                    삭제
+                  </button>
+                </li>
+              </ButtonsModal>
+            </div>
+            <AlertModal
+              handleClose={() => {
+                handleComingSoonModal(false)
+              }}
+              isOpenModal={isComingSoonModalOpen}
+              message={messageOfComingSoonModal}
+            />
           </S.Todo>
         ))}
     </S.TodoList>
