@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 export const TodoList = styled.ul`
   margin: 0;
   padding: 0;
+  gap: 2px;
 
   flex-grow: 1;
 
@@ -47,4 +48,13 @@ export const Todo = styled.li`
     color: ${({ theme }) => theme.checkedTextColor};
     text-decoration: line-through;
   }
+`
+
+export const input = styled.input`
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 16px;
+  border: none;
 `

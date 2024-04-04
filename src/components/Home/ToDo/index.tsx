@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { ITodoList } from '@/types'
-
-import { AccordionItem } from '@layouts/Accordion'
-import { PageHeader } from '@layouts/PageHeader'
-import Add from '@assets/image/icon/ic-add.svg?react'
-import TodoList from '@components/common/TodoList'
-import IconButton from '@components/common/button/IconButton'
 import { getTodoList } from '@/api/Todo/todoApi.ts'
+import Calendar from '@/utils/calendar.ts'
+import { ITodoList } from '@/types'
+import { calendarInfoAtom } from '@/store'
+import { useAtom } from 'jotai/index'
 
 import * as S from '@components/Home/ToDo/style'
+import { AccordionItem } from '@layouts/Accordion'
+import { PageHeader } from '@layouts/PageHeader'
+import TodoList from '@components/common/TodoList'
+import IconButton from '@components/common/button/IconButton'
+import Add from '@assets/image/icon/ic-add.svg?react'
 
 interface Props {
   id: string
@@ -71,7 +73,18 @@ function Content({
   list: ITodoList[]
   setTodoList: React.Dispatch<React.SetStateAction<ITodoList[]>>
 }) {
-  return <TodoList list={list} setTodoList={setTodoList} />
+  const [calendarInfo] = useAtom(calendarInfoAtom)
+  const calendar = new Calendar()
+  const { thisYear, thisMonth, thisDay } = calendar.getDateInfo(new Date(calendarInfo.selectedDate))
+  const filteredList = list
+    .filter((item: ITodoList) => {
+      const itemDate = new Date(item.appliedAt)
+      return (
+        thisYear === itemDate.getFullYear() && thisMonth === itemDate.getMonth() + 1 && thisDay === itemDate.getDate()
+      )
+    })
+    .sort((a, b) => a.sequence - b.sequence)
+  return <TodoList list={filteredList} setTodoList={setTodoList} />
 }
 
 function EmptyContent() {
