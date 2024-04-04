@@ -12,7 +12,7 @@ import StyleGroup from '@/assets/image/guide/styleGroup.png'
 import TodoLogo from '@/assets/image/guide/todoLogo.png'
 import RoutineLogo from '@/assets/image/guide/routineLogo.png'
 import CalendarLogo from '@/assets/image/guide/calendarLogo.png'
-import Plus from '@/assets/image/icon/ic-plus.svg?react'
+import Add from '@/assets/image/icon/ic-add.svg?react'
 import Button from '@components/common/button/Button'
 import * as S from './style'
 
@@ -85,9 +85,9 @@ export default function Guide() {
             </S.GuideTextTitle>
             <S.LogoDetail>
               <img src={TodoLogo} alt="To Do Logo" />
-              <Plus />
+              <Add />
               <img src={RoutineLogo} alt="Routine Logo" />
-              <Plus />
+              <Add />
               <img src={CalendarLogo} alt="Calendar Logo" />
             </S.LogoDetail>
             <Button id="round-button" size="large" $outline={true} $round={true} onClick={goToLogin}>
