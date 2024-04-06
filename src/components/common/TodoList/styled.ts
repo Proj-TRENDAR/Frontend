@@ -9,7 +9,7 @@ export const TodoList = styled.ul`
 
   list-style: none;
 `
-export const Todo = styled.li`
+export const Todo = styled.li<{ $deleted?: string }>`
   padding: 8px;
   gap: 10px;
 
@@ -18,6 +18,9 @@ export const Todo = styled.li`
   align-items: center;
 
   border-radius: 8px;
+  background-color: ${props => {
+    return props.$deleted === 'true' ? props.theme.cancelBgColor : props.theme.basicBg
+  }};
 
   &:not(:last-child) {
     margin-bottom: 2px;

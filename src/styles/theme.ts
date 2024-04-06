@@ -29,6 +29,7 @@ export const basicTheme: DefaultTheme = {
   dayColorOfSun: '#E43636', // 일요일 색
   dayColorOfWeekday: '#484848', // 주간 색
   basicBg: '#FFFFFF',
+  cancelBgColor: '#FFC7C3',
   grayLine: '#EDEDED',
   grayBt: '#A9A9A9',
   grayBtLight: '#F0F0F0',

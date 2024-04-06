@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
-import { updateTodo } from '@/api/Todo/todoApi.ts'
+import { getTodoList, updateTodo, deleteTodo } from '@/api/Todo/todoApi.ts'
 import { ITodoList } from '@/types'
 
 import * as S from './styled'
@@ -42,6 +42,20 @@ export default function TodoList({ list = [], setTodoList }: Props) {
     }
   }
 
+  const deleteTodoItem = async (index: number) => {
+    list.map(async (todo, i) => {
+      if (i === index) {
+        const result = await deleteTodo(todo.idx + 111)
+        if (result.status === 200) {
+          const { data } = await getTodoList()
+          setTodoList && setTodoList(data)
+        } else {
+          alert('오류 넣기')
+        }
+      }
+    })
+  }
+
   const handleEdit = (index: number) => {
     setEditIndex(index === editIndex ? null : index)
   }
@@ -73,7 +87,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
   return (
     <S.TodoList>
       {list.map((todo, index) => (
-        <S.Todo key={todo.idx}>
+        <S.Todo key={todo.idx} $deleted={index === deleteIndex ? 'true' : 'false'}>
           {editIndex === index ? (
             // 수정 상태일 때 UI
             <>
@@ -102,6 +116,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
               <button className="done-button" onClick={() => updateTodoItem(index, { isDone: !todo.isDone })}>
                 {todo.isDone ? <CheckedIcon fill={theme.checkedColor} /> : <UncheckedIcon fill={theme.grayBtLight} />}
               </button>
+              <span className={todo.isDone ? 'done' : ''}>{todo.title}</span>
               <ButtonInAlert
                 type="cancel"
                 onClick={() => {
@@ -113,6 +128,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
                 type="delete"
                 onClick={() => {
                   /* 클릭 시 동작 구현 */
+                  deleteTodoItem(index)
                 }}
               />
             </>
@@ -129,7 +145,6 @@ export default function TodoList({ list = [], setTodoList }: Props) {
                     <button
                       onClick={() => {
                         setOriginalTitle(todo.title)
-                        console.log(originalTitle)
                         handleEdit(index)
                         // handleComingSoonModal(true)
                       }}
