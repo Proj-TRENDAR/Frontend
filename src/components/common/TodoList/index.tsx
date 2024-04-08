@@ -4,8 +4,6 @@ import { getTodoList, updateTodo, deleteTodo } from '@/api/Todo/todoApi.ts'
 import { ITodoList } from '@/types'
 
 import * as S from './styled'
-import { useAlertModal } from '@/Hooks/useAlertModal.ts'
-import AlertModal from '@components/common/modal/AlertModal'
 import ButtonsModal from '@components/common/modal/ButtonsModal'
 import ButtonInAlert from '@components/common/button/ButtonInAlert'
 import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
@@ -22,9 +20,6 @@ export default function TodoList({ list = [], setTodoList }: Props) {
   const [editIndex, setEditIndex] = useState<number | null>(null)
   const [originalTitle, setOriginalTitle] = useState('')
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
-  const [handleComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] = useAlertModal({
-    alertMessageKey: 'comingSoon',
-  })
 
   const updateTodoItem = async (index: number, newData: { isDone?: boolean; title?: string }) => {
     const updatedTodos = list.map(async (todo, i) => {
@@ -142,7 +137,6 @@ export default function TodoList({ list = [], setTodoList }: Props) {
                       onClick={() => {
                         setOriginalTitle(todo.title)
                         handleEdit(index)
-                        // handleComingSoonModal(true)
                       }}
                     >
                       수정
@@ -153,7 +147,6 @@ export default function TodoList({ list = [], setTodoList }: Props) {
                       className="red"
                       onClick={() => {
                         handleDelete(index)
-                        // handleComingSoonModal(true)
                       }}
                     >
                       삭제
@@ -163,13 +156,6 @@ export default function TodoList({ list = [], setTodoList }: Props) {
               </div>
             </>
           )}
-          <AlertModal
-            handleClose={() => {
-              handleComingSoonModal(false)
-            }}
-            isOpenModal={isComingSoonModalOpen}
-            message={messageOfComingSoonModal}
-          />
         </S.Todo>
       ))}
     </S.TodoList>
