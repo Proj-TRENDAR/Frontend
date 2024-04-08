@@ -37,6 +37,13 @@ export const Todo = styled.li<{ $deleted?: string }>`
     line-height: unset;
   }
 
+  .title-input {
+    align-items: center;
+
+    font-size: 16px;
+    border: none;
+  }
+
   span {
     padding-top: 2px;
 
@@ -51,13 +58,4 @@ export const Todo = styled.li<{ $deleted?: string }>`
     color: ${({ theme }) => theme.checkedTextColor};
     text-decoration: line-through;
   }
-`
-
-export const input = styled.input`
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-
-  font-size: 16px;
-  border: none;
 `

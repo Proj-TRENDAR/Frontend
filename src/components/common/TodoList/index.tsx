@@ -85,10 +85,12 @@ export default function TodoList({ list = [], setTodoList }: Props) {
           {editIndex === index ? (
             // 수정 상태일 때 UI
             <>
-              <S.input
+              <input
                 type="text"
                 name="title"
                 value={todo.title}
+                className="title-input"
+                autoFocus={true}
                 onChange={event => handleTitleChange(event, index)}
               />
               <ButtonInAlert
