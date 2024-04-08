@@ -42,18 +42,12 @@ export default function TodoList({ list = [], setTodoList }: Props) {
     }
   }
 
-  const deleteTodoItem = async (index: number) => {
-    list.map(async (todo, i) => {
-      if (i === index) {
-        const result = await deleteTodo(todo.idx + 111)
-        if (result.status === 200) {
-          const { data } = await getTodoList()
-          setTodoList && setTodoList(data)
-        } else {
-          alert('오류 넣기')
-        }
-      }
-    })
+  const deleteTodoItem = async (idx: number) => {
+    const result = await deleteTodo(idx)
+    if (result.status === 200) {
+      const { data } = await getTodoList()
+      setTodoList && setTodoList(data)
+    }
   }
 
   const handleEdit = (index: number) => {
@@ -128,7 +122,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
                 type="delete"
                 onClick={() => {
                   /* 클릭 시 동작 구현 */
-                  deleteTodoItem(index)
+                  deleteTodoItem(todo.idx)
                 }}
               />
             </>
@@ -167,7 +161,6 @@ export default function TodoList({ list = [], setTodoList }: Props) {
               </div>
             </>
           )}
-
           <AlertModal
             handleClose={() => {
               handleComingSoonModal(false)
