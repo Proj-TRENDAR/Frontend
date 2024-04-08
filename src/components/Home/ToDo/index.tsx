@@ -74,8 +74,14 @@ function Content({
   setTodoList: React.Dispatch<React.SetStateAction<ITodoList[]>>
 }) {
   const [calendarInfo] = useAtom(calendarInfoAtom)
+  const [key, setKey] = useState(0)
   const calendar = new Calendar()
   const { thisYear, thisMonth, thisDay } = calendar.getDateInfo(new Date(calendarInfo.selectedDate))
+
+  useEffect(() => {
+    setKey(prevKey => prevKey + 1)
+  }, [calendarInfo])
+
   const filteredList = list
     .filter((item: ITodoList) => {
       const itemDate = new Date(item.appliedAt)
@@ -84,7 +90,7 @@ function Content({
       )
     })
     .sort((a, b) => a.sequence - b.sequence)
-  return <TodoList list={filteredList} setTodoList={setTodoList} />
+  return <TodoList key={key} list={filteredList} setTodoList={setTodoList} />
 }
 
 function EmptyContent() {
