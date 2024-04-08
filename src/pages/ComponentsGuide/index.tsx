@@ -142,9 +142,27 @@ export default function ComponentsGuide() {
               />
             </div>
           </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>size="small", disabled</h3>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <ButtonInAlert
+                type="save"
+                disabled={true}
+                onClick={() => {
+                  /* 클릭 시 동작 구현 */
+                }}
+              />
+              <ButtonInAlert
+                type="delete"
+                disabled={true}
+                onClick={() => {
+                  /* 클릭 시 동작 구현 */
+                }}
+              />
+            </div>
+          </S.ExampleWrapper>
         </S.ComponentWrapper>
       </S.FolderWrapper>
-
       <S.FolderWrapper>
         <h1>modal</h1>
         <b>AlertModal 컴포넌트</b>는 <b>useAlertModal훅</b>과 함께 사용합니다.

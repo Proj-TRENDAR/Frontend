@@ -62,14 +62,16 @@ export const types: Types = {
   },
 }
 
-export const Button = styled.button<{ $size: keyof typeof sizes; $type: keyof typeof BUTTON_TYPE }>`
+export const Button = styled.button<{ $size: keyof typeof sizes; $type: keyof typeof BUTTON_TYPE; disabled: boolean }>`
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   ${({ $size }) => sizes[$size]}
 
-  color: ${({ $type }) => types[$type].color};
+  color: ${({ $type, disabled }) => (disabled ? types['cancel'].color : types[$type].color)};
   font-size: 16px;
   font-weight: 700;
 
-  background-color: ${({ $type }) => types[$type].backgroundColor};
+  background-color: ${({ $type, disabled }) =>
+    disabled ? types['cancel'].backgroundColor : types[$type].backgroundColor};
   border-radius: 6px;
   border: none;
 
