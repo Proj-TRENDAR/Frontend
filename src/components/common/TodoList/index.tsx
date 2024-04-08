@@ -18,7 +18,7 @@ interface Props {
 export default function TodoList({ list = [], setTodoList }: Props) {
   const theme = useTheme()
   const [editIndex, setEditIndex] = useState<number | null>(null)
-  const [originalTitle, setOriginalTitle] = useState('')
+  const [originalTitle, setOriginalTitle] = useState<string>('')
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
 
   const updateTodoItem = async (index: number, newData: { isDone?: boolean; title?: string }) => {
@@ -90,6 +90,8 @@ export default function TodoList({ list = [], setTodoList }: Props) {
               />
               <ButtonInAlert
                 type="save"
+                text="저장"
+                disabled={todo.title.length === 0}
                 onClick={() => {
                   updateTodoItem(index, { title: todo.title })
                   handleEdit(index)
@@ -111,14 +113,12 @@ export default function TodoList({ list = [], setTodoList }: Props) {
               <ButtonInAlert
                 type="cancel"
                 onClick={() => {
-                  /* 클릭 시 동작 구현 */
                   handleDelete(index)
                 }}
               />
               <ButtonInAlert
                 type="delete"
                 onClick={() => {
-                  /* 클릭 시 동작 구현 */
                   deleteTodoItem(todo.idx)
                 }}
               />
