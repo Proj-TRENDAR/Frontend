@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { getTodoList } from '@/api/Todo/todoApi.ts'
+import { getTodoList, createTodo } from '@/api/Todo/todoApi.ts'
 import Calendar from '@/utils/calendar.ts'
 import { ITodoList } from '@/types'
 import { calendarInfoAtom } from '@/store'
 import { useAtom } from 'jotai/index'
 
 import * as S from '@components/Home/ToDo/style'
+import * as TodoListS from '@components/common/TodoList/styled'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import TodoList from '@components/common/TodoList'
 import IconButton from '@components/common/button/IconButton'
 import Add from '@assets/image/icon/ic-add.svg?react'
+import ButtonInAlert from '@components/common/button/ButtonInAlert'
+import X from '@/assets/image/icon/ic-x.svg?react'
 
 interface Props {
   id: string
@@ -20,11 +23,27 @@ export default function ToDo({ id }: Props) {
   const [todoList, setTodoList] = useState<ITodoList[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-
+  const [createNewTodo, setCreateNewTodo] = useState<boolean>(false)
+  const [newTodoTitle, setNewTodoTitle] = useState<string>('')
+  const [calendarInfo] = useAtom(calendarInfoAtom)
+  const handleCreateTodo = async () => {
+    if (newTodoTitle.trim() !== '') {
+      // 새로운 할 일 추가
+      const payload = {
+        title: newTodoTitle.trim(),
+        appliedAt: calendarInfo.selectedDate,
+      }
+      const result = await createTodo(payload)
+      if (result.status === 201) {
+        setNewTodoTitle('') // 입력 필드 초기화
+        setCreateNewTodo(false) // 새로운 할 일 추가 상태 종료
+        await getTodos()
+      }
+    }
+  }
   const getTodos = async () => {
     try {
       setError(null)
-      setTodoList([])
       setLoading(true)
       const { data } = await getTodoList()
       setTodoList(data)
@@ -52,9 +71,9 @@ export default function ToDo({ id }: Props) {
           title={<PageHeader.InnerListTitle title="TO DO" url="to-do-list" />}
           button={
             <IconButton
-            // onClick={() => {
-            //   // TODO: 투두 추가 기능 구현
-            // }}
+              onClick={() => {
+                setCreateNewTodo(true)
+              }}
             >
               <Add />
             </IconButton>
@@ -62,7 +81,25 @@ export default function ToDo({ id }: Props) {
         />
       }
     >
-      {todoList.length ? <Content list={todoList} setTodoList={setTodoList} /> : <EmptyContent />}
+      <>
+        {createNewTodo ? (
+          <TodoListS.Todo>
+            <input
+              type="text"
+              value={newTodoTitle}
+              className="title-input"
+              autoFocus={true}
+              onChange={e => setNewTodoTitle(e.target.value)}
+              placeholder="새로운 할 일 입력"
+            />
+            <ButtonInAlert type="save" text="저장" disabled={!newTodoTitle} onClick={handleCreateTodo} />
+            <X onClick={() => setCreateNewTodo(false)} />
+          </TodoListS.Todo>
+        ) : (
+          ''
+        )}
+        {todoList.length ? <Content list={todoList} setTodoList={setTodoList} /> : <EmptyContent />}
+      </>
     </AccordionItem>
   )
 }
