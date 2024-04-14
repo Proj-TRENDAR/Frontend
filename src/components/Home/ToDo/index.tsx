@@ -69,8 +69,6 @@ export default function ToDo({ id }: Props) {
     getTodo()
   }, [])
 
-  if (loading) return <div>로딩중..</div>
-  if (error) return <div>에러가 발생했습니다</div>
   return (
     <AccordionItem
       moreStyle={S.ToDoWrapper}
@@ -114,7 +112,19 @@ export default function ToDo({ id }: Props) {
         ) : (
           ''
         )}
-        {filteredTodoList.length ? <Content list={filteredTodoList} setTodoList={setTodoList} /> : <EmptyContent />}
+        {/* FIXME:
+         * 처음 목록 가져올때 =>로딩중
+         * 투두 추가/수정/삭제로 인한 업데이트 => 스켈레톤
+         */}
+        {loading ? (
+          <div style={{ textAlign: 'center' }}>로딩중..</div>
+        ) : error ? (
+          <div style={{ textAlign: 'center' }}>에러가 발생했습니다</div>
+        ) : filteredTodoList.length ? (
+          <Content list={filteredTodoList} setTodoList={setTodoList} />
+        ) : (
+          <EmptyContent />
+        )}
       </>
     </AccordionItem>
   )
