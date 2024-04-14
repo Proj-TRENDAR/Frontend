@@ -8,6 +8,20 @@ export const TodoList = styled.ul`
   flex-grow: 1;
 
   list-style: none;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #cdcdcd;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
 `
 type TodoType = 'basic' | 'create' | 'edit' | 'delete'
 export const Todo = styled.li<{ $type?: TodoType }>`
