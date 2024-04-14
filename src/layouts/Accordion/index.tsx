@@ -45,14 +45,15 @@ interface ItemProps {
   header: React.ReactElement // 여닫는 버튼 옆에 출력됩니다
   children: React.ReactElement // 닫히는 영역에 출력됩니다
   moreStyle?: RuleSet<object>
+  itemContentMoreStyle?: RuleSet<object>
   arrowColor?: string
 }
-export function AccordionItem({ id, header, children, moreStyle, arrowColor }: ItemProps) {
+export function AccordionItem({ id, header, children, moreStyle, itemContentMoreStyle, arrowColor }: ItemProps) {
   const [isOpened, setIsOpened] = useState<boolean>(true)
   const { isAllClosed, setIsAllClosed } = useContext(ItemClosedContext)
 
   return (
-    <S.AccordionItem $isOpened={isOpened} $moreStyle={moreStyle}>
+    <S.AccordionItem $isOpened={isOpened} $moreStyle={moreStyle} $itemContentMoreStyle={itemContentMoreStyle}>
       <S.ItemHeader className="item-header">
         <button
           className={`open-button ${isOpened ? '' : 'close'}`}

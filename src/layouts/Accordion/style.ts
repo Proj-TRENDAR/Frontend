@@ -12,7 +12,11 @@ export const AccordionWrapper = styled.div<{ height: string }>`
   }
 `
 
-export const AccordionItem = styled.section<{ $isOpened: boolean; $moreStyle: RuleSet<object> | undefined }>`
+export const AccordionItem = styled.section<{
+  $isOpened: boolean
+  $moreStyle: RuleSet<object> | undefined
+  $itemContentMoreStyle: RuleSet<object> | undefined
+}>`
   width: 100%;
 
   display: flex;
@@ -21,6 +25,10 @@ export const AccordionItem = styled.section<{ $isOpened: boolean; $moreStyle: Ru
 
   transition: all 0.2s ease-in-out;
   ${({ $moreStyle }) => $moreStyle}
+
+  .item-content {
+    ${({ $itemContentMoreStyle }) => $itemContentMoreStyle}
+  }
 `
 
 export const ItemHeader = styled.div`

@@ -5,6 +5,9 @@ import { PageHeader } from '@layouts/PageHeader/style'
 export const ToDoWrapper = css`
   background-color: ${({ theme }) => theme.basicBg};
 `
+export const ItemContent = css`
+  flex-direction: column;
+`
 export const Content = styled.div`
   margin: 8px 4px;
 

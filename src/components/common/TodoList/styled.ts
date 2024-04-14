@@ -9,7 +9,7 @@ export const TodoList = styled.ul`
 
   list-style: none;
 `
-export const Todo = styled.li<{ $deleted?: string }>`
+export const Todo = styled.li<{ $deleted?: boolean }>`
   padding: 8px;
   gap: 10px;
 
@@ -19,7 +19,7 @@ export const Todo = styled.li<{ $deleted?: string }>`
 
   border-radius: 8px;
   background-color: ${props => {
-    return props.$deleted === 'true' ? props.theme.cancelBgColor : props.theme.basicBg
+    return props.$deleted ? props.theme.cancelBgColor : props.theme.basicBg
   }};
 
   &:not(:last-child) {

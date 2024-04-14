@@ -31,10 +31,8 @@ export default function TodoList({ list = [], setTodoList }: Props) {
       return todo
     })
 
-    if (setTodoList) {
-      const updatedTodosArray = await Promise.all(updatedTodos)
-      setTodoList(updatedTodosArray)
-    }
+    const updatedTodosArray = await Promise.all(updatedTodos)
+    setTodoList && setTodoList(updatedTodosArray)
   }
 
   const deleteTodoItem = async (idx: number) => {
@@ -77,7 +75,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
   return (
     <S.TodoList>
       {list.map((todo, index) => (
-        <S.Todo key={todo.idx} $deleted={index === deleteIndex ? 'true' : 'false'}>
+        <S.Todo key={todo.idx} $deleted={index === deleteIndex}>
           {editIndex === index ? (
             // 수정 상태일 때 UI
             <>

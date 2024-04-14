@@ -45,6 +45,7 @@ export default function ToDo({ id }: Props) {
   return (
     <AccordionItem
       moreStyle={S.ToDoWrapper}
+      itemContentMoreStyle={S.ItemContent}
       id={id}
       header={
         <PageHeader
