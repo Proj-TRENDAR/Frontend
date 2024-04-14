@@ -42,6 +42,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
     if (result.status === 200) {
       const { data } = await getTodoList()
       setTodoList && setTodoList(data)
+      handleDelete(null)
     }
   }
 
@@ -58,7 +59,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
     setTodoList && setTodoList(updatedTodos)
     handleEdit(index)
   }
-  const handleDelete = (index: number) => {
+  const handleDelete = (index: number | null) => {
     setDeleteIndex(index === deleteIndex ? null : index)
   }
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
