@@ -9,18 +9,37 @@ export const TodoList = styled.ul`
 
   list-style: none;
 `
-export const Todo = styled.li<{ $deleted?: boolean }>`
-  padding: 8px;
-  gap: 10px;
-
+type TodoType = 'basic' | 'create' | 'edit' | 'delete'
+export const Todo = styled.li<{ $type?: TodoType }>`
   display: flex;
   flex-direction: row;
   align-items: center;
 
   border-radius: 8px;
-  background-color: ${props => {
-    return props.$deleted ? props.theme.cancelBgColor : props.theme.basicBg
-  }};
+  ${({ $type, theme }) => {
+    switch ($type) {
+      case 'create':
+      case 'edit':
+        return `
+          padding: 2px 0 2px 4px; 
+          gap: 6px;
+          background-color: ${theme.pointBg};
+        `
+      case 'delete':
+        return `
+          padding: 4px 4px 4px 8px; 
+          gap: 6px;
+          background-color: ${theme.cancelBgColor};
+        `
+      case 'basic':
+      default:
+        return `
+          padding: 6px 8px;
+          gap: 10px;
+          background-color: ${theme.basicBg}
+        `
+    }
+  }}
 
   &:not(:last-child) {
     margin-bottom: 2px;
@@ -38,7 +57,7 @@ export const Todo = styled.li<{ $deleted?: boolean }>`
   }
 
   .title-input {
-    align-items: center;
+    flex-grow: 1;
 
     font-size: 16px;
     border: none;

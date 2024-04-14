@@ -18,6 +18,7 @@ export const AccordionItem = styled.section<{
   $itemContentMoreStyle: RuleSet<object> | undefined
 }>`
   width: 100%;
+  max-height: 31vb;
 
   display: flex;
   flex-direction: column;

@@ -10,6 +10,7 @@ import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'
 import MoreIcon from '@assets/image/icon/ic-more.svg?react'
 import X from '@/assets/image/icon/ic-x.svg?react'
+import IconButton from '@components/common/button/IconButton'
 
 interface Props {
   list: ITodoList[]
@@ -75,7 +76,7 @@ export default function TodoList({ list = [], setTodoList }: Props) {
   return (
     <S.TodoList>
       {list.map((todo, index) => (
-        <S.Todo key={todo.idx} $deleted={index === deleteIndex}>
+        <S.Todo key={todo.idx} $type={index === deleteIndex ? 'delete' : index === editIndex ? 'edit' : 'basic'}>
           {editIndex === index ? (
             // 수정 상태일 때 UI
             <>
@@ -96,11 +97,13 @@ export default function TodoList({ list = [], setTodoList }: Props) {
                   handleEdit(index)
                 }}
               />
-              <X
+              <IconButton
                 onClick={() => {
                   handleEditCancel(index)
                 }}
-              />
+              >
+                <X />
+              </IconButton>
             </>
           ) : deleteIndex === index ? (
             // 삭제 상태일 때 UI

@@ -26,6 +26,16 @@ export default function ToDo({ id }: Props) {
   const [createNewTodo, setCreateNewTodo] = useState<boolean>(false)
   const [newTodoTitle, setNewTodoTitle] = useState<string>('')
   const [calendarInfo] = useAtom(calendarInfoAtom)
+  const calendar = new Calendar()
+  const { thisYear, thisMonth, thisDay } = calendar.getDateInfo(new Date(calendarInfo.selectedDate))
+  const filteredTodoList = todoList
+    .filter((item: ITodoList) => {
+      const itemDate = new Date(item.appliedAt)
+      return (
+        thisYear === itemDate.getFullYear() && thisMonth === itemDate.getMonth() + 1 && thisDay === itemDate.getDate()
+      )
+    })
+    .sort((a, b) => a.sequence - b.sequence)
   const handleCreateTodo = async () => {
     if (newTodoTitle.trim() !== '') {
       // 새로운 할 일 추가
@@ -37,11 +47,11 @@ export default function ToDo({ id }: Props) {
       if (result.status === 201) {
         setNewTodoTitle('') // 입력 필드 초기화
         setCreateNewTodo(false) // 새로운 할 일 추가 상태 종료
-        await getTodos()
+        await getTodo()
       }
     }
   }
-  const getTodos = async () => {
+  const getTodo = async () => {
     try {
       setError(null)
       setLoading(true)
@@ -56,7 +66,7 @@ export default function ToDo({ id }: Props) {
   }
 
   useEffect(() => {
-    getTodos()
+    getTodo()
   }, [])
 
   if (loading) return <div>로딩중..</div>
@@ -83,7 +93,7 @@ export default function ToDo({ id }: Props) {
     >
       <>
         {createNewTodo ? (
-          <TodoListS.Todo>
+          <TodoListS.Todo $type={'create'}>
             <input
               type="text"
               value={newTodoTitle}
@@ -93,12 +103,18 @@ export default function ToDo({ id }: Props) {
               placeholder="새로운 할 일 입력"
             />
             <ButtonInAlert type="save" text="저장" disabled={!newTodoTitle} onClick={handleCreateTodo} />
-            <X onClick={() => setCreateNewTodo(false)} />
+            <IconButton
+              onClick={() => {
+                setCreateNewTodo(true)
+              }}
+            >
+              <X />
+            </IconButton>
           </TodoListS.Todo>
         ) : (
           ''
         )}
-        {todoList.length ? <Content list={todoList} setTodoList={setTodoList} /> : <EmptyContent />}
+        {filteredTodoList.length ? <Content list={filteredTodoList} setTodoList={setTodoList} /> : <EmptyContent />}
       </>
     </AccordionItem>
   )
@@ -113,22 +129,12 @@ function Content({
 }) {
   const [calendarInfo] = useAtom(calendarInfoAtom)
   const [key, setKey] = useState(0)
-  const calendar = new Calendar()
-  const { thisYear, thisMonth, thisDay } = calendar.getDateInfo(new Date(calendarInfo.selectedDate))
 
   useEffect(() => {
     setKey(prevKey => prevKey + 1)
   }, [calendarInfo])
 
-  const filteredList = list
-    .filter((item: ITodoList) => {
-      const itemDate = new Date(item.appliedAt)
-      return (
-        thisYear === itemDate.getFullYear() && thisMonth === itemDate.getMonth() + 1 && thisDay === itemDate.getDate()
-      )
-    })
-    .sort((a, b) => a.sequence - b.sequence)
-  return <TodoList key={key} list={filteredList} setTodoList={setTodoList} />
+  return <TodoList key={key} list={list} setTodoList={setTodoList} />
 }
 
 function EmptyContent() {
