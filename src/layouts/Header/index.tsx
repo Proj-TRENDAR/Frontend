@@ -23,7 +23,7 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
   const [calendar, setCalendar] = useState<Calendar[]>([])
   const [currentCalendar, setCurrentCalendar] = useState<string>('')
   const [, setUserInfo] = useAtom(userInfoAtom)
-  let userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
+  const userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
 
   useEffect(() => {
     // TODO: 캘린더 공유 구현시, 캘린더 정보 받아와야함. 지금은 dummy 사용
@@ -55,7 +55,7 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
             onClick={() => {
               const config = {
                 method: 'post',
-                url: '/web-server/auth/logout',
+                url: '/auth/logout',
                 headers: {
                   'Content-Type': 'application/json',
                 },

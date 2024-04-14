@@ -12,8 +12,10 @@ import { CONSTANTS } from '@/constants.ts'
 axios.defaults.baseURL = CONSTANTS.API_URL
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.interceptors.request.use(config => {
-  const accessToken = JSON.parse(localStorage.userInfo).accessToken
-  if (accessToken && config.headers) config.headers.authorization = `Bearer ${accessToken}`
+  if (localStorage.userInfo) {
+    const accessToken = JSON.parse(localStorage.userInfo).accessToken
+    if (accessToken && config.headers) config.headers.authorization = `Bearer ${accessToken}`
+  }
   return config
 })
 
