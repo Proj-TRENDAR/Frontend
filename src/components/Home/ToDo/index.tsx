@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getTodoList, createTodo } from '@/api/Todo/todoApi.ts'
+import { getTodoList } from '@/api/Todo/todoApi.ts'
 import Calendar from '@/utils/calendar.ts'
 import { ITodoList } from '@/types'
 import { calendarInfoAtom } from '@/store'
@@ -12,8 +12,7 @@ import { PageHeader } from '@layouts/PageHeader'
 import TodoList from '@components/common/TodoList'
 import IconButton from '@components/common/button/IconButton'
 import Add from '@assets/image/icon/ic-add.svg?react'
-import ButtonInAlert from '@components/common/button/ButtonInAlert'
-import X from '@/assets/image/icon/ic-x.svg?react'
+import { NewToDoInput } from '@components/Home/ToDo/ToDoInput'
 
 interface Props {
   id: string
@@ -24,7 +23,6 @@ export default function ToDo({ id }: Props) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [createNewTodo, setCreateNewTodo] = useState<boolean>(false)
-  const [newTodoTitle, setNewTodoTitle] = useState<string>('')
   const [calendarInfo] = useAtom(calendarInfoAtom)
   const calendar = new Calendar()
   const { thisYear, thisMonth, thisDay } = calendar.getDateInfo(new Date(calendarInfo.selectedDate))
@@ -36,21 +34,7 @@ export default function ToDo({ id }: Props) {
       )
     })
     .sort((a, b) => a.sequence - b.sequence)
-  const handleCreateTodo = async () => {
-    if (newTodoTitle.trim() !== '') {
-      // 새로운 할 일 추가
-      const payload = {
-        title: newTodoTitle.trim(),
-        appliedAt: calendarInfo.selectedDate,
-      }
-      const result = await createTodo(payload)
-      if (result.status === 201) {
-        setNewTodoTitle('') // 입력 필드 초기화
-        setCreateNewTodo(false) // 새로운 할 일 추가 상태 종료
-        await getTodo()
-      }
-    }
-  }
+
   const getTodo = async () => {
     try {
       setError(null)
@@ -92,22 +76,13 @@ export default function ToDo({ id }: Props) {
       <>
         {createNewTodo ? (
           <TodoListS.Todo $type={'create'}>
-            <input
-              type="text"
-              value={newTodoTitle}
-              className="title-input"
-              autoFocus={true}
-              onChange={e => setNewTodoTitle(e.target.value)}
-              placeholder="새로운 할 일 입력"
-            />
-            <ButtonInAlert type="save" text="저장" disabled={!newTodoTitle} onClick={handleCreateTodo} />
-            <IconButton
-              onClick={() => {
-                setCreateNewTodo(true)
+            <NewToDoInput
+              appliedAt={calendarInfo.selectedDate}
+              close={() => {
+                setCreateNewTodo(false)
               }}
-            >
-              <X />
-            </IconButton>
+              getTodo={getTodo}
+            />
           </TodoListS.Todo>
         ) : (
           ''
