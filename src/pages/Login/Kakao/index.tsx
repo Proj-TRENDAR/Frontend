@@ -15,7 +15,7 @@ const KakaoLogin = () => {
     const code = params.get('code')
     const config = {
       method: 'get',
-      url: '/web-server/auth/login',
+      url: '/auth/login',
       headers: {
         'Content-Type': 'application/json',
       },

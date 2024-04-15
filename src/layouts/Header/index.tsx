@@ -55,7 +55,7 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
             onClick={() => {
               const config = {
                 method: 'post',
-                url: '/web-server/auth/logout',
+                url: '/auth/logout',
                 headers: {
                   'Content-Type': 'application/json',
                 },
