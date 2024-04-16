@@ -9,6 +9,8 @@ import * as S from './style'
 import Dropdown, { DropdownItem, DropdownItems } from '@components/common/Dropdown'
 import { userInfoAtom } from '@/store'
 import { logout } from '@/api/Auth/authApi.ts'
+import { useAlertModal } from '@/Hooks/useAlertModal.ts'
+import AlertModal from '@components/common/modal/AlertModal'
 
 interface Props {
   handleOpenForComingSoonModal: () => void
@@ -23,7 +25,31 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
   const [calendar, setCalendar] = useState<Calendar[]>([])
   const [currentCalendar, setCurrentCalendar] = useState<string>('')
   const [, setUserInfo] = useAtom(userInfoAtom)
-  let userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
+  const userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
+  const [setIsOpenModal, isOpenModal, modalMessage] = useAlertModal({
+    message: (
+      <>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', textAlign: 'center' }}
+        >
+          <>
+            <svg
+              viewBox="64 64 896 896"
+              focusable="false"
+              data-icon="warning"
+              width="40px"
+              height="40px"
+              fill="#f5661b"
+              aria-hidden="true"
+            >
+              <path d="M464 720a48 48 0 1096 0 48 48 0 10-96 0zm16-304v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V416c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8zm475.7 440l-416-720c-6.2-10.7-16.9-16-27.7-16s-21.6 5.3-27.7 16l-416 720C56 877.4 71.4 904 96 904h832c24.6 0 40-26.6 27.7-48zm-783.5-27.9L512 239.9l339.8 588.2H172.2z"></path>
+            </svg>
+            <span>로그아웃 중 오류가 발생했습니다.</span>
+          </>
+        </div>
+      </>
+    ),
+  })
 
   useEffect(() => {
     // TODO: 캘린더 공유 구현시, 캘린더 정보 받아와야함. 지금은 dummy 사용
@@ -64,9 +90,8 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
                   navigate('/login')
                 })
                 .catch((err: any) => {
-                  console.log(err)
-                  // TODO: 로그인 실패 모달 띄우기
                   console.debug('로그아웃 실패', err)
+                  setIsOpenModal(true)
                 })
             }}
           >
@@ -92,6 +117,13 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
           }
         })}
       </Dropdown>
+      <AlertModal
+        handleClose={() => {
+          setIsOpenModal(false)
+        }}
+        isOpenModal={isOpenModal}
+        message={modalMessage}
+      />
     </S.Header>
   )
 }
