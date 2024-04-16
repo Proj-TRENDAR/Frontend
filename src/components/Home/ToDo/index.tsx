@@ -105,7 +105,8 @@ export default function ToDo({ id }: Props) {
             <ButtonInAlert type="save" text="저장" disabled={!newTodoTitle} onClick={handleCreateTodo} />
             <IconButton
               onClick={() => {
-                setCreateNewTodo(true)
+                setNewTodoTitle('')
+                setCreateNewTodo(false)
               }}
             >
               <X />
