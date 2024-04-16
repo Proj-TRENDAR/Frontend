@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
@@ -9,6 +8,7 @@ import ButtonsModal from '@components/common/modal/ButtonsModal'
 import * as S from './style'
 import Dropdown, { DropdownItem, DropdownItems } from '@components/common/Dropdown'
 import { userInfoAtom } from '@/store'
+import { logout } from '@/api/Auth/authApi.ts'
 
 interface Props {
   handleOpenForComingSoonModal: () => void
@@ -52,17 +52,10 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
         <li>
           <button
             className="red"
-            onClick={() => {
-              const config = {
-                method: 'post',
-                url: '/auth/logout',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              }
-              axios(config)
+            onClick={async () => {
+              await logout()
                 .then((res: any) => {
-                  console.log(res)
+                  console.debug(res)
                   setUserInfo({
                     accessToken: null,
                     userName: null,
@@ -73,6 +66,7 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
                 .catch((err: any) => {
                   console.log(err)
                   // TODO: 로그인 실패 모달 띄우기
+                  console.debug('로그아웃 실패', err)
                 })
             }}
           >

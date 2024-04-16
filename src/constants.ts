@@ -9,5 +9,7 @@ export const CONSTANTS = {
 }
 
 export const API_PATHS = {
+  login: '/auth/login',
+  logout: '/auth/logout',
   todo: '/todo',
 }
