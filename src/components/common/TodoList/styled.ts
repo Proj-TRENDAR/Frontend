@@ -89,6 +89,7 @@ export const Todo = styled.li<{ $type?: TodoType }>`
 
   .done {
     color: ${({ theme }) => theme.checkedTextColor};
+    mix-blend-mode: multiply;
     text-decoration: line-through;
   }
 `
