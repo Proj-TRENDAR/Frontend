@@ -3,7 +3,7 @@ import React from 'react'
 import * as S from './style'
 
 interface Props {
-  onClick: () => void
+  onClick?: () => void
   children: React.ReactNode
   style?: React.CSSProperties
 }
