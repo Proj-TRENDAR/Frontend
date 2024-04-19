@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { getTodoList } from '@/api/Todo/todoApi.ts'
+import { useEffect, useState } from 'react'
+import { createTodo, getTodoList } from '@/api/Todo/todoApi.ts'
 import Calendar from '@/utils/calendar.ts'
 import { ITodoList } from '@/types'
 import { calendarInfoAtom } from '@/store'
@@ -12,7 +12,7 @@ import { PageHeader } from '@layouts/PageHeader'
 import TodoList from '@components/common/TodoList'
 import IconButton from '@components/common/button/IconButton'
 import Add from '@assets/image/icon/ic-add.svg?react'
-import { NewToDoInput } from '@components/Home/ToDo/ToDoInput'
+import { ToDoInputForm } from '@components/Home/ToDo/ToDoForm'
 
 interface Props {
   id: string
@@ -41,11 +41,25 @@ export default function ToDo({ id }: Props) {
       setLoading(true)
       const { data } = await getTodoList()
       setTodoList(data)
-    } catch (err) {
+    } catch (err: any) {
       console.debug('err', err)
       setError(err)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleCreateTodo = async (title: string) => {
+    if (title.trim() !== '') {
+      const payload = {
+        title: title.trim(),
+        appliedAt: calendarInfo.selectedDate,
+      }
+      const result = await createTodo(payload)
+      if (result.status === 201) {
+        setCreateNewTodo(false) // 입력 필드 닫기
+        await getTodo()
+      }
     }
   }
 
@@ -76,12 +90,11 @@ export default function ToDo({ id }: Props) {
       <>
         {createNewTodo ? (
           <TodoListS.Todo $type={'create'}>
-            <NewToDoInput
-              appliedAt={calendarInfo.selectedDate}
+            <ToDoInputForm
+              handleSaveTodo={handleCreateTodo}
               close={() => {
                 setCreateNewTodo(false)
               }}
-              getTodo={getTodo}
             />
           </TodoListS.Todo>
         ) : (
@@ -96,35 +109,18 @@ export default function ToDo({ id }: Props) {
         ) : error ? (
           <div style={{ textAlign: 'center' }}>에러가 발생했습니다</div>
         ) : filteredTodoList.length ? (
-          <Content list={filteredTodoList} setTodoList={setTodoList} />
+          <TodoList list={filteredTodoList} setTodoList={setTodoList} />
         ) : (
-          <EmptyContent />
+          <EmptyList />
         )}
       </>
     </AccordionItem>
   )
 }
 
-function Content({
-  list,
-  setTodoList,
-}: {
-  list: ITodoList[]
-  setTodoList: React.Dispatch<React.SetStateAction<ITodoList[]>>
-}) {
-  const [calendarInfo] = useAtom(calendarInfoAtom)
-  const [key, setKey] = useState(0)
-
-  useEffect(() => {
-    setKey(prevKey => prevKey + 1)
-  }, [calendarInfo])
-
-  return <TodoList key={key} list={list} setTodoList={setTodoList} />
-}
-
-function EmptyContent() {
+function EmptyList() {
   return (
-    <S.EmptyContent>
+    <S.EmptyList>
       <p className="description">
         새로운 할 일이 없습니다
         <br />할 일을 추가해보세요
@@ -133,7 +129,7 @@ function EmptyContent() {
         <h2 className="exam-title">TODO 예시</h2>
         <TodoList list={ExamDummy} />
       </div>
-    </S.EmptyContent>
+    </S.EmptyList>
   )
 }
 
