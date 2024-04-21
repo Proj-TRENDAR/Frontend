@@ -26,7 +26,12 @@ export default function useToggleOpenWithExternalClick(): [
     }
     if (!isOpen) {
       window.addEventListener('mousedown', handleExternalClick)
-      setIsOpen(true)
+      // FIXME: CalendarHeaderDatePicker에서 사용시, html구조상 가운데 버튼 외 다른 버튼 클릭시에도
+      // 모달이 열리는 것을 막기위해 숨김 처리함
+      // * 아래 코드가 없어도 기존 사용에 문제가 되지 않을것같으나
+      // 만약 이슈 발생시 CalendarHeaderDatePicker에서만 아래줄을 제외하도록 수정할것.
+      // 이슈가 발생하지 않는다면 아래줄 삭제할 예정.
+      // setIsOpen(true)
     }
   }
 

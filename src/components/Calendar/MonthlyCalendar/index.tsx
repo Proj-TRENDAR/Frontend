@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components'
 import React from 'react'
 import { calendarInfoAtom } from '@/store'
 import { useAtom } from 'jotai'
+import HandleDate from '@/utils/calcDate'
 
 // FIXME: api 연동하고 리팩토링 하겠습니다..!!
 interface ILongScheduleDummy {
@@ -26,6 +27,8 @@ export default function MonthlyCalendar() {
   const { prevMonthDates, thisMonthDates, nextMonthDates } = calendar.getMonthDates(new Date(calendarInfo.selectedDate))
   const monthlyDates = [...prevMonthDates, ...thisMonthDates, ...nextMonthDates]
   const theme = useTheme()
+  const today = new Date()
+  const handleDate = new HandleDate()
 
   // FIXME: 현재 더미로 임시 출력해둠. api 연동 후 삭제해야함
   const longScheduleDummy: ILongScheduleDummy[][] = [
@@ -220,15 +223,14 @@ export default function MonthlyCalendar() {
         {monthlyDates
           // 1. 하루는 li로 렌터
           .map((date, i) => {
+            // selectedDate: 현재 선택된 날짜
+            // weekColor: 평일, 토요일, 일요일에 따른 색상 표시
+            // ghost: 이전달, 다음달에 해당하는 날짜는 연하게 표시
+            // current: 현재 선택된 날짜를 테두리로 표시
             const selectedDate = new Date(calendarInfo.selectedDate)
             const weekColor = i % 7 === 0 ? 'sun' : i % 7 === 6 ? 'sat' : ''
             const ghost = selectedDate.getMonth() !== date.getMonth() ? 'ghost' : ''
-            const current =
-              selectedDate.getFullYear() === date.getFullYear() &&
-              selectedDate.getMonth() === date.getMonth() &&
-              selectedDate.getDate() === date.getDate()
-                ? 'current'
-                : ''
+            const current = handleDate.isSameDate(selectedDate, date) ? 'current' : ''
 
             return (
               <li
@@ -238,7 +240,9 @@ export default function MonthlyCalendar() {
                   setCalendarInfo({ selectedDate: date })
                 }}
               >
-                {date.getDate()}
+                {/* 오늘 날짜인 경우 두껍게 표시 */}
+                {handleDate.isSameDate(today, date) ? <b>{date.getDate()}</b> : date.getDate()}
+
                 {/* TODO: 일일 루틴 표시 */}
               </li>
             )

@@ -34,6 +34,7 @@ export const basicTheme: DefaultTheme = {
   grayBt: '#A9A9A9',
   grayBtLight: '#F0F0F0',
   text: '#333333',
+  text98: '#989898',
   textInfo: '#7C7C7C',
   textLight: '#CBCBCB',
   textRed: '#E43636',
