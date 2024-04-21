@@ -1,7 +1,7 @@
 import * as S from './style'
 import React from 'react'
 import TabButton, { ITabList } from '@components/common/button/TabButton'
-import CalendarHeaderButton from '@components/common/datePicker/CalendarHeaderDatePicker'
+import CalendarHeaderDatePicker from '@components/common/datePicker/CalendarHeaderDatePicker'
 import { useAtom } from 'jotai'
 import { calendarInfoAtom } from '@/store'
 
@@ -21,7 +21,7 @@ export default function CalendarLayout({ tabList, defaultTabKey, children }: Pro
     <S.Calendar>
       <div className="calendar-header">
         <div className="title-button-wrapper">
-          <CalendarHeaderButton date={calendarInfo.selectedDate} setDate={setDate} size="large" width={168} />
+          <CalendarHeaderDatePicker date={calendarInfo.selectedDate} setDate={setDate} size="large" width={168} />
         </div>
         <div className="toggle-wrapper">
           <TabButton tabList={tabList} defaultTabKey={defaultTabKey} />
