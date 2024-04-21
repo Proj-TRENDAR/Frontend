@@ -18,4 +18,10 @@ export default class HandleDate {
     const dateNum = thisDate.getDate()
     return new Date(year, newMonth, dateNum)
   }
+
+  // 같은 날짜면 true, 아니면 false 리턴함(년, 월, 일 만 비교)
+  isSameDate = (date1: Date, date2: Date) =>
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
 }
