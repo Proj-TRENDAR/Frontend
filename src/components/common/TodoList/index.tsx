@@ -76,7 +76,7 @@ function TodoItem({ index, todo, updateTodoItem, deleteTodoItem }: TodoItemProps
           close={() => {
             setType('basic')
           }}
-          initalTodoTitle={todo.title}
+          initialTodoTitle={todo.title}
         />
       </S.Todo>
     )

@@ -10,12 +10,12 @@ import { ITodoList } from '@/types'
 interface IToDoInputFormProps {
   handleSaveTodo: (title: string) => void
   close: () => void
-  initalTodoTitle?: string
+  initialTodoTitle?: string
 }
 
 // 투두 추가, 수정 시 사용하는 폼
-export function ToDoInputForm({ handleSaveTodo, close, initalTodoTitle }: IToDoInputFormProps) {
-  const [todoTitle, setTodoTitle] = useState<string>(initalTodoTitle ?? '')
+export function ToDoInputForm({ handleSaveTodo, close, initialTodoTitle }: IToDoInputFormProps) {
+  const [todoTitle, setTodoTitle] = useState<string>(initialTodoTitle ?? '')
 
   return (
     <>
