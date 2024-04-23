@@ -1,11 +1,13 @@
 import * as S from './style'
+import Button from '@components/common/button/Button'
 import ButtonInAlert from '@components/common/button/ButtonInAlert'
 import GuideAlertModal from './modal/GuideAlertModal'
 import GuideAlertModal2 from './modal/GuideAlertModal2'
-import Button from '@components/common/button/Button'
 import IconButton from '@components/common/button/IconButton'
 import UserIcon from '@components/common/UserIcon'
 import TabButton from '@components/common/button/TabButton'
+import GuideDropdownForButton from './dropdown/GuideDropdownForButton.tsx'
+import GuideDropdownForLink from './dropdown/GuideDropdownForLink.tsx'
 
 export default function ComponentsGuide() {
   return (
@@ -64,7 +66,7 @@ export default function ComponentsGuide() {
           </S.ExampleWrapper>
           <S.ExampleWrapper>
             <h3>$fullwidth= true | false</h3>
-            <div>
+            <div style={{ marginBottom: '10px' }}>
               <Button $fullwidth={false} $outline={true} size="large">
                 기본(false)
               </Button>
@@ -316,6 +318,21 @@ export default function ComponentsGuide() {
           </S.ExampleWrapper>
         </S.ComponentWrapper>
       </S.FolderWrapper>
+      <S.FolderWrapper>
+        <h1>Dropdown</h1>
+        <S.ComponentWrapper>
+          <h2>Dropdown</h2>
+          <S.ExampleWrapper>
+            <h3>버튼인 경우</h3>
+            <GuideDropdownForButton />
+          </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>링크인 경우</h3>
+            <GuideDropdownForLink />
+          </S.ExampleWrapper>
+        </S.ComponentWrapper>
+      </S.FolderWrapper>
+
       <S.FolderWrapper>
         <h1>modal</h1>
         <b>AlertModal 컴포넌트</b>는 <b>useAlertModal훅</b>과 함께 사용합니다.

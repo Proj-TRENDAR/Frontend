@@ -57,9 +57,4 @@ export const ExampleWrapper = styled.div`
     margin: 0;
     padding: 0;
   }
-
-  & > div {
-    margin: 10px 0;
-    padding: 10px 20px 10px;
-  }
 `

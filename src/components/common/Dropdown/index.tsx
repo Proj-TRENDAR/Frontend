@@ -15,6 +15,7 @@ interface Props {
   currentItemId?: string
   placeholder: string
   children: React.ReactNode // DropdownItem 컴포넌트들을 자식으로 받습니다
+  style?: React.CSSProperties
 }
 
 export default function Dropdown({ items, currentItemId = '', placeholder, children, ...props }: Props) {
@@ -59,12 +60,12 @@ interface ItemProps {
 
 interface ItemButtonProps extends ItemProps {
   onClick: () => void
-  url?: undefined
+  url?: () => void
 }
 
 interface ItemLinkProps extends ItemProps {
   url: string
-  onClick?: undefined
+  onClick?: () => void
 }
 
 export function DropdownItem({ title, onClick, url, disabled }: ItemButtonProps | ItemLinkProps) {
