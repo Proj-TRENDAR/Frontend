@@ -53,4 +53,13 @@ export const ComponentWrapper = styled.div`
 
 export const ExampleWrapper = styled.div`
   border-top: solid 1px ${({ theme }) => theme.grayBtLight};
+  & div {
+    margin: 0;
+    padding: 0;
+  }
+
+  & > div {
+    margin: 10px 0;
+    padding: 10px 20px 10px;
+  }
 `

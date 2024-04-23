@@ -3,6 +3,9 @@ import ButtonInAlert from '@components/common/button/ButtonInAlert'
 import GuideAlertModal from './modal/GuideAlertModal'
 import GuideAlertModal2 from './modal/GuideAlertModal2'
 import Button from '@components/common/button/Button'
+import IconButton from '@components/common/button/IconButton'
+import UserIcon from '@components/common/UserIcon'
+import TabButton from '@components/common/button/TabButton'
 
 export default function ComponentsGuide() {
   return (
@@ -158,6 +161,156 @@ export default function ComponentsGuide() {
                 onClick={() => {
                   /* 클릭 시 동작 구현 */
                 }}
+              />
+            </div>
+          </S.ExampleWrapper>
+        </S.ComponentWrapper>
+        <S.ComponentWrapper>
+          <h2>IconButton</h2>
+          <S.ExampleWrapper>
+            <h3>{`style={{ height: '32px', width: '32px' }}`}</h3>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              {/* 👇코드 사용 */}
+              <IconButton
+                style={{ height: '32px', width: '32px' }}
+                onClick={() => {
+                  console.debug('UserIconButton 클릭됨')
+                }}
+              >
+                <UserIcon />
+              </IconButton>
+            </div>
+          </S.ExampleWrapper>
+        </S.ComponentWrapper>
+        <S.ComponentWrapper>
+          <h2>TabButton</h2>
+          <S.ExampleWrapper>
+            <h3>{`size: large(default)`} </h3>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              {/* 👇코드 사용 */}
+              <TabButton
+                tabList={[
+                  {
+                    key: '1',
+                    title: '버튼1',
+                    onClick: () => {
+                      console.debug('버튼1 클릭됨')
+                    },
+                  },
+                  {
+                    key: '2',
+                    title: '버튼2',
+                    onClick: () => {
+                      console.debug('버튼2 클릭됨')
+                    },
+                  },
+                ]}
+                defaultTabKey={'1'}
+              />
+              <TabButton
+                tabList={[
+                  {
+                    key: '1',
+                    title: '버튼1',
+                    onClick: () => {
+                      console.debug('버튼1 클릭됨')
+                    },
+                  },
+                  {
+                    key: '2',
+                    title: '버튼2',
+                    onClick: () => {
+                      console.debug('버튼2 클릭됨')
+                    },
+                  },
+                  {
+                    key: '3',
+                    title: '버튼3',
+                    onClick: () => {
+                      console.debug('버튼3 클릭됨')
+                    },
+                  },
+                ]}
+                defaultTabKey={'3'}
+              />
+            </div>
+          </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>{`size: small`} </h3>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              {/* 👇코드 사용 */}
+              <TabButton
+                size={'small'}
+                tabList={[
+                  {
+                    key: '1',
+                    title: '버튼1',
+                    onClick: () => {
+                      console.debug('버튼1 클릭됨')
+                    },
+                  },
+                  {
+                    key: '2',
+                    title: '버튼2',
+                    onClick: () => {
+                      console.debug('버튼2 클릭됨')
+                    },
+                  },
+                ]}
+                defaultTabKey={'1'}
+              />
+              <TabButton
+                size={'small'}
+                tabList={[
+                  {
+                    key: '1',
+                    title: '버튼1',
+                    onClick: () => {
+                      console.debug('버튼1 클릭됨')
+                    },
+                  },
+                  {
+                    key: '2',
+                    title: '버튼2',
+                    onClick: () => {
+                      console.debug('버튼2 클릭됨')
+                    },
+                  },
+                  {
+                    key: '3',
+                    title: '버튼3',
+                    onClick: () => {
+                      console.debug('버튼3 클릭됨')
+                    },
+                  },
+                ]}
+                defaultTabKey={'3'}
+              />
+            </div>
+          </S.ExampleWrapper>
+          <S.ExampleWrapper>
+            <h3>{`$fullwidth: true`} </h3>
+            <div>
+              {/* 👇코드 사용 */}
+              <TabButton
+                $fullwidth={true}
+                tabList={[
+                  {
+                    key: '1',
+                    title: '버튼1',
+                    onClick: () => {
+                      console.debug('버튼1 클릭됨')
+                    },
+                  },
+                  {
+                    key: '2',
+                    title: '버튼2',
+                    onClick: () => {
+                      console.debug('버튼2 클릭됨')
+                    },
+                  },
+                ]}
+                defaultTabKey={'1'}
               />
             </div>
           </S.ExampleWrapper>
