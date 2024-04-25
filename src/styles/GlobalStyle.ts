@@ -36,8 +36,15 @@ ${fonts}
   section,
   article,
   div,
-  input {
+  input,
+  a,
+  button {
     box-sizing: border-box;
+  }
+
+  button {
+    font-family: 'NanumBarunGothic';
+    font-size: 15px;
   }
   
   h1, h2, h3, h4, h5, h6, p {
@@ -45,5 +52,4 @@ ${fonts}
     margin: 0;
     font-weight: normal;
   }
-  
 `

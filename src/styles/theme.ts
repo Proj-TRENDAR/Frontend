@@ -6,6 +6,7 @@ import NANUM_BARUN_GOTHIC_ULTRA_LIGHT from '@assets/font/nanumbarungothicultrali
 
 export const basicTheme: DefaultTheme = {
   point: '#1FC6D0',
+  pointHover: '#00ABB5',
   point2: '#B1E7DD',
   point3: '#F8FFFF',
   pointBg: '#F3F9FA',
@@ -24,16 +25,22 @@ export const basicTheme: DefaultTheme = {
   s5: '#E8F6D6',
   s6: '#FFEFD1',
   s7: '#E2ECF6',
-  dayColorOfSat: '#4573E9',
-  dayColorOfSun: '#E43636',
-  dayColorOfWeekday: '#484848',
+  dayColorOfSat: '#4573E9', // 토요일 색
+  dayColorOfSun: '#E43636', // 일요일 색
+  dayColorOfWeekday: '#484848', // 주간 색
   basicBg: '#FFFFFF',
+  cancelBgColor: '#FFC7C3',
   grayLine: '#EDEDED',
   grayBt: '#A9A9A9',
   grayBtLight: '#F0F0F0',
   text: '#333333',
-  texInfo: '#7C7C7C',
+  text98: '#989898',
+  textInfo: '#7C7C7C',
   textLight: '#CBCBCB',
+  textRed: '#E43636',
+  textRedDark: '#CC1212',
+  checkedColor: '#1DB993',
+  checkedTextColor: '#DDDDDD',
 }
 
 // TODO: 다른 컬러테마 추가

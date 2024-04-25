@@ -11,6 +11,11 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.29",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "axios": "^1.6.2",
+    "jotai": "^2.6.0",
+    "polished": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.18.0",
@@ -22,16 +27,21 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react": "^4.1.1",
-    "eslint": "^8.45.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "react-app": "^1.1.2",
+    "prettier": "3.1.1",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-svgr": "^4.2.0"
   },
   "main": "index.js",
-  "author": "soohyeon <su132489@gmail.com>",
+  "author": "soohyeon <su132489@gmail.com>, ohseong <bkks1004@naver.com>",
   "license": "MIT"
 }

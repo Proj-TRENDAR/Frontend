@@ -1,15 +1,25 @@
 import { Outlet } from 'react-router'
 import { Link } from 'react-router-dom'
 
-import Calendar from '@components/Calendar'
 import Header from '@layouts/Header'
+import Calendar from '@components/Calendar'
+import AlertModal from '@components/common/modal/AlertModal'
+import { useAlertModal } from '@/Hooks/useAlertModal'
 import * as S from './style'
 
-export default function HomeLayout() {
+export default function MainLayout() {
+  const [setIsOpenComingSoonModal, isComingSoonModalOpen, messageOfComingSoonModal] = useAlertModal({
+    alertMessageKey: 'comingSoon',
+  })
+
   return (
     <>
       <S.Layout>
-        <Header />
+        <Header
+          handleOpenForComingSoonModal={() => {
+            setIsOpenComingSoonModal(true)
+          }}
+        />
         <Calendar id="calendar" />
         <main id="right-bar">
           <Outlet />
@@ -32,6 +42,13 @@ export default function HomeLayout() {
           </li>
         </ul>
       </footer>
+      <AlertModal
+        handleClose={() => {
+          setIsOpenComingSoonModal(false)
+        }}
+        isOpenModal={isComingSoonModalOpen}
+        message={messageOfComingSoonModal}
+      />
     </>
   )
 }
