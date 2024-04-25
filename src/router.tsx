@@ -9,7 +9,7 @@ import Login from '@pages/Login'
 import KakaoLogin from '@pages/Login/Kakao'
 import Guide from '@pages/Guide'
 import ComponentsGuide from '@pages/ComponentsGuide'
-import TodoList from '@pages/TodoList'
+import WeeklyTodoList from '@pages/WeeklyTodoList'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +17,7 @@ const router = createBrowserRouter(
       <Route element={<MainLayout />}>
         <Route path="" element={<Home />} />
         <Route path="routine-list" element={<RoutineList />} />
-        <Route path="to-do-list" element={<TodoList />} />
+        <Route path="to-do-list" element={<WeeklyTodoList />} />
       </Route>
       <Route element={<LoginLayout />}>
         <Route path="login" element={<Login />} />
