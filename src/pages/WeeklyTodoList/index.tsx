@@ -10,15 +10,13 @@ import X from '@/assets/image/icon/ic-x.svg?react'
 import dateFormat from '@/utils/dateFormat.ts'
 import TodoList from '@components/common/TodoList'
 import IconButton from '@components/common/button/IconButton'
-import CalendarHeaderButton from '@components/common/button/CalendarHeaderButton'
+import CalendarHeaderDatePicker from '@components/common/datePicker/CalendarHeaderDatePicker'
 
 export default function WeeklyTodoList() {
   const navigate = useNavigate()
   const [todoList, setTodoList] = useState<ITodoList[]>([])
   const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
   const weekDates = getSelectedWeekDates()
-  console.warn('weekDates', weekDates)
-  console.warn('weekDates', weekDates[0], typeof weekDates[0])
   const handleWeek = (calc: number) => {
     const currentDate = new Date(calendarInfo.selectedDate)
     const oneWeekAgo = new Date(currentDate.setDate(currentDate.getDate() + calc * 7))
@@ -53,7 +51,7 @@ export default function WeeklyTodoList() {
       </S.WeeklyTodoListHeader>
       <S.WeeklyTodoList>
         <div className="calendar-header-button-wrapper">
-          <CalendarHeaderButton
+          <CalendarHeaderDatePicker
             text={dateFormat(new Date(calendarInfo.selectedDate), 'YYYY년 MM월 W주차')}
             handlePrev={() => {
               handleWeek(-1)
