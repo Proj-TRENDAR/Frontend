@@ -15,7 +15,6 @@ export const AccordionWrapper = styled.div<{ height: string }>`
 export const AccordionItem = styled.section<{
   $isOpened: boolean
   $moreStyle: RuleSet<object> | undefined
-  $itemContentMoreStyle: RuleSet<object> | undefined
 }>`
   width: 100%;
   max-height: 31vb;
@@ -26,10 +25,6 @@ export const AccordionItem = styled.section<{
 
   transition: all 0.2s ease-in-out;
   ${({ $moreStyle }) => $moreStyle}
-
-  .item-content {
-    ${({ $itemContentMoreStyle }) => $itemContentMoreStyle}
-  }
 `
 
 export const ItemHeader = styled.div`
@@ -58,7 +53,7 @@ export const ItemHeader = styled.div`
     }
   }
 `
-export const ItemContent = styled.div<{ $isOpened: boolean }>`
+export const ItemContent = styled.div<{ $isOpened: boolean; $itemContentMoreStyle: RuleSet<object> | undefined }>`
   height: ${({ $isOpened }) => ($isOpened ? 'auto' : 0)};
   padding: 0 8px;
 
@@ -66,4 +61,6 @@ export const ItemContent = styled.div<{ $isOpened: boolean }>`
   justify-content: center;
   flex-grow: 1;
   overflow: hidden;
+
+  ${({ $itemContentMoreStyle }) => $itemContentMoreStyle}
 `

@@ -16,7 +16,7 @@ export const Content = styled.div`
   flex-direction: row;
   align-items: center;
 `
-export const EmptyContent = styled.div`
+export const EmptyList = styled.div`
   margin: 14px 0;
   gap: 20px;
 

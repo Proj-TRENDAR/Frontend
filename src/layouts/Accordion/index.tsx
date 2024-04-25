@@ -53,7 +53,7 @@ export function AccordionItem({ id, header, children, moreStyle, itemContentMore
   const { isAllClosed, setIsAllClosed } = useContext(ItemClosedContext)
 
   return (
-    <S.AccordionItem $isOpened={isOpened} $moreStyle={moreStyle} $itemContentMoreStyle={itemContentMoreStyle}>
+    <S.AccordionItem $isOpened={isOpened} $moreStyle={moreStyle}>
       <S.ItemHeader className="item-header">
         <button
           className={`open-button ${isOpened ? '' : 'close'}`}
@@ -71,7 +71,7 @@ export function AccordionItem({ id, header, children, moreStyle, itemContentMore
         </button>
         <div className="header-wrapper">{header}</div>
       </S.ItemHeader>
-      <S.ItemContent className="item-content" $isOpened={isOpened}>
+      <S.ItemContent className="item-content" $isOpened={isOpened} $itemContentMoreStyle={itemContentMoreStyle}>
         {children}
       </S.ItemContent>
     </S.AccordionItem>
