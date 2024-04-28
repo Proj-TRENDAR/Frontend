@@ -54,9 +54,9 @@ export default function Guide() {
         <S.RoutineImage2 {...useScrollFadeIn<HTMLDivElement>('left', 1, 0.8)} $path={Routine2} />
       </S.GuideWrapper>
       <S.GuideWrapper>
-        <S.ScheduleImage1 {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.2)} $path={Todo1} />
-        <S.ScheduleImage2 {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.3)} $path={Todo2} />
-        <S.ScheduleText {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.5)}>
+        <S.EventImage1 {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.2)} $path={Todo1} />
+        <S.EventImage2 {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.3)} $path={Todo2} />
+        <S.EventText {...useScrollFadeIn<HTMLDivElement>('right', 1, 0.5)}>
           <S.GuideTextTitle>할일 관리</S.GuideTextTitle>
           <S.GuideText>
             <br />
@@ -69,7 +69,7 @@ export default function Guide() {
             <br />
             일주일을 점검할 수 있어요
           </S.GuideText>
-        </S.ScheduleText>
+        </S.EventText>
       </S.GuideWrapper>
       <S.GuideColumnWrapper {...useScrollFadeIn<HTMLDivElement>('up', 1, 0.3)}>
         <S.GuideText>마음에 드는 색상을 선택해 나만의 스타일로 TRANDAR를 사용해보세요.</S.GuideText>

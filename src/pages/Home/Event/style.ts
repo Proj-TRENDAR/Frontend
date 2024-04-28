@@ -2,7 +2,7 @@ import { css, styled } from 'styled-components'
 
 import { PageHeader } from '@layouts/PageHeader/style.ts'
 
-export const ScheduleWrapper = css`
+export const EventWrapper = css`
   background-color: ${({ theme }) => theme.point};
   border-radius: 16px 0 0 0;
 

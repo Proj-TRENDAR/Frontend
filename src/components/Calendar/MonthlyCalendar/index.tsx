@@ -7,7 +7,7 @@ import { useAtom } from 'jotai'
 import HandleDate from '@/utils/calcDate'
 
 // FIXME: api 연동하고 리팩토링 하겠습니다..!!
-interface ILongScheduleDummy {
+interface ILongEventDummy {
   key: string
   title: string
   color: number
@@ -15,7 +15,7 @@ interface ILongScheduleDummy {
   isAllDay: boolean
 }
 
-interface IShortScheduleDummy {
+interface IShortEventDummy {
   key: string
   title: string
   isAllDay: boolean
@@ -31,31 +31,31 @@ export default function MonthlyCalendar() {
   const handleDate = new HandleDate()
 
   // FIXME: 현재 더미로 임시 출력해둠. api 연동 후 삭제해야함
-  const longScheduleDummy: ILongScheduleDummy[][] = [
+  const longEventDummy: ILongEventDummy[][] = [
     [], // 1주차
     [
-      { key: 'schedule1', title: '일정더미1(월)', color: 1, being: 3, isAllDay: true },
-      { key: 'schedule2', title: '일정더미2(월)', color: 3, being: 2, isAllDay: true },
+      { key: 'event1', title: '일정더미1(월)', color: 1, being: 3, isAllDay: true },
+      { key: 'event2', title: '일정더미2(월)', color: 3, being: 2, isAllDay: true },
     ],
     [],
-    [{ key: 'schedule3', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
-    [{ key: 'schedule4', title: '일정더미1(목)', color: 2, being: 2, isAllDay: true }],
-    [{ key: 'schedule5', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
-    [{ key: 'schedule6', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
+    [{ key: 'event3', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
+    [{ key: 'event4', title: '일정더미1(목)', color: 2, being: 2, isAllDay: true }],
+    [{ key: 'event5', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
+    [{ key: 'event6', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
     [], // 2주차
-    [{ key: 'schedule7', title: '일정더미1(월)', color: 6, being: 1, isAllDay: true }],
+    [{ key: 'event7', title: '일정더미1(월)', color: 6, being: 1, isAllDay: true }],
     [],
     [],
-    [{ key: 'schedule8', title: '일정더미1(목)', color: 2, being: 3, isAllDay: true }],
-    [{ key: 'schedule9', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
+    [{ key: 'event8', title: '일정더미1(목)', color: 2, being: 3, isAllDay: true }],
+    [{ key: 'event9', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
     [],
     [], // 3주차
     [],
     [],
-    [{ key: 'schedule10', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
+    [{ key: 'event10', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
     [],
-    [{ key: 'schedule11', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
-    [{ key: 'schedule12', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
+    [{ key: 'event11', title: '일정더미1(금)', color: 4, being: 2, isAllDay: true }],
+    [{ key: 'event12', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
     [], // 4주차
     [],
     [],
@@ -64,12 +64,12 @@ export default function MonthlyCalendar() {
     [],
     [],
     [], // 5주차
-    [{ key: 'schedule13', title: '일정더미1(월)', color: 1, being: 2, isAllDay: true }],
+    [{ key: 'event13', title: '일정더미1(월)', color: 1, being: 2, isAllDay: true }],
     [],
-    [{ key: 'schedule14', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
+    [{ key: 'event14', title: '일정더미1(수)', color: 7, being: 1, isAllDay: true }],
     [],
     [],
-    [{ key: 'schedule15', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
+    [{ key: 'event15', title: '일정더미1(토)', color: 5, being: 1, isAllDay: true }],
     [], // 6주차
     [],
     [],
@@ -78,84 +78,84 @@ export default function MonthlyCalendar() {
     [],
     [],
   ]
-  const shortScheduleDummy: IShortScheduleDummy[][] = [
-    [{ key: 'schedule1', title: '하루일정더미1(일)', isAllDay: false }], // 1주차
-    [{ key: 'schedule2', title: '하루일정더미1(월)', isAllDay: false }],
+  const shortEventDummy: IShortEventDummy[][] = [
+    [{ key: 'event1', title: '하루일정더미1(일)', isAllDay: false }], // 1주차
+    [{ key: 'event2', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule3', title: '하루일정더미1(화)', isAllDay: false },
-      { key: 'schedule4', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event3', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event4', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule5', title: '하루일정더미1(수)', isAllDay: false },
-      { key: 'schedule6', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event5', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event6', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule7', title: '하루일정더미1(목)', isAllDay: false }],
-    [{ key: 'schedule8', title: '하루일정더미1(금)', isAllDay: false }],
+    [{ key: 'event7', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'event8', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule9', title: '하루일정더미1(일)', isAllDay: false }], // 2주차
-    [{ key: 'schedule10', title: '하루일정더미1(월)', isAllDay: false }],
+    [{ key: 'event9', title: '하루일정더미1(일)', isAllDay: false }], // 2주차
+    [{ key: 'event10', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule11', title: '하루일정더미1(화)', isAllDay: false },
-      { key: 'schedule12', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event11', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event12', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule13', title: '하루일정더미1(수)', isAllDay: false },
-      { key: 'schedule14', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event13', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event14', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule15', title: '하루일정더미1(목)', isAllDay: false }],
-    [{ key: 'schedule16', title: '하루일정더미1(금)', isAllDay: false }],
+    [{ key: 'event15', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'event16', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule17', title: '하루일정더미1(일)', isAllDay: false }], // 3주차
-    [{ key: 'schedule18', title: '하루일정더미1(월)', isAllDay: false }],
+    [{ key: 'event17', title: '하루일정더미1(일)', isAllDay: false }], // 3주차
+    [{ key: 'event18', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule19', title: '하루일정더미1(화)', isAllDay: false },
-      { key: 'schedule20', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event19', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event20', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule21', title: '하루일정더미1(수)', isAllDay: false },
-      { key: 'schedule22', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event21', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event22', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule23', title: '하루일정더미1(목)', isAllDay: false }],
-    [{ key: 'schedule24', title: '하루일정더미1(금)', isAllDay: false }],
+    [{ key: 'event23', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'event24', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule25', title: '하루일정더미1(일)', isAllDay: false }], // 4주차
-    [{ key: 'schedule26', title: '하루일정더미1(월)', isAllDay: false }],
+    [{ key: 'event25', title: '하루일정더미1(일)', isAllDay: false }], // 4주차
+    [{ key: 'event26', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule27', title: '하루일정더미1(화)', isAllDay: false },
-      { key: 'schedule28', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event27', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event28', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule29', title: '하루일정더미1(수)', isAllDay: false },
-      { key: 'schedule30', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event29', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event30', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule31', title: '하루일정더미1(목)', isAllDay: false }],
-    [{ key: 'schedule32', title: '하루일정더미1(금)', isAllDay: false }],
+    [{ key: 'event31', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'event32', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule33', title: '하루일정더미1(일)', isAllDay: false }], // 5주차
-    [{ key: 'schedule34', title: '하루일정더미1(월)', isAllDay: false }],
+    [{ key: 'event33', title: '하루일정더미1(일)', isAllDay: false }], // 5주차
+    [{ key: 'event34', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule35', title: '하루일정더미1(화)', isAllDay: false },
-      { key: 'schedule36', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event35', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event36', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule37', title: '하루일정더미1(수)', isAllDay: false },
-      { key: 'schedule38', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event37', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event38', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule39', title: '하루일정더미1(목)', isAllDay: false }],
-    [{ key: 'schedule40', title: '하루일정더미1(금)', isAllDay: false }],
+    [{ key: 'event39', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'event40', title: '하루일정더미1(금)', isAllDay: false }],
     [],
-    [{ key: 'schedule41', title: '하루일정더미1(일)', isAllDay: false }], // 6주차
-    [{ key: 'schedule42', title: '하루일정더미1(월)', isAllDay: false }],
+    [{ key: 'event41', title: '하루일정더미1(일)', isAllDay: false }], // 6주차
+    [{ key: 'event42', title: '하루일정더미1(월)', isAllDay: false }],
     [
-      { key: 'schedule43', title: '하루일정더미1(화)', isAllDay: false },
-      { key: 'schedule44', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event43', title: '하루일정더미1(화)', isAllDay: false },
+      { key: 'event44', title: '하루일정더미1(화)', isAllDay: false },
     ],
     [
-      { key: 'schedule45', title: '하루일정더미1(수)', isAllDay: false },
-      { key: 'schedule46', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event45', title: '하루일정더미1(수)', isAllDay: false },
+      { key: 'event46', title: '하루일정더미1(수)', isAllDay: false },
     ],
-    [{ key: 'schedule47', title: '하루일정더미1(목)', isAllDay: false }],
-    [{ key: 'schedule48', title: '하루일정더미1(금)', isAllDay: false }],
+    [{ key: 'event47', title: '하루일정더미1(목)', isAllDay: false }],
+    [{ key: 'event48', title: '하루일정더미1(금)', isAllDay: false }],
     [],
   ]
 
@@ -163,15 +163,15 @@ export default function MonthlyCalendar() {
   // 이 값을 참고하여 '하루 내 일정'을 '하루종일 일정' 아래줄에 렌더합니다.
   const rowColStackNum: number[][] = []
 
-  const getSortedLongScheduleDummy = (weekNum: number) => {
+  const getSortedLongEventDummy = (weekNum: number) => {
     rowColStackNum.push([0, 0, 0, 0, 0, 0, 0])
-    const schedule = JSON.parse(JSON.stringify(longScheduleDummy.slice(weekNum * 7, weekNum * 7 + 7)))
+    const event = JSON.parse(JSON.stringify(longEventDummy.slice(weekNum * 7, weekNum * 7 + 7)))
     const newSorted = []
     let startNum = 0
     let rowNum = 0
 
-    while (schedule.flat().length > 0) {
-      if (schedule[startNum].length === 0) {
+    while (event.flat().length > 0) {
+      if (event[startNum].length === 0) {
         startNum++
         if (startNum > 6) {
           startNum = 0
@@ -179,14 +179,14 @@ export default function MonthlyCalendar() {
         }
         continue
       }
-      const firstSchedule = schedule[startNum].shift()
-      newSorted.push({ ...firstSchedule, start: startNum, row: rowNum })
+      const firstEvent = event[startNum].shift()
+      newSorted.push({ ...firstEvent, start: startNum, row: rowNum })
 
-      for (let i = 0; i < firstSchedule.being ?? 0; i++) {
+      for (let i = 0; i < firstEvent.being ?? 0; i++) {
         rowColStackNum[rowColStackNum.length - 1][startNum + i]++
       }
 
-      startNum += firstSchedule.being
+      startNum += firstEvent.being
       if (startNum > 6) {
         startNum = 0
         rowNum++
@@ -196,13 +196,13 @@ export default function MonthlyCalendar() {
     return newSorted
   }
 
-  const getSortedShortScheduleDummy = (weekNum: number) => {
-    const schedule = JSON.parse(JSON.stringify(shortScheduleDummy.slice(weekNum * 7, weekNum * 7 + 7)))
+  const getSortedShortEventDummy = (weekNum: number) => {
+    const event = JSON.parse(JSON.stringify(shortEventDummy.slice(weekNum * 7, weekNum * 7 + 7)))
 
-    return schedule.map((daySchedules: IShortScheduleDummy[], i: number) =>
-      daySchedules.length === 0
-        ? daySchedules
-        : daySchedules.map((schedule, j) => ({ ...schedule, start: i, row: rowColStackNum[weekNum][i] + j }))
+    return event.map((dayEvents: IShortEventDummy[], i: number) =>
+      dayEvents.length === 0
+        ? dayEvents
+        : dayEvents.map((event, j) => ({ ...event, start: i, row: rowColStackNum[weekNum][i] + j }))
     )
   }
   return (
@@ -266,41 +266,41 @@ export default function MonthlyCalendar() {
               <ul className="date-wrapper">{week}</ul>
 
               {/* 주간 일정 렌더 */}
-              <ul className="schedule-wrapper">
+              <ul className="event-wrapper">
                 {/* 4. 여러날 이어지는 일정 먼저 렌더 */}
-                {getSortedLongScheduleDummy(weekNum).map((schedule, i) => {
-                  console.debug(`${weekNum}째주의 하루종일 일정 ${i}`, schedule)
+                {getSortedLongEventDummy(weekNum).map((event, i) => {
+                  console.debug(`${weekNum}째주의 하루종일 일정 ${i}`, event)
 
                   return (
-                    schedule && (
+                    event && (
                       <li
-                        key={`${schedule.title}${i}`}
-                        className="long-schedule"
+                        key={`${event.title}${i}`}
+                        className="long-event"
                         style={{
                           // gridArea: gridRowStart / 시작일 / gridRowStart + 1 / 종료일
-                          gridArea: `${schedule.row + 1} / ${schedule.start + 1} / ${schedule.row + 2} / ${schedule.start + 1 + (schedule.being ?? 0)}`,
-                          backgroundColor: theme[`s${schedule.color}`],
+                          gridArea: `${event.row + 1} / ${event.start + 1} / ${event.row + 2} / ${event.start + 1 + (event.being ?? 0)}`,
+                          backgroundColor: theme[`s${event.color}`],
                         }}
                       >
-                        <span>{schedule.title}</span>
+                        <span>{event.title}</span>
                       </li>
                     )
                   )
                 })}
                 {/* 5. 하루중에 일어나는 일정 렌더 */}
-                {getSortedShortScheduleDummy(weekNum).map(
-                  (schedules: (IShortScheduleDummy & { row: number; start: number })[], i: number) => {
-                    console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, schedules)
+                {getSortedShortEventDummy(weekNum).map(
+                  (events: (IShortEventDummy & { row: number; start: number })[], i: number) => {
+                    console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, events)
 
-                    return schedules.map(schedule => (
+                    return events.map(event => (
                       <li
-                        key={`${schedule.key}${i}`}
+                        key={`${event.key}${i}`}
                         style={{
-                          gridColumnStart: schedule.start + 1,
-                          gridRowStart: schedule.row + 1,
+                          gridColumnStart: event.start + 1,
+                          gridRowStart: event.row + 1,
                         }}
                       >
-                        <span>{schedule.title}</span>
+                        <span>{event.title}</span>
                       </li>
                     ))
                   }

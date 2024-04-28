@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components'
 
-import * as S from '@pages/Home/Schedule/style.ts'
+import * as S from '@pages/Home/Event/style.ts'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import Add from '@assets/image/icon/ic-add.svg?react'
@@ -10,12 +10,13 @@ interface Props {
   id: string
 }
 
-export default function Schedule({ id }: Props) {
+export default function Event({ id }: Props) {
   const theme = useTheme()
   const scheduleList = null
+  const eventList = null
   return (
     <AccordionItem
-      moreStyle={S.ScheduleWrapper}
+      moreStyle={S.EventWrapper}
       arrowColor={theme.basicBg}
       id={id}
       header={
@@ -34,7 +35,7 @@ export default function Schedule({ id }: Props) {
       }
     >
       {/*TODO: 스케줄 목록 여부에 따라 출력이 달라져야함. 지금은 우선 목록이 없는 경우로만 출력함 */}
-      <S.ContentWrapper>{scheduleList ? <>컨텐츠</> : <EmptyContent />}</S.ContentWrapper>
+      <S.ContentWrapper>{eventList ? <>컨텐츠</> : <EmptyContent />}</S.ContentWrapper>
     </AccordionItem>
   )
 }

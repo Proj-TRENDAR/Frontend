@@ -1,13 +1,13 @@
 import Accordion from '@layouts/Accordion'
 import Routine from '@pages/Home/Routine'
-import Schedule from '@pages/Home/Schedule'
+import Event from '@pages/Home/Event'
 import ToDo from '@pages/Home/ToDo'
 
 export default function Home() {
   const ID_LIST = {
     routine: 'routine',
     todo: 'to-do',
-    schedule: 'schedule',
+    event: 'event',
   }
 
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         <>
           <Routine id={ID_LIST.routine} />
           <ToDo id={ID_LIST.todo} />
-          <Schedule id={ID_LIST.schedule} />
+          <Event id={ID_LIST.event} />
         </>
       </Accordion>
     </>

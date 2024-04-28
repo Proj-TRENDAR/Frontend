@@ -93,19 +93,19 @@ export const RoutineImage2 = styled(FixedLocationImage)`
   top: 193px;
   left: 575px;
 `
-export const ScheduleImage1 = styled(FixedLocationImage)`
+export const EventImage1 = styled(FixedLocationImage)`
   width: 212px;
   height: 545px;
   top: 66px;
   left: 31px;
 `
-export const ScheduleImage2 = styled(FixedLocationImage)`
+export const EventImage2 = styled(FixedLocationImage)`
   width: 212px;
   height: 471px;
   top: 217px;
   left: 296px;
 `
-export const ScheduleText = styled.div`
+export const EventText = styled.div`
   height: 471px;
   margin: 5.73rem 0 1.65rem 0;
   top: 193px;
