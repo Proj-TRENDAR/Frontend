@@ -1,7 +1,7 @@
 import Accordion from '@layouts/Accordion'
-import Routine from '@components/Home/Routine'
-import Schedule from '@components/Home/Schedule'
-import ToDo from '@components/Home/ToDo'
+import Routine from '@pages/Home/Routine'
+import Schedule from '@pages/Home/Schedule'
+import ToDo from '@pages/Home/ToDo'
 
 export default function Home() {
   const ID_LIST = {

@@ -1,7 +1,7 @@
 import ButtonInAlert from '@components/common/button/ButtonInAlert'
 import IconButton from '@components/common/button/IconButton'
 import { useState } from 'react'
-import X from '@/assets/image/icon/ic-x.svg?react'
+import X from '@assets/image/icon/ic-x.svg?react'
 import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'
 import { useTheme } from 'styled-components'

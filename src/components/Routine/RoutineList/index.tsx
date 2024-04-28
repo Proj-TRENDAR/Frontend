@@ -1,4 +1,4 @@
-import * as S from './styled'
+import * as S from './style.ts'
 import { IRoutineList } from '@/types'
 import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'

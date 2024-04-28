@@ -5,14 +5,14 @@ import { ITodoList } from '@/types'
 import { calendarInfoAtom } from '@/store'
 import { useAtom } from 'jotai/index'
 
-import * as S from '@components/Home/ToDo/style'
-import * as TodoListS from '@components/common/TodoList/styled'
+import * as S from '@pages/Home/ToDo/style.ts'
+import * as TodoListS from '@components/Todo/TodoList/style.ts'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
-import TodoList from '@components/common/TodoList'
+import TodoList from '@components/Todo/TodoList'
 import IconButton from '@components/common/button/IconButton'
 import Add from '@assets/image/icon/ic-add.svg?react'
-import { ToDoInputForm } from '@components/Home/ToDo/ToDoForm'
+import { ToDoInputForm } from '@pages/Home/ToDo/ToDoForm'
 
 interface Props {
   id: string

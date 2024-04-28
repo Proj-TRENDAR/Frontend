@@ -8,10 +8,9 @@ import { useAtom } from 'jotai/index'
 import * as S from './style'
 import X from '@/assets/image/icon/ic-x.svg?react'
 import dateFormat from '@/utils/dateFormat.ts'
-import TodoList from '@components/common/TodoList'
+import TodoList from '@components/Todo/TodoList'
 import IconButton from '@components/common/button/IconButton'
 import CalendarHeaderButton from '@components/common/button/CalendarHeaderButton'
-import CalendarHeaderDatePicker from '@components/common/datePicker/CalendarHeaderDatePicker'
 
 export default function WeeklyTodoList() {
   const navigate = useNavigate()

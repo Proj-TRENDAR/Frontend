@@ -1,6 +1,6 @@
 import { useTheme } from 'styled-components'
 
-import * as S from '@components/Home/Schedule/style'
+import * as S from '@pages/Home/Schedule/style.ts'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import Add from '@assets/image/icon/ic-add.svg?react'

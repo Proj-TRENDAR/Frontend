@@ -2,8 +2,8 @@ import Add from '@assets/image/icon/ic-add.svg?react'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import IconButton from '@components/common/button/IconButton'
-import * as S from '@components/Home/Routine/style'
-import RoutineList from '@components/common/RoutineList'
+import * as S from '@pages/Home/Routine/style.ts'
+import RoutineList from '@components/Routine/RoutineList'
 import { IRoutineList } from '@/types'
 
 interface Props {

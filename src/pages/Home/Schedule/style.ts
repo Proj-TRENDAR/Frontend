@@ -1,6 +1,6 @@
 import { css, styled } from 'styled-components'
 
-import { PageHeader } from '@layouts/PageHeader/style'
+import { PageHeader } from '@layouts/PageHeader/style.ts'
 
 export const ScheduleWrapper = css`
   background-color: ${({ theme }) => theme.point};

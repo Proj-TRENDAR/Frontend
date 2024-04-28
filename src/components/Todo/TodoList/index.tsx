@@ -3,12 +3,12 @@ import { useTheme } from 'styled-components'
 import { getTodoList, updateTodo, deleteTodo } from '@/api/Todo/todoApi.ts'
 import { ITodoList } from '@/types'
 
-import * as S from './styled'
+import * as S from './style.ts'
 import ButtonsModal from '@components/common/modal/ButtonsModal'
 import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'
 import MoreIcon from '@assets/image/icon/ic-more.svg?react'
-import { ToDoDeleteForm, ToDoInputForm } from '@components/Home/ToDo/ToDoForm'
+import { ToDoDeleteForm, ToDoInputForm } from '@pages/Home/ToDo/ToDoForm'
 
 interface Props {
   list: ITodoList[]
