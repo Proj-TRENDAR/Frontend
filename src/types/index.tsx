@@ -1,3 +1,15 @@
+export interface IEvent {
+  idx: string
+  title: string
+  isAllDay: boolean
+  being: number | null
+  startTime: string
+  endTime: string
+  color: number
+  place: string
+  description: string
+}
+
 export interface IRoutineList {
   title: string
   isDone: boolean

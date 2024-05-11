@@ -14,7 +14,7 @@ export default function CalendarLayout({ tabList, defaultTabKey, children }: Pro
   const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
 
   const setDate = (date: Date) => {
-    setCalendarInfo({ selectedDate: date })
+    setCalendarInfo({ ...calendarInfo, selectedDate: date })
   }
 
   return (

@@ -20,7 +20,7 @@ export default function WeeklyTodoList() {
   const handleWeek = (calc: number) => {
     const currentDate = new Date(calendarInfo.selectedDate)
     const oneWeekAgo = new Date(currentDate.setDate(currentDate.getDate() + calc * 7))
-    setCalendarInfo({ selectedDate: oneWeekAgo })
+    setCalendarInfo({ ...calendarInfo, selectedDate: oneWeekAgo })
   }
 
   const getTodo = async () => {

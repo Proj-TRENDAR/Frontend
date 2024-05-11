@@ -1,8 +1,15 @@
 import { useAtom } from 'jotai' // FIXME: 내부에서는 다르게 사용하는 방법이 있을꺼임.. 수정하기
 import { atomWithStorage } from 'jotai/utils'
+import { IEvent } from '@/types'
 
-export const calendarInfoAtom = atomWithStorage<{ selectedDate: Date }>('calendarInfo', {
+interface ICalendarInfo {
+  selectedDate: Date
+  selectedMonthInfo: IEvent[][]
+}
+
+export const calendarInfoAtom = atomWithStorage<ICalendarInfo>('calendarInfo', {
   selectedDate: new Date(),
+  selectedMonthInfo: [],
 })
 
 export function getWeekDates(selectedDate: Date): Date[] {
