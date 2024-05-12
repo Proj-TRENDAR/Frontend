@@ -44,7 +44,9 @@ export default function Event({ id }: Props) {
     // 2-1. beforeDatesOfSelectedDate 중 하루종일, 하루이상이면서 선택된 날짜까지 이어지는 일정
     // 2-2. 선택된 날짜의 일정
     setEventList([
-      ...beforeDatesOfSelectedDate.filter(event => event?.being !== null && new Date(event?.endTime) >= selectedDate),
+      ...beforeDatesOfSelectedDate.filter(
+        event => event?.being !== null && new Date(event?.endTime).getTime() >= selectedDate.getTime()
+      ),
       ...weekOfselectedDate,
     ])
   }, [calendarInfo])
