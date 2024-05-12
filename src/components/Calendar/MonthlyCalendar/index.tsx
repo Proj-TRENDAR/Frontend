@@ -26,7 +26,7 @@ export default function MonthlyCalendar() {
     // 다른 달로 날짜 변경 시, 그 달의 이벤트들을 가져와서 jotai에 업데이트해줌
     const selectedDate = new Date(calendarInfo.selectedDate)
     if (selectedDate.getMonth() !== prevSelectedDate?.getMonth()) {
-      setPrevSelectedDate(calendarInfo.selectedDate) // 날짜 변경시 비교를 위해 이전 날짜를 저장함(월만 비교하기 떄문에 월이 바뀔때만 저장함)
+      setPrevSelectedDate(selectedDate) // 날짜 변경시 비교를 위해 이전 날짜를 저장함(월만 비교하기 떄문에 월이 바뀔때만 저장함)
 
       getEventList(selectedDate.getFullYear(), selectedDate.getMonth() + 1).then(res => {
         // FIXME: 테스트 끝나면 더미 없는 코드로 바꾸기
@@ -59,7 +59,7 @@ export default function MonthlyCalendar() {
               description: '메모1',
             },
             {
-              idx: 'event1',
+              idx: 'event3',
               title: '하루(월)',
               startTime: '2024-03-29 11:20:00',
               endTime: '2024-03-29 11:50:00',
@@ -72,7 +72,7 @@ export default function MonthlyCalendar() {
           ],
           [
             {
-              idx: 'event1',
+              idx: 'event4',
               title: '하루1(화)',
               startTime: '2024-03-30 11:20:00',
               endTime: '2024-03-30 11:50:00',
@@ -83,7 +83,7 @@ export default function MonthlyCalendar() {
               description: '메모1',
             },
             {
-              idx: 'event1',
+              idx: 'event5',
               title: '하루2(화)',
               startTime: '2024-03-30 15:00:00',
               endTime: '2024-03-30 17:00:00',
@@ -96,7 +96,7 @@ export default function MonthlyCalendar() {
           ],
           [
             {
-              idx: 'event3',
+              idx: 'event6',
               title: '하루종일(수)',
               startTime: '2024-04-01 00:00:00',
               endTime: '2024-04-01 00:00:00',
@@ -107,7 +107,7 @@ export default function MonthlyCalendar() {
               description: '메모1',
             },
             {
-              idx: 'event1',
+              idx: 'event7',
               title: '하루1(수)',
               startTime: '2024-04-01 11:20:00',
               endTime: '2024-04-01 11:50:00',
@@ -120,7 +120,7 @@ export default function MonthlyCalendar() {
           ],
           [
             {
-              idx: 'event4',
+              idx: 'event8',
               title: '하루종일(목~금)',
               startTime: '2024-04-02 00:00:00',
               endTime: '2024-04-03 00:00:00',
@@ -131,7 +131,7 @@ export default function MonthlyCalendar() {
               description: '메모1',
             },
             {
-              idx: 'event1',
+              idx: 'event9',
               title: '하루1(목)',
               startTime: '2024-04-02 11:20:00',
               endTime: '2024-04-02 11:50:00',
@@ -144,7 +144,7 @@ export default function MonthlyCalendar() {
           ],
           [
             {
-              idx: 'event5',
+              idx: 'event10',
               title: '하루이상(금~토)',
               startTime: '2024-04-03 19:20:00',
               endTime: '2024-04-04 04:00:00',
@@ -155,7 +155,7 @@ export default function MonthlyCalendar() {
               description: '메모1',
             },
             {
-              idx: 'event1',
+              idx: 'event11',
               title: '하루1(금)',
               startTime: '2024-04-03 11:20:00',
               endTime: '2024-04-03 11:50:00',
@@ -168,7 +168,7 @@ export default function MonthlyCalendar() {
           ],
           [
             {
-              idx: 'event6',
+              idx: 'event12',
               title: '하루종일(토~일)',
               startTime: '2024-04-04 00:00:00',
               endTime: '2024-04-05 00:00:00',
@@ -182,7 +182,7 @@ export default function MonthlyCalendar() {
           [
             // 2주차
             {
-              idx: 'event6',
+              idx: 'event13',
               title: '하루종일(토~일)',
               startTime: '2024-04-04 00:00:00',
               endTime: '2024-04-05 00:00:00',
@@ -193,7 +193,7 @@ export default function MonthlyCalendar() {
               description: '메모1',
             },
             {
-              idx: 'event1',
+              idx: 'event14',
               title: '하루1(일)',
               startTime: '2024-04-05 11:20:00',
               endTime: '2024-04-05 11:50:00',
@@ -206,7 +206,7 @@ export default function MonthlyCalendar() {
           ],
           [
             {
-              idx: 'event6',
+              idx: 'event15',
               title: '하루종일(월)',
               startTime: '2024-04-06 00:00:00',
               endTime: '2024-04-06 00:00:00',
@@ -219,7 +219,7 @@ export default function MonthlyCalendar() {
           ],
           [
             {
-              idx: 'event1',
+              idx: 'event16',
               title: '하루1(화)',
               startTime: '2024-04-07 11:20:00',
               endTime: '2024-04-07 11:50:00',
@@ -230,7 +230,7 @@ export default function MonthlyCalendar() {
               description: '메모1',
             },
             {
-              idx: 'event1',
+              idx: 'event17',
               title: '하루1(화)',
               startTime: '2024-04-07 14:20:00',
               endTime: '2024-04-07 14:50:00',
@@ -244,7 +244,7 @@ export default function MonthlyCalendar() {
           [],
           [
             {
-              idx: 'event8',
+              idx: 'event18',
               title: '일정더미1(목~일)',
               startTime: '2024-04-09 00:00:00',
               endTime: '2024-04-11 00:00:00',
@@ -394,7 +394,7 @@ export default function MonthlyCalendar() {
           )
           // 3. ul로 렌더
           .map((week, weekNum) => (
-            <div key={weekNum}>
+            <div key={`${calendarInfo.selectedDate}_${weekNum}`}>
               {/* 주간 날짜 렌더 */}
               <ul className="date-wrapper">{week}</ul>
 
@@ -433,7 +433,7 @@ export default function MonthlyCalendar() {
 
                   return events.map(event => (
                     <li
-                      key={`${event.idx}${i}`}
+                      key={`${calendarInfo.selectedDate}.${event.idx}${i}`}
                       style={{
                         gridColumnStart: event.start + 1,
                         gridRowStart: event.row + 1,
