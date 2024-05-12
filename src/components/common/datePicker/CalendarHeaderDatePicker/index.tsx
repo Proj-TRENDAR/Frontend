@@ -93,6 +93,7 @@ export default function CalendarHeaderDatePicker({ date, setDate, $fullwidth = f
         <div>
           {Array.from({ length: 12 }, (_, i) => `${i + 1}월`).map((month, i) => (
             <S.MonthButton
+              key={i}
               className={`${new Date(date).getMonth() === i ? 'current' : ''}`}
               onClick={() => {
                 handleMonth(i)
