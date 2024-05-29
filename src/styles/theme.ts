@@ -36,6 +36,7 @@ export const basicTheme: DefaultTheme = {
   text: '#333333',
   text98: '#989898',
   textInfo: '#7C7C7C',
+  placeholder: '#CDCDCD',
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',

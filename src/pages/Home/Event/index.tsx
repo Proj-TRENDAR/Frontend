@@ -4,7 +4,6 @@ import * as S from '@pages/Home/Event/style.ts'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import Add from '@assets/image/icon/ic-add.svg?react'
-import IconButton from '@components/common/button/IconButton'
 import { useAtom } from 'jotai/index'
 import { calendarInfoAtom } from '@/store'
 import dateFormat from '@/utils/dateFormat.ts'
@@ -12,6 +11,7 @@ import EventList from '@components/Event/EventList'
 import { useEffect, useState } from 'react'
 import Calendar from '@/utils/calendar.ts'
 import { IEvent } from '@/types'
+import IconLink from '@components/common/link/IconLink'
 
 interface Props {
   id: string
@@ -64,13 +64,9 @@ export default function Event({ id }: Props) {
             </h1>
           }
           button={
-            <IconButton
-              onClick={() => {
-                // TODO: 일정 추가 기능 구현
-              }}
-            >
+            <IconLink url="event-create">
               <Add fill={theme.basicBg} />
-            </IconButton>
+            </IconLink>
           }
         />
       }

@@ -10,6 +10,7 @@ import KakaoLogin from '@pages/Login/Kakao'
 import Guide from '@pages/Guide'
 import ComponentsGuide from '@pages/ComponentsGuide'
 import WeeklyTodoList from '@pages/WeeklyTodoList'
+import EventCreate from '@pages/EventCreate'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
         <Route path="" element={<Home />} />
         <Route path="routine-list" element={<RoutineList />} />
         <Route path="to-do-list" element={<WeeklyTodoList />} />
+        <Route path="event-create" element={<EventCreate />} />
       </Route>
       <Route element={<LoginLayout />}>
         <Route path="login" element={<Login />} />
