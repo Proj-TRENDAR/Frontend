@@ -60,7 +60,7 @@ interface ItemProps {
 
 interface ItemButtonProps extends ItemProps {
   onClick: () => void
-  url?: () => void
+  url?: string
 }
 
 interface ItemLinkProps extends ItemProps {
