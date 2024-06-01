@@ -11,6 +11,7 @@ export const basicTheme: DefaultTheme = {
   point3: '#F8FFFF',
   pointBg: '#F3F9FA',
   pointText: '#599086',
+
   r1: '#F9A1A4',
   r2: '#CE9AD0',
   r3: '#91D8D8',
@@ -25,21 +26,27 @@ export const basicTheme: DefaultTheme = {
   s5: '#E8F6D6',
   s6: '#FFEFD1',
   s7: '#E2ECF6',
+
   dayColorOfSat: '#4573E9', // 토요일 색
   dayColorOfSun: '#E43636', // 일요일 색
   dayColorOfWeekday: '#484848', // 주간 색
+
   basicBg: '#FFFFFF',
   cancelBgColor: '#FFC7C3',
   grayLine: '#EDEDED',
   grayBt: '#A9A9A9',
   grayBtLight: '#F0F0F0',
+
   text: '#333333',
   text98: '#989898',
   textInfo: '#7C7C7C',
-  placeholder: '#CDCDCD',
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
+
+  labelGray: '#D0D0D0',
+  placeholder: '#CDCDCD',
+  toggleUnChecked: '#F4F4F4',
   checkedColor: '#1DB993',
   checkedTextColor: '#DDDDDD',
 }

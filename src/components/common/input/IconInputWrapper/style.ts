@@ -10,15 +10,15 @@ const inputStyle = css`
   border: none;
   font-family: 'NanumBarunGothic';
   font-weight: 200;
-  &:focus,
-  &:active {
+  &[type='text']:focus,
+  &[type='text']:active {
     outline: solid 1px ${({ theme }) => theme.pointHover}30;
   }
   &::placeholder {
     color: ${({ theme }) => theme.placeholder};
   }
 `
-export const IconInputWrapper = styled.div`
+export const IconInputWrapper = styled.div<{ $backgroundColor: string }>`
   display: flex;
   width: 100%;
   .icon-wrapper {
@@ -35,6 +35,12 @@ export const IconInputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    ${props =>
+      props.$backgroundColor !== 'unset' &&
+      css`
+        background-color: ${props.$backgroundColor};
+        padding: 8px;
+      `};
     input {
       ${inputStyle};
     }
