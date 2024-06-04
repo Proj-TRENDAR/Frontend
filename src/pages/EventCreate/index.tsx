@@ -10,10 +10,55 @@ import IconTextArea from '@components/common/input/IconTextArea'
 import IconInputWrapper from '@components/common/input/IconInputWrapper'
 import ToggleButton from '@components/common/input/ToggleButton'
 import ColorRadioButton from '@components/common/input/ColorRadioButton'
+import DatePickerInput from '@components/common/input/DatePickerInput'
+import * as S from './style.ts'
+import Select from '@components/common/input/Select'
+
+interface IEvent {
+  title: string
+  place: string
+  memo: string
+  isAllDay: boolean
+  color: string
+  startDate: Date | null
+  endDate: Date | null
+  recurringType: string | null
+}
 
 export default function EventCreate() {
-  const initial = { title: '', place: '', memo: '', isAllDay: false, color: '' }
-  const [event, setEvent] = useState(initial)
+  const initial: IEvent = {
+    title: '',
+    place: '',
+    memo: '',
+    isAllDay: false,
+    color: '',
+    startDate: null,
+    endDate: null,
+    recurringType: null,
+  }
+  const recurringTypeItems = [
+    {
+      label: '반복 없음',
+      value: null,
+    },
+    {
+      label: '일간반복',
+      value: 'D',
+    },
+    {
+      label: '주간반복',
+      value: 'W',
+    },
+    {
+      label: '월간반복',
+      value: 'M',
+    },
+    {
+      label: '년간반복',
+      value: 'Y',
+    },
+  ]
+  const [event, setEvent] = useState<IEvent>(initial)
   const theme = useTheme()
   return (
     <PageLayout title="일정 추가" backgroundColor={theme.pointBg}>
@@ -35,21 +80,34 @@ export default function EventCreate() {
             setEvent({ ...event, isAllDay: isAllDay })
           }}
         />
-        <div>
-          {/* TODO: 선택된 날짜에 현재 시간 가져와야함 */}
-          <div>
-            <input id="start-date" value={'2024년 5월 25일(토)'} />
-            <input id="start-time" value={'11 : 00 PM'} />
-            <span>~ </span>
-            <input id="end-date" value={'2024년 5월 25일(토)'} />
-            <input id="end-time" value={'11 : 00 PM'} />
-          </div>
-        </div>
+        {/* TODO: 선택된 날짜에 현재 시간 가져와야함 */}
+        <DatePickerInput
+          value={event.startDate}
+          setValue={(date: Date | null) => {
+            setEvent({ ...event, startDate: date })
+          }}
+        />
+        <S.EndDateWrapper>
+          <span>~ </span>
+          <DatePickerInput
+            value={event.endDate}
+            setValue={(date: Date | null) => {
+              setEvent({ ...event, endDate: date })
+            }}
+          />
+        </S.EndDateWrapper>
         <ColorRadioButton
           color="event"
           value={event.color}
           setValue={(color: string) => {
             setEvent({ ...event, color: color })
+          }}
+        />
+        <Select
+          items={recurringTypeItems}
+          value={event.recurringType}
+          setValue={(recurringType: string | null) => {
+            setEvent({ ...event, recurringType: recurringType })
           }}
         />
       </IconInputWrapper>

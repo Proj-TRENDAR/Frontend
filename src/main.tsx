@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import axios from 'axios'
 import { ThemeProvider } from 'styled-components'
 import { RouterProvider } from 'react-router-dom'
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { basicTheme } from '@/styles/theme.ts'
 import { GlobalStyle } from '@/styles/GlobalStyle.ts'
