@@ -13,6 +13,7 @@ import ColorRadioButton from '@components/common/input/ColorRadioButton'
 import DatePickerInput from '@components/common/input/DatePickerInput'
 import * as S from './style.ts'
 import Select from '@components/common/input/Select'
+import SeparationCountInput from '@components/common/input/SeparationCountInput'
 
 interface IEvent {
   title: string
@@ -23,6 +24,7 @@ interface IEvent {
   startDate: Date | null
   endDate: Date | null
   recurringType: string | null
+  separationCount: number | null
 }
 
 export default function EventCreate() {
@@ -35,6 +37,7 @@ export default function EventCreate() {
     startDate: null,
     endDate: null,
     recurringType: null,
+    separationCount: null,
   }
   const recurringTypeItems = [
     {
@@ -106,10 +109,20 @@ export default function EventCreate() {
         <Select
           items={recurringTypeItems}
           value={event.recurringType}
-          setValue={(recurringType: string | null) => {
+          setValue={recurringType => {
             setEvent({ ...event, recurringType: recurringType })
           }}
         />
+        {event.recurringType !== null && (
+          <SeparationCountInput
+            recurringType={event.recurringType}
+            value={event.separationCount}
+            setValue={(separationCount: number | null) => {
+              setEvent({ ...event, separationCount: separationCount })
+            }}
+          />
+          // TODO: 반복 컴포넌트 추가
+        )}
       </IconInputWrapper>
       <IconTextInput
         id="title"
