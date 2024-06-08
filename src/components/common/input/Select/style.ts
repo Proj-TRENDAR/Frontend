@@ -2,12 +2,11 @@ import { styled } from 'styled-components'
 
 const borderRadius = '6px'
 
-export const SelectWrapper = styled.div`
+export const SelectWrapper = styled.div<{ isOpenModal: boolean }>`
   width: 100%;
 
   position: relative;
-  z-index: 0;
-
+  z-index: ${props => (props.isOpenModal ? 1 : 0)};
   & > button {
     padding: 8px 8px 8px 12px;
     width: 100%;
