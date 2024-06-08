@@ -129,6 +129,12 @@ export const DatePickerWrapper = styled.div<{ showTimeSelect: boolean }>`
     color: ${({ theme }) => theme.basicBg};
 
     background-color: ${({ theme }) => theme.point};
+    &:first-child {
+      color: ${({ theme }) => theme.basicBg};
+    }
+    &:last-child {
+      color: ${({ theme }) => theme.basicBg};
+    }
   }
 
   // 해당 월 이외의 날짜
