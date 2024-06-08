@@ -30,6 +30,7 @@ export default function Select({ items, value, setValue, placeholder, ...props }
 
   return (
     <S.SelectWrapper
+      isOpenModal={isOpenModal}
       onClick={(e: { currentTarget: HTMLElement }) => {
         isExternalClickDetected(e.currentTarget)
       }}
