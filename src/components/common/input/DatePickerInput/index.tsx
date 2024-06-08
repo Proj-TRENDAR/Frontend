@@ -30,7 +30,7 @@ export default function DatePickerInput({
           setValue(date)
         }}
         showTimeSelect={showTimeSelect}
-        dateFormat="yyyy년 M월 d일(E) aa h:mm"
+        dateFormat={showTimeSelect ? 'yyyy년 M월 d일(E) aa h:mm' : 'yyyy년 M월 d일(E)'}
         minDate={minDate}
         maxDate={maxDate}
       />
