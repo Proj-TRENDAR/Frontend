@@ -8,11 +8,18 @@ interface Props {
   setValue: (value: Date | null) => void
   minDate?: Date
   maxDate?: Date
+  showTimeSelect?: boolean
 }
 
-export default function DatePickerInput({ value, setValue, minDate = undefined, maxDate = undefined }: Props) {
+export default function DatePickerInput({
+  value,
+  setValue,
+  minDate = undefined,
+  maxDate = undefined,
+  showTimeSelect = true,
+}: Props) {
   return (
-    <S.DatePickerWrapper className="datepicker-wrapper">
+    <S.DatePickerWrapper className="datepicker-wrapper" showTimeSelect={showTimeSelect}>
       <DatePicker
         locale="ko"
         selected={value}
@@ -22,7 +29,7 @@ export default function DatePickerInput({ value, setValue, minDate = undefined, 
         onChange={date => {
           setValue(date)
         }}
-        showTimeSelect
+        showTimeSelect={showTimeSelect}
         dateFormat="yyyy년 M월 d일(E) aa h:mm"
         minDate={minDate}
         maxDate={maxDate}

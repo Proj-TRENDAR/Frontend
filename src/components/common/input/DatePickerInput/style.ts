@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 const timePickerWidth = '70px'
 
-export const DatePickerWrapper = styled.div`
+export const DatePickerWrapper = styled.div<{ showTimeSelect: boolean }>`
   .react-datepicker-wrapper {
     width: 100%;
     input {
@@ -63,7 +63,7 @@ export const DatePickerWrapper = styled.div`
   }
   .react-datepicker__navigation--next {
     top: 8px;
-    right: ${timePickerWidth};
+    right: ${props => (props.showTimeSelect ? timePickerWidth : '8px')};
   }
 
   // 요일 컬럼
