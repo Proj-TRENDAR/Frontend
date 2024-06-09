@@ -13,10 +13,18 @@ import ColorRadioButton from '@components/common/input/ColorRadioButton'
 import DatePickerInput from '@components/common/input/DatePickerInput'
 import * as S from './style.ts'
 import Select from '@components/common/input/Select'
-import SeparationCountInput from '@components/common/input/SeparationCountInput'
-import RecurringEndTime from '@components/common/input/RecurringEndTime'
+import RecurringDetailInput from '@components/Event/RecurringDetailInput'
+//0 = 일요일, 1 = 월요일, 2 = 화요일, 3 = 수요일, 4 = 목요일, 5 = 금요일, 6 = 토요일
 
-interface IEvent {
+export interface IRecurring {
+  separationCount: number | null // 간격 주기 설정 ex) 이틀마다, 격주마다..
+  maxNumOfOccurrances: number | null // 최대반복횟수 ex) n회
+  dayOfWeek: number[] | null // 주간 특정 요일 설정
+  dayOfMonth: number[] | null // 월간 특정 일 설정
+  weekOfMonth: number | null // 월간 특정 주 설정
+  recurringEndTime: Date | null // 반복종료시간 ex) 0000년 00월 00일까지
+}
+export interface IEvent extends IRecurring {
   title: string
   place: string
   memo: string
@@ -27,12 +35,18 @@ interface IEvent {
 
   isRecurring: boolean
   recurringType: string | null
-  separationCount: number | null // 간격 주기 설정 ex) 이틀마다, 격주마다..
-  maxNumOfOccurrances: number | null // 최대반복횟수 ex) n회
-  recurringEndTime: Date | null // 반복종료시간 ex) 0000년 00월 00일까지
 }
 
 export default function EventCreate() {
+  const recurringInitial = {
+    separationCount: null,
+    maxNumOfOccurrances: null,
+    dayOfWeek: null,
+    dayOfMonth: null,
+    weekOfMonth: null,
+    recurringEndTime: null,
+  }
+
   const initial: IEvent = {
     title: '',
     place: '',
@@ -44,10 +58,9 @@ export default function EventCreate() {
 
     isRecurring: false,
     recurringType: null,
-    separationCount: 1,
-    maxNumOfOccurrances: null,
-    recurringEndTime: null,
+    ...recurringInitial,
   }
+
   const recurringTypeItems = [
     {
       label: '반복 없음',
@@ -66,12 +79,14 @@ export default function EventCreate() {
       value: 'M',
     },
     {
-      label: '년간반복',
+      label: '연간반복',
       value: 'Y',
     },
   ]
+
   const [event, setEvent] = useState<IEvent>(initial)
   const theme = useTheme()
+
   return (
     <PageLayout title="일정 추가" backgroundColor={theme.pointBg}>
       <IconTextInput
@@ -125,28 +140,9 @@ export default function EventCreate() {
             setEvent({ ...event, isRecurring: isRecurring, recurringType: recurringType })
           }}
         />
+        {/* 반복 타입 지정시 반복상세 인풋 노출*/}
         {event.isRecurring && event.recurringType !== null && (
-          <>
-            <SeparationCountInput
-              recurringType={event.recurringType}
-              value={event.separationCount}
-              setValue={(separationCount: number | null) => {
-                setEvent({ ...event, separationCount: separationCount })
-              }}
-            />
-            {/* TODO: recurringType에 따라 필요한 반복 옵션 컴포넌트 추가 */}
-            {event.recurringType === 'W' && !event.isAllDay && <>월화수목금토일 지정반복</>}
-            {event.recurringType === 'M' && <>n일 반복, n째주 d요일 반복</>}
-            <RecurringEndTime
-              startDate={event.startDate}
-              endDate={event.endDate}
-              maxNumOfOccurrances={event.maxNumOfOccurrances}
-              recurringEndTime={event.recurringEndTime}
-              setRecurringEndTime={(date: Date | null, maxNum: number | null) => {
-                setEvent({ ...event, recurringEndTime: date, maxNumOfOccurrances: maxNum })
-              }}
-            />
-          </>
+          <RecurringDetailInput event={event} setEvent={setEvent} recurringInitial={recurringInitial} />
         )}
       </IconInputWrapper>
       <IconTextInput

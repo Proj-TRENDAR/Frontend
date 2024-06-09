@@ -10,6 +10,7 @@ import Subtract from '@assets/image/icon/ic-subtract.svg?react'
 interface Props {
   startDate: Date | null
   endDate: Date | null
+  recurringType: string | null
   maxNumOfOccurrances: number | null
   recurringEndTime: Date | null
   setRecurringEndTime: (date: Date | null, maxNum: number | null) => void
@@ -17,6 +18,7 @@ interface Props {
 export default function RecurringEndTime({
   startDate,
   endDate,
+  recurringType,
   maxNumOfOccurrances,
   recurringEndTime,
   setRecurringEndTime,
@@ -28,7 +30,6 @@ export default function RecurringEndTime({
 
   const handleKeepRepeat = () => {
     setActiveOption('keep-repeat')
-    setRecurringEndTime(new Date('2099-12-31'), null)
   }
   const handleMaxNum = () => {
     setActiveOption('max-num')
@@ -36,19 +37,29 @@ export default function RecurringEndTime({
   }
 
   useEffect(() => {
-    if (recurringEndTime === new Date('2099-12-31') || (recurringEndTime === null && maxNumOfOccurrances === null)) {
+    // FIXME: 생성시와 수정시에 초기화가 달라야함. 그 경우 처리가 제대로 되지 않아 이슈 있음.
+    console.debug('바뀜')
+    if (
+      (recurringEndTime && new Date(recurringEndTime).getTime() === new Date('2099-12-31 23:59:59').getTime()) ||
+      (recurringEndTime === null && maxNumOfOccurrances === null)
+    ) {
       // 초기화
-      handleKeepRepeat()
+      console.debug('계속 반복', recurringEndTime, maxNumOfOccurrances)
+      setActiveOption('keep-repeat')
       setSelectEndDate(endDate ?? startDate)
       setSelectMaxNum(2)
     } else if (recurringEndTime !== null) {
+      console.debug('기간 정함', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('end-time')
       setSelectEndDate(recurringEndTime)
+      setSelectMaxNum(2)
     } else if (maxNumOfOccurrances !== null) {
+      console.debug('횟수 정함', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('max-num')
+      setSelectEndDate(endDate ?? startDate)
       setSelectMaxNum(maxNumOfOccurrances)
     }
-  }, [])
+  }, [recurringType])
 
   useEffect(() => {
     if (activeOption !== 'end-time') {

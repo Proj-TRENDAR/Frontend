@@ -1,14 +1,13 @@
 import * as S from './styles.ts'
-import { useEffect } from 'react'
 
 interface Props {
-  recurringType: string
+  recurringType: string | null
   value: number | null
   setValue: (value: number | null) => void
 }
 
 export default function SeparationCountInput({ recurringType, value, setValue }: Props) {
-  const getSeparationText = (recurringType: string) => {
+  const getSeparationText = (recurringType: string | null) => {
     switch (recurringType) {
       case 'D':
         return '일 마다'
@@ -22,11 +21,6 @@ export default function SeparationCountInput({ recurringType, value, setValue }:
         return ''
     }
   }
-
-  useEffect(() => {
-    // 1로 초기화
-    setValue(1)
-  }, [])
 
   return (
     <S.Wrapper>

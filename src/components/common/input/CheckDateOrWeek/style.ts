@@ -3,42 +3,26 @@ import { styled } from 'styled-components'
 export const Wrapper = styled.div`
   width: 100%;
 
-  background-color: ${({ theme }) => theme.point2}4d;
+  background-color: ${({ theme }) => theme.grayBtLight}80;
 
   border-radius: 6px;
-  .top-wrapper {
+  .days-wrapper {
     display: flex;
-    gap: 8px;
-  }
-  .keep-repeat {
-  }
-  .max-num {
-    display: flex;
-    align-items: center;
-    span {
-      width: 100%;
-
-      display: inline-block;
-    }
-    button {
-      flex-shrink: 0;
-    }
-  }
-  .end-time {
-    border: none;
+    gap: 4px;
   }
   .option {
     padding: 0;
     margin: 0;
     width: 100%;
+    height: 32px;
 
     background-color: ${({ theme }) => theme.basicBg};
 
-    border: solid 1px ${({ theme }) => theme.grayLine};
+    border: solid 1px ${({ theme }) => theme.point}90;
     border-radius: 4px;
 
     outline: none;
-    opacity: 0.4;
+    opacity: 0.35;
     &.current {
       border: solid 1px ${({ theme }) => theme.point};
 
