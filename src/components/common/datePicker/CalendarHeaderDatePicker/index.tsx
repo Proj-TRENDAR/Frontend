@@ -40,70 +40,72 @@ export default function CalendarHeaderDatePicker({ date, setDate, $fullwidth = f
   }, [date, isActive])
 
   return (
-    <S.DatePicker
-      isActive={isActive}
-      onClick={(e: { currentTarget: HTMLElement }) => {
-        isExternalClickDetected(e.currentTarget)
-      }}
-    >
-      <S.headerButtonWrapper isActive={isActive}>
-        <IconButton
-          className={'more prev-button'}
-          onClick={() => {
-            handleCalcYear(-10)
-          }}
-        >
-          <DoubleArrow />
-        </IconButton>
-        <IconButton
-          className={'prev-button'}
-          onClick={() => {
-            isActive ? handleCalcYear(-1) : handleCalcMonth(-1)
-          }}
-        >
-          <Arrow />
-        </IconButton>
-        <S.CenterButton
-          isActive={isActive}
-          $fullwidth={$fullwidth}
-          size={size}
-          width={width}
-          onClick={handleCenterButton}
-        >
-          {text}
-        </S.CenterButton>
-        <IconButton
-          className={'next-button'}
-          onClick={() => {
-            isActive ? handleCalcYear(1) : handleCalcMonth(1)
-          }}
-        >
-          <Arrow />
-        </IconButton>
-        <IconButton
-          className={'more next-button'}
-          onClick={() => {
-            handleCalcYear(10)
-          }}
-        >
-          <DoubleArrow />
-        </IconButton>
-      </S.headerButtonWrapper>
-      <S.BodyButtonWrapper isActive={isActive}>
-        <div>
-          {Array.from({ length: 12 }, (_, i) => `${i + 1}월`).map((month, i) => (
-            <S.MonthButton
-              key={i}
-              className={`${new Date(date).getMonth() === i ? 'current' : ''}`}
-              onClick={() => {
-                handleMonth(i)
-              }}
-            >
-              {month}
-            </S.MonthButton>
-          ))}
-        </div>
-      </S.BodyButtonWrapper>
-    </S.DatePicker>
+    <>
+      <S.DatePicker
+        $isActive={isActive}
+        onClick={(e: { currentTarget: HTMLElement }) => {
+          isExternalClickDetected(e.currentTarget)
+        }}
+      >
+        <S.headerButtonWrapper $isActive={isActive}>
+          <IconButton
+            className={'more prev-button'}
+            onClick={() => {
+              handleCalcYear(-10)
+            }}
+          >
+            <DoubleArrow />
+          </IconButton>
+          <IconButton
+            className={'prev-button'}
+            onClick={() => {
+              isActive ? handleCalcYear(-1) : handleCalcMonth(-1)
+            }}
+          >
+            <Arrow />
+          </IconButton>
+          <S.CenterButton
+            $isActive={isActive}
+            $fullwidth={$fullwidth}
+            size={size}
+            width={width}
+            onClick={handleCenterButton}
+          >
+            {text}
+          </S.CenterButton>
+          <IconButton
+            className={'next-button'}
+            onClick={() => {
+              isActive ? handleCalcYear(1) : handleCalcMonth(1)
+            }}
+          >
+            <Arrow />
+          </IconButton>
+          <IconButton
+            className={'more next-button'}
+            onClick={() => {
+              handleCalcYear(10)
+            }}
+          >
+            <DoubleArrow />
+          </IconButton>
+        </S.headerButtonWrapper>
+        <S.BodyButtonWrapper $isActive={isActive}>
+          <div>
+            {Array.from({ length: 12 }, (_, i) => `${i + 1}월`).map((month, i) => (
+              <S.MonthButton
+                key={i}
+                className={`${new Date(date).getMonth() === i ? 'current' : ''}`}
+                onClick={() => {
+                  handleMonth(i)
+                }}
+              >
+                {month}
+              </S.MonthButton>
+            ))}
+          </div>
+        </S.BodyButtonWrapper>
+      </S.DatePicker>
+    </>
   )
 }

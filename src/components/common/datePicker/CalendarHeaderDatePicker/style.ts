@@ -1,7 +1,7 @@
-import { css, styled } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Props } from '@components/common/datePicker/CalendarHeaderDatePicker/index'
 
-export const DatePicker = styled.div<{ isActive: boolean }>`
+export const DatePicker = styled.div<{ $isActive: boolean }>`
   overflow: hidden;
   border-radius: 8px;
   position: absolute;
@@ -11,9 +11,10 @@ export const DatePicker = styled.div<{ isActive: boolean }>`
   transition:
     opacity 0.2s ease-in-out,
     filter 0.2s ease-in-out;
+
   @media (hover: hover) {
     ${props =>
-      props.isActive &&
+      props.$isActive &&
       css`
         opacity: 0.4;
         & > * {
@@ -30,14 +31,14 @@ export const DatePicker = styled.div<{ isActive: boolean }>`
   }
 
   ${props =>
-    props.isActive &&
+    props.$isActive &&
     css`
       box-shadow: 0 0 4px 1px rgba(0, 0, 0, 16%);
       background-color: ${({ theme }) => theme.pointBg};
     `}
 `
 
-export const headerButtonWrapper = styled.div<{ isActive: boolean }>`
+export const headerButtonWrapper = styled.div<{ $isActive: boolean }>`
   margin: 8px 12px;
   gap: 8px;
 
@@ -80,7 +81,7 @@ export const headerButtonWrapper = styled.div<{ isActive: boolean }>`
   }
 
   ${props =>
-    !props.isActive &&
+    !props.$isActive &&
     css`
       .more {
         display: none;
@@ -114,7 +115,7 @@ const sizes = {
   `,
 }
 
-export const CenterButton = styled.button<Pick<Props, 'size' | '$fullwidth' | 'width'> & { isActive: boolean }>`
+export const CenterButton = styled.button<Pick<Props, 'size' | '$fullwidth' | 'width'> & { $isActive: boolean }>`
   /* 공통 스타일 */
   display: flex;
   justify-content: center;
@@ -162,11 +163,11 @@ export const CenterButton = styled.button<Pick<Props, 'size' | '$fullwidth' | 'w
     `
   }}
 `
-export const BodyButtonWrapper = styled.div<{ isActive: boolean }>`
+export const BodyButtonWrapper = styled.div<{ $isActive: boolean }>`
   background-color: ${({ theme }) => theme.basicBg};
   padding: 16px;
   ${props =>
-    !props.isActive &&
+    !props.$isActive &&
     css`
       display: none;
     `};
