@@ -9,13 +9,15 @@ import { IEvent } from '@/types'
 import { getEventList } from '@/api/Event/eventApi.ts'
 
 export default function MonthlyCalendar() {
+  const [isLoading, setIsLoading] = useState(true)
   const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
-  const [monthlyEvents, setMonthlyEvents] = useState<{ long: IEvent[][]; short: IEvent[][] }>({
+  const [monthlyEvents, setMonthlyEvents] = useState<{ long: IEvent[][]; short: IEvent[][][] }>({
     long: [],
     short: [],
   })
   const [prevSelectedDate, setPrevSelectedDate] = useState<Date>()
   const calendar = new Calendar()
+  // FIXME: type error
   const { prevMonthDates, thisMonthDates, nextMonthDates } = calendar.getMonthDates(new Date(calendarInfo.selectedDate))
   const monthlyDates = [...prevMonthDates, ...thisMonthDates, ...nextMonthDates]
   const theme = useTheme()
@@ -23,246 +25,37 @@ export default function MonthlyCalendar() {
   const handleDate = new HandleDate()
 
   useEffect(() => {
+    if (calendarInfo.selectedDate !== null) {
+      setIsLoading(false) // selectedDate가 null이 아니면 로딩 상태 해제
+    }
+  }, [calendarInfo.selectedDate])
+
+  useEffect(() => {
+    if (isLoading) {
+      const calendarInfoInLocalStorage = JSON.parse(localStorage.getItem('calendarInfo'))
+      if (calendarInfoInLocalStorage && 'selectedDate' in calendarInfoInLocalStorage) {
+        if (calendarInfoInLocalStorage.selectedDate !== null) {
+          // 로딩중이므로 실행하지 않음
+          return
+        } else {
+          // 데이터가 없는것이므로 오늘날짜로 초기화
+          setIsLoading(false)
+        }
+      }
+    }
+
     // 다른 달로 날짜 변경 시, 그 달의 이벤트들을 가져와서 jotai에 업데이트해줌
-    const selectedDate = new Date(calendarInfo.selectedDate)
+    const selectedDate = calendarInfo.selectedDate ? new Date(calendarInfo.selectedDate) : new Date()
     if (selectedDate.getMonth() !== prevSelectedDate?.getMonth()) {
       setPrevSelectedDate(selectedDate) // 날짜 변경시 비교를 위해 이전 날짜를 저장함(월만 비교하기 떄문에 월이 바뀔때만 저장함)
 
       getEventList(selectedDate.getFullYear(), selectedDate.getMonth() + 1)
         .then(res => {
-          // FIXME: 테스트 끝나면 더미 없는 코드로 바꾸기
-          // setCalendarInfo({ ...calendarInfo, selectedMonthInfo: res.data })
-
-          // 더미는 4/1~11까지의 더미임
-          const EventListDummy: IEvent[][] = [
-            [], // 1주차
-            [
-              {
-                idx: 'event1',
-                title: '하루종일(월~수)',
-                startTime: '2024-03-29 00:00:00',
-                endTime: '2024-04-01 00:00:00',
-                isAllDay: true,
-                being: 3,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event2',
-                title: '하루이상(월~화)',
-                startTime: '2024-03-29 23:20:00',
-                endTime: '2024-03-30 01:00:00',
-                isAllDay: false,
-                being: 2,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event3',
-                title: '하루(월)',
-                startTime: '2024-03-29 11:20:00',
-                endTime: '2024-03-29 11:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              {
-                idx: 'event4',
-                title: '하루1(화)',
-                startTime: '2024-03-30 11:20:00',
-                endTime: '2024-03-30 11:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event5',
-                title: '하루2(화)',
-                startTime: '2024-03-30 15:00:00',
-                endTime: '2024-03-30 17:00:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              {
-                idx: 'event6',
-                title: '하루종일(수)',
-                startTime: '2024-04-01 00:00:00',
-                endTime: '2024-04-01 00:00:00',
-                isAllDay: true,
-                being: 1,
-                color: 7,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event7',
-                title: '하루1(수)',
-                startTime: '2024-04-01 11:20:00',
-                endTime: '2024-04-01 11:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              {
-                idx: 'event8',
-                title: '하루종일(목~금)',
-                startTime: '2024-04-02 00:00:00',
-                endTime: '2024-04-03 00:00:00',
-                isAllDay: true,
-                being: 2,
-                color: 2,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event9',
-                title: '하루1(목)',
-                startTime: '2024-04-02 11:20:00',
-                endTime: '2024-04-02 11:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              {
-                idx: 'event10',
-                title: '하루이상(금~토)',
-                startTime: '2024-04-03 19:20:00',
-                endTime: '2024-04-04 04:00:00',
-                isAllDay: false,
-                being: 2,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event11',
-                title: '하루1(금)',
-                startTime: '2024-04-03 11:20:00',
-                endTime: '2024-04-03 11:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              {
-                idx: 'event12',
-                title: '하루종일(토~일)',
-                startTime: '2024-04-04 00:00:00',
-                endTime: '2024-04-05 00:00:00',
-                isAllDay: true,
-                being: 1,
-                color: 5,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              // 2주차
-              {
-                idx: 'event13',
-                title: '하루종일(토~일)',
-                startTime: '2024-04-04 00:00:00',
-                endTime: '2024-04-05 00:00:00',
-                isAllDay: true,
-                being: 1,
-                color: 5,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event14',
-                title: '하루1(일)',
-                startTime: '2024-04-05 11:20:00',
-                endTime: '2024-04-05 11:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              {
-                idx: 'event15',
-                title: '하루종일(월)',
-                startTime: '2024-04-06 00:00:00',
-                endTime: '2024-04-06 00:00:00',
-                isAllDay: true,
-                being: 1,
-                color: 5,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [
-              {
-                idx: 'event16',
-                title: '하루1(화)',
-                startTime: '2024-04-07 11:20:00',
-                endTime: '2024-04-07 11:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-              {
-                idx: 'event17',
-                title: '하루1(화)',
-                startTime: '2024-04-07 14:20:00',
-                endTime: '2024-04-07 14:50:00',
-                isAllDay: false,
-                being: null,
-                color: 1,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [],
-            [
-              {
-                idx: 'event18',
-                title: '일정더미1(목~일)',
-                startTime: '2024-04-09 00:00:00',
-                endTime: '2024-04-11 00:00:00',
-                isAllDay: true,
-                being: 3,
-                color: 2,
-                place: '장소1',
-                description: '메모1',
-              },
-            ],
-            [],
-            [],
-          ]
-          setCalendarInfo({
-            ...calendarInfo,
-            selectedMonthInfo: res.data.flat().length === 0 ? EventListDummy : res.data,
-          })
+          if (calendarInfo.selectedDate) {
+            setCalendarInfo({ ...calendarInfo, selectedMonthInfo: res.data })
+          } else {
+            setCalendarInfo({ selectedDate: selectedDate, selectedMonthInfo: res.data })
+          }
         })
         .catch(error => {
           // 로그아웃시 monthInfo 초기화
@@ -274,13 +67,12 @@ export default function MonthlyCalendar() {
           }
         })
     }
-  }, [calendarInfo.selectedDate])
+  }, [calendarInfo.selectedDate, isLoading]) //
 
   useEffect(() => {
     // 일정 업데이트시, UI 출력을 위해 long/short 이벤트 분리
     const longEvent: IEvent[][] = []
     const shortEvent: IEvent[][] = []
-
     ;(calendarInfo.selectedMonthInfo ?? []).forEach(dateEventList => {
       const long: IEvent[] = []
       const short: IEvent[] = []
@@ -295,11 +87,17 @@ export default function MonthlyCalendar() {
       shortEvent.push(short)
     })
 
+    const shortWeekEvent = shortEvent.map(week => {
+      const weekEventList = [[], [], [], [], [], [], []]
+      week.forEach(event => weekEventList[new Date(event.startTime).getDay()].push(event))
+      return weekEventList
+    })
+    // console.debug('✅', calendarInfo.selectedMonthInfo, 'longEvent', longEvent, 'shortEvent', shortWeekEvent)
     setMonthlyEvents({
       long: longEvent,
-      short: shortEvent,
+      short: shortWeekEvent,
     })
-  }, [calendarInfo.selectedMonthInfo])
+  }, [calendarInfo.selectedMonthInfo]) //
 
   // rowColStackNum: 각 하루 칸 안에서 하루종일 일정이 차지하는 줄의 수를 저장합니다.
   // 이 값을 참고하여 '하루 내 일정'을 '하루종일 일정' 아래줄에 렌더합니다.
@@ -307,13 +105,23 @@ export default function MonthlyCalendar() {
 
   const getSortedLongEvent = (weekNum: number) => {
     rowColStackNum.push([0, 0, 0, 0, 0, 0, 0])
-    const event = JSON.parse(JSON.stringify(monthlyEvents.long.slice(weekNum * 7, weekNum * 7 + 7)))
+    let event = JSON.parse(JSON.stringify(monthlyEvents.long)) // .slice(weekNum * 7, weekNum * 7 + 7)
+    // console.debug('event', event)
+    const weekEvent = event[weekNum]
+    if (!event || event.length === weekNum) {
+      return []
+    }
+    event = [[], [], [], [], [], [], []]
+    weekEvent?.forEach(v => {
+      const dayNum = new Date(v.startTime).getDay()
+      event[dayNum].push(v)
+    })
     const newSorted = []
     let startNum = 0
     let rowNum = 0
 
-    while (event.flat().length > 0) {
-      if (event[startNum].length === 0) {
+    while (event?.flat().length > 0) {
+      if (event[startNum]?.length === 0) {
         startNum++
         if (startNum > 6) {
           startNum = 0
@@ -321,31 +129,48 @@ export default function MonthlyCalendar() {
         }
         continue
       }
-      const firstEvent = event[startNum].shift()
+      // console.debug('있는 번호', weekNum, startNum, event[startNum])
+      const firstEvent = event[startNum]?.shift()
       newSorted.push({ ...firstEvent, start: startNum, row: rowNum })
 
-      for (let i = 0; i < firstEvent.being ?? 0; i++) {
+      for (let i = 0; i < firstEvent?.being ?? 0; i++) {
         rowColStackNum[rowColStackNum.length - 1][startNum + i]++
       }
 
-      startNum += firstEvent.being
+      startNum += firstEvent?.being ?? 1
       if (startNum > 6) {
         startNum = 0
         rowNum++
       }
     }
-
+    // console.debug('newSorted', newSorted)
     return newSorted
   }
 
   const getSortedShortEvent = (weekNum: number) => {
-    const event = JSON.parse(JSON.stringify(monthlyEvents.short.slice(weekNum * 7, weekNum * 7 + 7)))
-
-    return event.map((dayEvents: IEvent[], i: number) =>
-      dayEvents.length === 0
-        ? dayEvents
-        : dayEvents.map((event, j) => ({ ...event, start: i, row: rowColStackNum[weekNum][i] + j }))
-    )
+    const event = JSON.parse(JSON.stringify(monthlyEvents?.short)) // weekNum
+    // console.debug('weekNum', weekNum, 'event', event)
+    // console.debug('event', event[weekNum])
+    if (!event || event.length === weekNum) {
+      return []
+    }
+    return event.length !== 0
+      ? event[weekNum].map((event, i) => {
+          if (event.length === 0) {
+            return []
+          } else {
+            return event.map((event, j) => ({ ...event, start: i, row: rowColStackNum[weekNum][i] + j }))
+          }
+        })
+      : []
+    // return event.map((week: IEvent[][], i: number) => {
+    //   week.map(day => {
+    //     console.debug(day)
+    //     return day.length === 0
+    //       ? day
+    //       : day.map((event, j) => ({ ...event, start: i, row: rowColStackNum[weekNum][i] + j }))
+    //   })
+    // })
   }
 
   return (
@@ -370,6 +195,7 @@ export default function MonthlyCalendar() {
             // weekColor: 평일, 토요일, 일요일에 따른 색상 표시
             // ghost: 이전달, 다음달에 해당하는 날짜는 연하게 표시
             // current: 현재 선택된 날짜를 테두리로 표시
+            // FIXME: type error
             const selectedDate = new Date(calendarInfo.selectedDate)
             const weekColor = i % 7 === 0 ? 'sun' : i % 7 === 6 ? 'sat' : ''
             const ghost = selectedDate.getMonth() !== date.getMonth() ? 'ghost' : ''
@@ -378,7 +204,7 @@ export default function MonthlyCalendar() {
             return (
               <li
                 className={`weekend ${weekColor} ${ghost} ${current}`}
-                key={date.getTime()}
+                key={`${date.getTime()} index_${i}`}
                 onClick={() => {
                   setCalendarInfo({ ...calendarInfo, selectedDate: date })
                 }}
@@ -406,7 +232,10 @@ export default function MonthlyCalendar() {
           .map((week, weekNum) => (
             <div key={`${calendarInfo.selectedDate}_${weekNum}`}>
               {/* 주간 날짜 렌더 */}
-              <ul className="date-wrapper">{week}</ul>
+              <ul className="date-wrapper">
+                {week}
+                {/*{weekNum} /!* n주차 디버깅 확인용 *!/*/}
+              </ul>
 
               {/* 주간 일정 렌더 */}
               <ul className="event-wrapper">
@@ -440,18 +269,19 @@ export default function MonthlyCalendar() {
                 {/* 5. 하루중에 일어나는 일정 렌더 */}
                 {getSortedShortEvent(weekNum).map((events: (IEvent & { row: number; start: number })[], i: number) => {
                   // console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, events)
-
-                  return events.map(event => (
-                    <li
-                      key={`${calendarInfo.selectedDate}.${event.idx}${i}`}
-                      style={{
-                        gridColumnStart: event.start + 1,
-                        gridRowStart: event.row + 1,
-                      }}
-                    >
-                      <span>{event.title}</span>
-                    </li>
-                  ))
+                  if (events && events.length !== 0) {
+                    return events.map(event => (
+                      <li
+                        key={`${event.startTime}.${event.idx}(${weekNum}-${i})`}
+                        style={{
+                          gridColumnStart: event.start + 1,
+                          gridRowStart: event.row + 1,
+                        }}
+                      >
+                        <span>{event.title}</span>
+                      </li>
+                    ))
+                  }
                 })}
               </ul>
             </div>
