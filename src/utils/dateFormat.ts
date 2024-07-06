@@ -72,13 +72,13 @@ const dateFormat = (date: Date, formatName = 'YYYY년 MM월 W주차 DD일 d요�
     newFormatName = newFormatName.replace('d', dayTitle[dayNum])
   }
   if (formatName.includes('hh')) {
-    newFormatName = newFormatName.replace('hh', date.getHours().toString())
+    newFormatName = newFormatName.replace('hh', date.getHours().toString().padStart(2, '0'))
   }
   if (formatName.includes('mm')) {
-    newFormatName = newFormatName.replace('mm', date.getMinutes().toString())
+    newFormatName = newFormatName.replace('mm', date.getMinutes().toString().padStart(2, '0'))
   }
   if (formatName.includes('ss')) {
-    newFormatName = newFormatName.replace('ss', date.getSeconds().toString())
+    newFormatName = newFormatName.replace('ss', date.getSeconds().toString().padStart(2, '0'))
   }
 
   return newFormatName
