@@ -1,6 +1,5 @@
 import * as S from './style.ts'
 import { useTheme } from 'styled-components'
-import { useEffect } from 'react'
 interface Props {
   color: 'routine' | 'event'
   value: string
@@ -12,11 +11,7 @@ export default function ColorRadioButton({ color, value, setValue }: Props) {
     routine: ['r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'],
     event: ['s1', 's2', 's3', 's4', 's5', 's6', 's7'],
   }
-  useEffect(() => {
-    if (!value || value === '') {
-      setValue(colorList[color][0])
-    }
-  }, [])
+
   return (
     <S.ColorRadioButtonWrapper>
       <label htmlFor="color">색상</label>

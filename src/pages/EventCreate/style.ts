@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-export const EndDateWrapper = styled.div`
+export const EndTimeWrapper = styled.div`
   width: 100%;
   display: flex;
 
@@ -10,4 +10,9 @@ export const EndDateWrapper = styled.div`
   & > div {
     width: 100%;
   }
+`
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `

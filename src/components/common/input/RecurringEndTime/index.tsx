@@ -8,16 +8,16 @@ import Add from '@assets/image/icon/ic-add.svg?react'
 import Subtract from '@assets/image/icon/ic-subtract.svg?react'
 
 interface Props {
-  startDate: Date | null
-  endDate: Date | null
+  startTime: Date | null
+  endTime: Date | null
   recurringType: string | null
   maxNumOfOccurrances: number | null
   recurringEndTime: Date | null
   setRecurringEndTime: (date: Date | null, maxNum: number | null) => void
 }
 export default function RecurringEndTime({
-  startDate,
-  endDate,
+  startTime,
+  endTime,
   recurringType,
   maxNumOfOccurrances,
   recurringEndTime,
@@ -46,7 +46,7 @@ export default function RecurringEndTime({
       // 초기화
       console.debug('계속 반복', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('keep-repeat')
-      setSelectEndDate(endDate ?? startDate)
+      setSelectEndDate(endTime ?? startTime)
       setSelectMaxNum(2)
     } else if (recurringEndTime !== null) {
       console.debug('기간 정함', recurringEndTime, maxNumOfOccurrances)
@@ -56,16 +56,16 @@ export default function RecurringEndTime({
     } else if (maxNumOfOccurrances !== null) {
       console.debug('횟수 정함', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('max-num')
-      setSelectEndDate(endDate ?? startDate)
+      setSelectEndDate(endTime ?? startTime)
       setSelectMaxNum(maxNumOfOccurrances)
     }
   }, [recurringType])
 
   useEffect(() => {
     if (activeOption !== 'end-time') {
-      setSelectEndDate(endDate ?? startDate)
+      setSelectEndDate(endTime ?? startTime)
     }
-  }, [startDate, endDate, activeOption])
+  }, [startTime, endTime, activeOption])
 
   return (
     <S.Wrapper>

@@ -1,10 +1,14 @@
 import CalendarLayout from '@layouts/Calendar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ITabList } from '@components/common/button/TabButton'
 import WeeklyCalendar from '@components/Calendar/WeeklyCalendar'
 import MonthlyCalendar from '@components/Calendar/MonthlyCalendar'
+import { useAtom } from 'jotai/index'
+import { calendarInfoAtom } from '@/store'
 
 export default function Calendar({ ...props }) {
+  const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
+
   const [viewToggle, setViewToggle] = useState('monthly')
   const tabList: ITabList[] = [
     {
@@ -24,6 +28,13 @@ export default function Calendar({ ...props }) {
       },
     },
   ]
+
+  useEffect(() => {
+    // 선택된 날짜가 없으면 오늘 날짜로 초기화
+    const currentTime = new Date(new Date().setHours(0, 0, 0, 0))
+    setCalendarInfo({ ...calendarInfo, selectedDate: currentTime })
+  }, [])
+
   return (
     <CalendarLayout tabList={tabList} defaultTabKey="monthly" {...props}>
       {viewToggle === 'weekly' && <WeeklyCalendar />}

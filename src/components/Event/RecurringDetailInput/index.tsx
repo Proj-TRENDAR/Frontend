@@ -2,19 +2,19 @@ import * as S from './style.ts'
 import SeparationCountInput from '@components/common/input/SeparationCountInput'
 import CheckDays from '@components/common/input/CheckDays'
 import RecurringEndTime from '@components/common/input/RecurringEndTime'
-import { IEvent, IRecurring } from '@pages/EventCreate'
+import { ICreateEvent, IRecurring } from '@pages/EventCreate'
 import { useEffect } from 'react'
 import CheckDateOrWeek from '@components/common/input/CheckDateOrWeek'
 
 interface Props {
-  event: IEvent
-  setEvent: (event: IEvent) => void
+  event: ICreateEvent
+  setEvent: (event: ICreateEvent) => void
   recurringInitial: IRecurring
 }
 export default function RecurringDetailInput({ event, setEvent, recurringInitial }: Props) {
   const handleInitialRecurringDetail = (recurringType: string | null) => {
     // 반복 타입 설정에 따른 초기화는 여기서 모두 합니다..!
-    const DayOfStartDate = event.startDate?.getDay()
+    const DayOfStartTime = event.startTime?.getDay()
     const commonInitial = {
       ...event,
       ...recurringInitial, // recurringDetail에 포함되는 값 모두 null로 변환(타입 변경시 초기화하기 위함)
@@ -33,15 +33,15 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
         return setEvent({
           ...commonInitial,
           ...{
-            dayOfWeek: DayOfStartDate === undefined ? null : [DayOfStartDate],
+            dayOfWeek: DayOfStartTime === undefined ? null : [DayOfStartTime],
           },
         })
       case 'M':
-        if (event.startDate) {
+        if (event.startTime) {
           return setEvent({
             ...commonInitial,
             ...{
-              dayOfMonth: [event.startDate?.getDay()],
+              dayOfMonth: [event.startTime?.getDay()],
             },
           })
         } else {
@@ -66,10 +66,10 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
   useEffect(() => {
     // event.separationCount 가 있으면 초기화 된 것.
     if (event.separationCount && event.recurringType === 'W') {
-      const DayOfStartDate = event.startDate?.getDay()
-      setEvent({ ...event, dayOfWeek: DayOfStartDate === undefined ? null : [DayOfStartDate] })
+      const DayOfStartTime = event.startTime?.getDay()
+      setEvent({ ...event, dayOfWeek: DayOfStartTime === undefined ? null : [DayOfStartTime] })
     }
-  }, [event.startDate])
+  }, [event.startTime])
 
   return (
     <S.Wrapper>
@@ -92,7 +92,7 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
       {event.recurringType === 'M' && (
         // 월간반복 선택시
         <CheckDateOrWeek
-          startDate={event.startDate}
+          startDate={event.startTime}
           dayOfMonth={event.dayOfMonth}
           weekOfMonth={event.weekOfMonth}
           setDateOrWeek={(dayOfMonth: number[] | null, weekOfMonth: number | null) => {
@@ -105,8 +105,8 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
         <></>
       )}
       <RecurringEndTime
-        startDate={event.startDate}
-        endDate={event.endDate}
+        startDate={event.startTime}
+        endTime={event.endTime}
         recurringType={event.recurringType}
         maxNumOfOccurrances={event.maxNumOfOccurrances}
         recurringEndTime={event.recurringEndTime}
