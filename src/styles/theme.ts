@@ -114,7 +114,7 @@ export const brownTheme: DefaultTheme = {
   textRed: '#E43636',
   textRedDark: '#CC1212',
 }
-// TODO: 다른 컬러테마 추가
+
 export const fluorescentTheme: DefaultTheme = {
   point: '#FE1D57',
   pointHover: '#ff0042',
@@ -189,7 +189,7 @@ export const coolGrayTheme: DefaultTheme = {
   textRedDark: '#CC1212',
 }
 
-export const themeList = [basicTheme, darkTheme, brownTheme, fluorescentTheme, coolGrayTheme]
+export const themeList = [coolGrayTheme, fluorescentTheme, brownTheme, darkTheme, basicTheme]
 
 export const fonts = css`
   @font-face {
