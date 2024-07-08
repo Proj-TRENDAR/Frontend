@@ -9,7 +9,7 @@ export const basicTheme: DefaultTheme = {
   pointHover: '#00ABB5',
   point2: '#B1E7DD',
   point3: '#F8FFFF',
-  pointBg: '#F8FFFF',
+  pointBg: '#F3F9FA',
   pointText: '#599086',
   r1: '#F9A1A4',
   r2: '#CE9AD0',
