@@ -6,11 +6,12 @@ import { themeAtom } from '@/store'
 import { themeList } from '@/styles/theme'
 import IconButton from '@components/common/button/IconButton'
 import ThemeIcon from '@assets/image/icon/ic-theme.svg?react'
+import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 
 export default function ThemeSelector() {
   const nowTheme = useTheme()
   const color = nowTheme.point
-  const [, setTheme] = useAtom(themeAtom)
+  const [theme, setTheme] = useAtom(themeAtom)
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
 
   const handlePaletteClick = () => {
@@ -40,7 +41,7 @@ export default function ThemeSelector() {
                   clickTheme(index)
                 }}
               >
-                {''}
+                {theme === themeList[index] && <CheckedIcon />}
               </div>
             )
           })}
