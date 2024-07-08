@@ -15,11 +15,12 @@ export const DropDownWrapper = styled.div`
     display: flex;
     align-items: center;
 
-    background-color: #fff;
+    text-align: left;
+    color: ${({ theme }) => theme.text};
+
+    background-color: ${({ theme }) => theme.basicBg};
     border: none;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
-
-    text-align: left;
 
     border-radius: 20px 20px 0 0;
 
@@ -40,7 +41,7 @@ export const DropDownWrapper = styled.div`
     overflow: hidden;
     z-index: 1;
 
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.basicBg};
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
     border-radius: 0 0 20px 20px;
 
@@ -63,6 +64,8 @@ const ItemStyled = css`
 
   text-align: left;
   line-height: 1rem;
+
+  color: ${({ theme }) => theme.text};
 
   background-color: unset;
   border: none;

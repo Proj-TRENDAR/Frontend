@@ -16,15 +16,19 @@ interface ThemeProps {
 
 export const Theme = styled.div<ThemeProps>`
   height: ${({ isPaletteOpen, themeCount }) => (isPaletteOpen ? `${32 * (themeCount + 1)}px` : '32px')};
+
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   position: absolute;
   bottom: 12px;
   right: 338px;
+  z-index: 1;
+
   background-color: ${({ theme }) => theme.basicBg};
   border-radius: 16px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+
   transition: height 0.5s ease;
 
   .icon {

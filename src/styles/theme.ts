@@ -9,7 +9,7 @@ export const basicTheme: DefaultTheme = {
   pointHover: '#00ABB5',
   point2: '#B1E7DD',
   point3: '#F8FFFF',
-  pointBg: '#F3F9FA',
+  pointBg: '#F8FFFF',
   pointText: '#599086',
   r1: '#F9A1A4',
   r2: '#CE9AD0',
@@ -39,74 +39,107 @@ export const basicTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
-  checkedColor: '#1DB993',
-  checkedTextColor: '#DDDDDD',
 }
 
 export const darkTheme: DefaultTheme = {
-  point: '#0D7377',
-  pointHover: '#14FFEC',
-  point2: '#323232',
-  point3: '#212121',
-  pointBg: '#1B1B1B',
+  point: '#614ED7',
+  pointHover: '#4734ce',
+  point2: '#4A546E',
+  point3: '#16243D',
+  pointBg: '#16243D',
   pointText: '#EAEAEA',
-  r1: '#FF6F61',
-  r2: '#D4A5A5',
-  r3: '#7A7A7A',
-  r4: '#DFAF2B',
-  r5: '#B5CC2E',
-  r6: '#FFBF00',
-  r7: '#009FFD',
-  s1: '#EF767A',
-  s2: '#AA6373',
-  s3: '#2A2B2D',
-  s4: '#FFA36C',
-  s5: '#F4A261',
-  s6: '#E0A899',
-  s7: '#B8C1EC',
+  r1: '#5F5CD1',
+  r2: '#36A58A',
+  r3: '#4B8199',
+  r4: '#217EEB',
+  r5: '#9C55AF',
+  r6: '#0B99B8',
+  r7: '#D1777A',
+  s1: '#171632',
+  s2: '#022D24',
+  s3: '#122027',
+  s4: '#0F183A',
+  s5: '#25132A',
+  s6: '#011C21',
+  s7: '#2C1916',
   dayColorOfSat: '#3655E6', // 토요일 색
   dayColorOfSun: '#A61832', // 일요일 색
-  dayColorOfWeekday: '#4B4B4B', // 주간 색
-  basicBg: '#121212',
-  cancelBgColor: '#C34A36',
-  grayLine: '#3A3A3A',
-  grayBt: '#696969',
-  grayBtLight: '#4E4E4E',
-  text: '#F5F5F5',
-  text98: '#B0B0B0',
-  textInfo: '#9A9A9A',
-  textLight: '#707070',
+  dayColorOfWeekday: '#ECECEC', // 주간 색
+  basicBg: '#0E1218',
+  cancelBgColor: '#FFC7C3',
+  grayLine: '#4E5972',
+  grayBt: '#A9A9A9',
+  grayBtLight: '#F0F0F0',
+  text: '#ECECEC',
+  text98: '#989898',
+  textInfo: '#7C7C7C',
+  textLight: '#CBCBCB',
   textRed: '#F44336',
   textRedDark: '#E57373',
-  checkedColor: '#00E676',
-  checkedTextColor: '#333333',
 }
 
 export const brownTheme: DefaultTheme = {
-  point: '#77634E', //
-  pointHover: '#7FCDC4',
-  point2: '#E3F7F3',
-  point3: '#E6F4EF',
-  pointBg: '#E9ECE1', //
+  point: '#77634E',
+  pointHover: '#795b41',
+  point2: '#B8D6B7',
+  point3: '#E9ECE1',
+  pointBg: '#E9ECE1',
   pointText: '#599086',
-  r1: '#F7D4D2',
-  r2: '#F0D2E4',
-  r3: '#C8E9E9',
-  r4: '#FFCC9F',
-  r5: '#9FBD7A', //
-  r6: '#FBE5B1',
-  r7: '#76AC99', //
-  s1: '#BED1AD', //
-  s2: '#E7C7A5', //
-  s3: '#C6E3AD', //
-  s4: '#EBDFAA', //
-  s5: '#D1D2A0', //
-  s6: '#F4D495', //
-  s7: '#EBF3FA',
+  r1: '#76AC99',
+  r2: '#EFC77A',
+  r3: '#DACB8C',
+  r4: '#BCD37A',
+  r5: '#CEB289',
+  r6: '#9FBD7A',
+  r7: '#ACC1B6',
+  s1: '#BED1AD',
+  s2: '#F4D495',
+  s3: '#EBDFAA',
+  s4: '#D1D2A0',
+  s5: '#E7C7A5',
+  s6: '#C6E3AD',
+  s7: '#CFDDD6',
   dayColorOfSat: '#4573E9', // 토요일 색
   dayColorOfSun: '#E43636', // 일요일 색
   dayColorOfWeekday: '#484848', // 주간 색
-  basicBg: '#FBF6F1', //
+  basicBg: '#FBF6F1',
+  cancelBgColor: '#FFC7C3',
+  grayLine: '#EDEDED',
+  grayBt: '#A9A9A9',
+  grayBtLight: '#F0F0F0',
+  text: '#413D3B',
+  text98: '#989898',
+  textInfo: '#7C7C7C',
+  textLight: '#CBCBCB',
+  textRed: '#E43636',
+  textRedDark: '#CC1212',
+}
+// TODO: 다른 컬러테마 추가
+export const fluorescentTheme: DefaultTheme = {
+  point: '#FE1D57',
+  pointHover: '#ff0042',
+  point2: '#BFD9FF',
+  point3: '#F8F8F8',
+  pointBg: '#F8F8F8',
+  pointText: '#599086', //
+  r1: '#F89A56',
+  r2: '#FF6F6F',
+  r3: '#FCDE44',
+  r4: '#5AE3A1',
+  r5: '#4CBFF9',
+  r6: '#6B8AF6',
+  r7: '#FF6F9A',
+  s1: '#FFAF75',
+  s2: '#FF9A94',
+  s3: '#FFF280',
+  s4: '#9AF0C7',
+  s5: '#76D2FF',
+  s6: '#8CA5FF',
+  s7: '#FF99B8',
+  dayColorOfSat: '#4573E9', // 토요일 색
+  dayColorOfSun: '#E43636', // 일요일 색
+  dayColorOfWeekday: '#484848', // 주간 색
+  basicBg: '#FFFFFF',
   cancelBgColor: '#FFC7C3',
   grayLine: '#EDEDED',
   grayBt: '#A9A9A9',
@@ -117,12 +150,46 @@ export const brownTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
-  checkedColor: '#1DB993',
-  checkedTextColor: '#DDDDDD',
 }
-// TODO: 다른 컬러테마 추가
 
-export const themeList = [basicTheme, darkTheme, brownTheme]
+export const coolGrayTheme: DefaultTheme = {
+  point: '#3C404C',
+  pointHover: '#30384d',
+  point2: '#DFDFDF',
+  point3: '#F1F1F1',
+  pointBg: '#F1F1F1',
+  pointText: '#599086', //
+  r1: '#E0A58A',
+  r2: '#B7A599',
+  r3: '#BEBEBE',
+  r4: '#668DA4',
+  r5: '#BB8391',
+  r6: '#A6D0D0',
+  r7: '#9696A0',
+  s1: '#F2D9CE',
+  s2: '#F4EBE5',
+  s3: '#F4F4F4',
+  s4: '#95C5E0',
+  s5: '#DDC5CB',
+  s6: '#E9F2F2',
+  s7: '#E6E6E7',
+  dayColorOfSat: '#4573E9', // 토요일 색
+  dayColorOfSun: '#E43636', // 일요일 색
+  dayColorOfWeekday: '#484848', // 주간 색
+  basicBg: '#FFFFFF',
+  cancelBgColor: '#FFC7C3',
+  grayLine: '#EDEDED',
+  grayBt: '#A9A9A9',
+  grayBtLight: '#F0F0F0',
+  text: '#333333',
+  text98: '#989898',
+  textInfo: '#7C7C7C',
+  textLight: '#CBCBCB',
+  textRed: '#E43636',
+  textRedDark: '#CC1212',
+}
+
+export const themeList = [basicTheme, darkTheme, brownTheme, fluorescentTheme, coolGrayTheme]
 
 export const fonts = css`
   @font-face {

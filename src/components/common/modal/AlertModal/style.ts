@@ -54,9 +54,10 @@ export const Modal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
+  color: ${({ theme }) => theme.text};
   font-size: 18px;
 
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.pointBg};
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.16);
   border-radius: 16px;
 
