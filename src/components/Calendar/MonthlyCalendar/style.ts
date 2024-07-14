@@ -126,6 +126,7 @@ export const Week = styled.div`
       border: solid 1px transparent;
       border-radius: 20px;
 
+      cursor: pointer;
       transition:
         box-shadow 0.2s ease-in-out,
         border 0.2s ease-in-out;
@@ -134,21 +135,6 @@ export const Week = styled.div`
       &:active {
         border: solid 1px ${({ theme }) => theme.grayBt + 50};
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-      }
-      &:before {
-        width: 4px;
-        height: 4px;
-        margin-right: 4px;
-        transform: translateY(-1px);
-
-        display: inline-block;
-
-        background-color: ${({ theme }) => theme.grayBt + 50};
-        border-radius: 2px;
-
-        vertical-align: top;
-
-        content: '';
       }
       & > span {
         overflow: hidden;
@@ -180,5 +166,24 @@ export const Week = styled.div`
         font-size: 13px;
       }
     }
+  }
+`
+
+export const EventDotList = styled.li<{ color: string }>`
+  &:before {
+    width: 5px;
+    height: 5px;
+    margin-right: 4px;
+    margin-left: -4px;
+    transform: translateY(-1px);
+
+    display: inline-block;
+
+    background-color: ${props => props.color ?? props.theme.grayBt + 50};
+    border-radius: 3px;
+
+    vertical-align: top;
+
+    content: '';
   }
 `

@@ -269,7 +269,7 @@ export default function MonthlyCalendar() {
                               }
                             : {
                                 backgroundColor: 'unset',
-                                border: `solid 2px ${theme.grayLine}`,
+                                border: `solid 2px ${theme[`s${event.color}`]}`,
                               }),
                         }}
                       >
@@ -283,7 +283,8 @@ export default function MonthlyCalendar() {
                   // console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, events)
                   if (events && events.length !== 0) {
                     return events.map(event => (
-                      <li
+                      <S.EventDotList
+                        color={theme[`s${event.color}`]}
                         key={`${event.startTime}.${event.idx}(${weekNum}-${i})`}
                         style={{
                           gridColumnStart: event.start + 1,
@@ -291,7 +292,7 @@ export default function MonthlyCalendar() {
                         }}
                       >
                         <span>{event.title}</span>
-                      </li>
+                      </S.EventDotList>
                     ))
                   }
                 })}
