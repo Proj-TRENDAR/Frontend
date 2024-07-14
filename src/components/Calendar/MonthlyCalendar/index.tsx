@@ -77,7 +77,10 @@ export default function MonthlyCalendar() {
       const long: IEvent[] = []
       const short: IEvent[] = []
       dateEventList.forEach(event => {
-        if (event.being !== null) {
+        if (event.being !== null || event.isAllDay) {
+          // FIXME: 하루종일인데 시작/종료 시간이 00:00:00으로 같으면 being이 null로 오고있어서
+          //  조건에서 event.isAllDay를 추가해줌. 추후 being이 1로 온다면 조건에서 event.isAllDay를 제외해도됨.
+          // being 조건은 남겨야함. 하루종일이 아닌 일정이어도 여러날 걸친 일정이 long에 포함되어야함.
           long.push(event)
         } else {
           short.push(event)
@@ -135,6 +138,15 @@ export default function MonthlyCalendar() {
 
       for (let i = 0; i < firstEvent?.being ?? 0; i++) {
         rowColStackNum[rowColStackNum.length - 1][startNum + i]++
+      }
+
+      if (firstEvent?.being === null && firstEvent?.isAllDay) {
+        // FIXME: 하루종일인데 being이 없는 경우
+        //  - 하루종일로 설정한 경우 시작과 종료 시간이 00:00:00으로 같아서 being이 null로 계산되어 옴.
+        //  - 그래서 이때는 해당 startNum에 ++만 해주면 됨.
+        //  - 나중에 백에서 being을 1로 준다면 if문은 지워도됨
+        // being은 남겨야함. 하루종일이 아닌 일정에도 여러날로 표시해야하는 경우가 있음
+        rowColStackNum[rowColStackNum.length - 1][startNum]++
       }
 
       startNum += firstEvent?.being ?? 1
