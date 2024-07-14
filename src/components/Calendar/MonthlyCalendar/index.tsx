@@ -8,6 +8,8 @@ import HandleDate from '@/utils/calcDate'
 import { IEvent } from '@/types'
 import { getEventList } from '@/api/Event/eventApi.ts'
 
+const MAX_NUM_OF_EVENT_VISIBLE = 3
+
 export default function MonthlyCalendar() {
   const [isLoading, setIsLoading] = useState(true)
   const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
@@ -241,65 +243,95 @@ export default function MonthlyCalendar() {
             [[]]
           )
           // 3. ul로 렌더
-          .map((week, weekNum) => (
-            <div key={`${calendarInfo.selectedDate}_${weekNum}`}>
-              {/* 주간 날짜 렌더 */}
-              <ul className="date-wrapper">
-                {week}
-                {/*{weekNum} /!* n주차 디버깅 확인용 *!/*/}
-              </ul>
+          .map((week, weekNum) => {
+            return (
+              <div key={`${calendarInfo.selectedDate}_${weekNum}`}>
+                {/* 주간 날짜 렌더 */}
+                <ul className="date-wrapper">
+                  {week}
+                  {/*{weekNum} /!* n주차 디버깅 확인용 *!/*/}
+                </ul>
 
-              {/* 주간 일정 렌더 */}
-              <ul className="event-wrapper">
-                {/* 4. 여러날 이어지는 일정 먼저 렌더 */}
-                {getSortedLongEvent(weekNum).map((event, i) => {
-                  // console.debug(`${weekNum}째주의 하루종일 일정 ${i}`, event)
-
-                  return (
-                    event && (
-                      <li
-                        key={`${event.title}${i}`}
-                        className={`long-event ${event.isAllDay ? '' : 'long-time'}`}
-                        style={{
-                          // gridArea: gridRowStart / 시작일 / gridRowStart + 1 / 종료일
-                          gridArea: `${event.row + 1} / ${event.start + 1} / ${event.row + 2} / ${event.start + 1 + (event.being ?? 0)}`,
-                          ...(event.isAllDay
-                            ? {
-                                backgroundColor: theme[`s${event.color}`],
-                              }
-                            : {
-                                backgroundColor: 'unset',
-                                border: `solid 2px ${theme[`s${event.color}`]}`,
-                              }),
-                        }}
-                      >
-                        <span>{event.title}</span>
-                      </li>
-                    )
-                  )
-                })}
-                {/* 5. 하루중에 일어나는 일정 렌더 */}
-                {getSortedShortEvent(weekNum).map((events: (IEvent & { row: number; start: number })[], i: number) => {
-                  // console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, events)
-                  if (events && events.length !== 0) {
-                    return events.map(event => (
-                      <S.EventDotList
-                        color={theme[`s${event.color}`]}
-                        key={`${event.startTime}.${event.idx}(${weekNum}-${i})`}
-                        style={{
-                          gridColumnStart: event.start + 1,
-                          gridRowStart: event.row + 1,
-                        }}
-                      >
-                        <span>{event.title}</span>
-                      </S.EventDotList>
-                    ))
-                  }
-                })}
-              </ul>
-            </div>
-          ))}
+                {/* 주간 일정 렌더 */}
+                <ul className="event-wrapper">
+                  {/* 4. 여러날 이어지는 일정 먼저 렌더 */}
+                  {getSortedLongEvent(weekNum).map((event, i) => {
+                    // console.debug(`${weekNum}째주의 하루종일 일정 ${i}`, event)
+                    if (event.row < MAX_NUM_OF_EVENT_VISIBLE) {
+                      return (
+                        event && (
+                          <li
+                            key={`${event.title}${i}`}
+                            className={`long-event ${event.isAllDay ? '' : 'long-time'}`}
+                            style={{
+                              // gridArea: gridRowStart / 시작일 / gridRowStart + 1 / 종료일
+                              gridArea: `${event.row + 1} / ${event.start + 1} / ${event.row + 2} / ${event.start + 1 + (event.being ?? 0)}`,
+                              ...(event.isAllDay
+                                ? {
+                                    backgroundColor: theme[`s${event.color}`],
+                                  }
+                                : {
+                                    backgroundColor: 'unset',
+                                    border: `solid 2px ${theme[`s${event.color}`]}`,
+                                  }),
+                            }}
+                          >
+                            <span>{event.title}</span>
+                          </li>
+                        )
+                      )
+                    } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {
+                      return <HideEventList gridColumnStart={event.start + 1} />
+                    }
+                  })}
+                  {/* 5. 하루중에 일어나는 일정 렌더 */}
+                  {getSortedShortEvent(weekNum).map(
+                    (events: (IEvent & { row: number; start: number })[], i: number) => {
+                      // console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, events)
+                      if (events && events.length !== 0) {
+                        return events.map(event => {
+                          if (event.row < MAX_NUM_OF_EVENT_VISIBLE) {
+                            return (
+                              <S.EventDotList
+                                color={theme[`s${event.color}`]}
+                                key={`${event.startTime}.${event.idx}(${weekNum}-${i})`}
+                                style={{
+                                  gridColumnStart: event.start + 1,
+                                  gridRowStart: event.row + 1,
+                                }}
+                              >
+                                <span>{event.title}</span>
+                              </S.EventDotList>
+                            )
+                          } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {
+                            return <HideEventList gridColumnStart={event.start + 1} />
+                          }
+                        })
+                      }
+                    }
+                  )}
+                </ul>
+              </div>
+            )
+          })}
       </S.Week>
     </S.Monthly>
+  )
+}
+
+function HideEventList({ gridColumnStart }: { gridColumnStart: number }) {
+  const theme = useTheme()
+  // FIXME: 하루 일정수를 구하기 어려워서 우선 '더 많은 일정이 있음'으로 표시함
+  return (
+    <li
+      style={{
+        gridColumnStart: gridColumnStart,
+        gridRowStart: 4,
+        pointerEvents: 'none',
+        color: theme.textLight,
+      }}
+    >
+      ... 더 많은 일정이 있음
+    </li>
   )
 }
