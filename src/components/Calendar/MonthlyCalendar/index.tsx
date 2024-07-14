@@ -326,7 +326,7 @@ function HideEventList({ gridColumnStart }: { gridColumnStart: number }) {
     <li
       style={{
         gridColumnStart: gridColumnStart,
-        gridRowStart: 4,
+        gridRowStart: MAX_NUM_OF_EVENT_VISIBLE + 1,
         pointerEvents: 'none',
         color: theme.textLight,
       }}
