@@ -12,8 +12,12 @@ export const createEvent = async (id: string, payload: ICreateEvent): Promise<Ax
     userId: id,
     title: payload.title,
     isAllDay: payload.isAllDay,
-    startTime: dateFormat(payload.startTime!, 'YYYY-MM-DD hh:mm:ss'),
-    endTime: dateFormat(payload.endTime!, 'YYYY-MM-DD hh:mm:ss'),
+    startTime: payload.isAllDay
+      ? `${dateFormat(payload.startTime!, 'YYYY-MM-DD')} 00:00:00`
+      : dateFormat(payload.startTime!, 'YYYY-MM-DD hh:mm:ss'),
+    endTime: payload.isAllDay
+      ? `${dateFormat(payload.endTime!, 'YYYY-MM-DD')} 00:00:00`
+      : dateFormat(payload.endTime!, 'YYYY-MM-DD hh:mm:ss'),
     color: Number(payload.color.replace('s', '')),
     place: payload.place,
     description: payload.description,
