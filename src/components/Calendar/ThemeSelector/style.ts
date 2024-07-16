@@ -15,14 +15,15 @@ interface ThemeProps {
 }
 
 export const Theme = styled.div<ThemeProps>`
+  width: 32px;
   height: ${({ isPaletteOpen, themeCount }) => (isPaletteOpen ? `${32 * (themeCount + 1)}px` : '32px')};
 
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  position: absolute;
+  position: sticky;
   bottom: 12px;
-  right: 338px;
+  left: calc(100% - 50px);
   z-index: 1;
 
   background-color: ${({ theme }) => theme.basicBg};

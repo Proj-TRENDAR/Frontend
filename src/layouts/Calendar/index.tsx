@@ -29,8 +29,10 @@ export default function CalendarLayout({ tabList, defaultTabKey, children }: Pro
           <TabButton tabList={tabList} defaultTabKey={defaultTabKey} />
         </div>
       </div>
-      <div className="calendar-body">{children}</div>
-      <ThemeSelector />
+      <div className="calendar-body">
+        {children}
+        <ThemeSelector />
+      </div>
     </S.Calendar>
   )
 }

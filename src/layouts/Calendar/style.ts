@@ -54,8 +54,10 @@ export const Calendar = styled.section`
     }
   }
   .calendar-body {
+    width: 100%;
     height: auto;
 
+    position: relative;
     overflow: auto;
 
     @media (min-width: 768px) {
