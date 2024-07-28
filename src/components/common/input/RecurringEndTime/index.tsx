@@ -46,10 +46,13 @@ export default function RecurringEndTime({
       return newEndDate
     }
     if (recurringType === 'W') {
-      return date
+      const count = separationCount * 7 * newSelectMaxNum - 1
+      const newEndDate = new Date(startTime?.getFullYear(), startTime?.getMonth(), startTime?.getDate() + count)
+      console.debug('날짜 계산 테스트(주간)', separationCount, newSelectMaxNum, count)
+
+      return newEndDate
     }
     if (recurringType === 'M') {
-      return date
     }
     if (recurringType === 'Y') {
       return date
