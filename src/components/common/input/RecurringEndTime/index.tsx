@@ -10,6 +10,7 @@ import Subtract from '@assets/image/icon/ic-subtract.svg?react'
 interface Props {
   startTime: Date | null
   endTime: Date | null
+  separationCount: number | null
   recurringType: string | null
   maxNumOfOccurrances: number | null
   recurringEndTime: Date | null
@@ -18,6 +19,7 @@ interface Props {
 export default function RecurringEndTime({
   startTime,
   endTime,
+  separationCount,
   recurringType,
   maxNumOfOccurrances,
   recurringEndTime,
@@ -33,7 +35,25 @@ export default function RecurringEndTime({
   }
   const handleMaxNum = () => {
     setActiveOption('max-num')
-    setRecurringEndTime(null, selectMaxNum)
+  }
+  const calcEndDate = (newSelectMaxNum: number) => {
+    const date = startTime
+    if (recurringType === 'D') {
+      const count = separationCount * newSelectMaxNum
+      const newEndDate = new Date(startTime?.getFullYear(), startTime?.getMonth(), startTime?.getDate() + count)
+      console.debug('날짜 계산 테스트', separationCount, newSelectMaxNum, count)
+
+      return newEndDate
+    }
+    if (recurringType === 'W') {
+      return date
+    }
+    if (recurringType === 'M') {
+      return date
+    }
+    if (recurringType === 'Y') {
+      return date
+    }
   }
 
   useEffect(() => {
@@ -62,10 +82,11 @@ export default function RecurringEndTime({
   }, [recurringType])
 
   useEffect(() => {
-    if (activeOption !== 'end-time') {
-      setSelectEndDate(endTime ?? startTime)
+    if (selectMaxNum && activeOption === 'max-num') {
+      setSelectEndDate(calcEndDate(selectMaxNum))
+      setRecurringEndTime(calcEndDate(selectMaxNum), selectMaxNum)
     }
-  }, [startTime, endTime, activeOption])
+  }, [separationCount])
 
   return (
     <S.Wrapper>
@@ -82,7 +103,9 @@ export default function RecurringEndTime({
           <button
             className={`option max-num ${activeOption === 'max-num' ? 'current' : ''}`}
             onClick={() => {
-              console.debug('b')
+              console.debug('b', selectMaxNum)
+              setSelectEndDate(calcEndDate(selectMaxNum))
+              setRecurringEndTime(calcEndDate(selectMaxNum), selectMaxNum)
               handleMaxNum()
             }}
           >
@@ -93,9 +116,8 @@ export default function RecurringEndTime({
                 if (activeOption === 'max-num') {
                   const newSelectMaxNum = selectMaxNum - 1 < 1 ? 1 : selectMaxNum - 1
                   setSelectMaxNum(newSelectMaxNum)
-                  setRecurringEndTime(null, newSelectMaxNum)
-                } else {
-                  handleMaxNum()
+                  setSelectEndDate(calcEndDate(newSelectMaxNum))
+                  setRecurringEndTime(calcEndDate(newSelectMaxNum), newSelectMaxNum)
                 }
               }}
             >
@@ -110,9 +132,8 @@ export default function RecurringEndTime({
                 if (activeOption === 'max-num') {
                   const newSelectMaxNum = selectMaxNum + 1
                   setSelectMaxNum(newSelectMaxNum)
-                  setRecurringEndTime(null, newSelectMaxNum)
-                } else {
-                  handleMaxNum()
+                  setSelectEndDate(calcEndDate(newSelectMaxNum))
+                  setRecurringEndTime(calcEndDate(newSelectMaxNum), newSelectMaxNum)
                 }
               }}
             >

@@ -8,7 +8,11 @@ export const getEventList = async (year: number, month: number): Promise<AxiosRe
   return await axios.get(`${API_PATHS.event}?year=${year}&month=${month}`)
 }
 export const createEvent = async (id: string, payload: ICreateEvent): Promise<AxiosResponse<ITodoList>> => {
+  // FIXME: 우선은 payload.startTime 또는 endTime이 없을리가 없어서
+  //  !로 막아놨는데... 권장하지 않는 방법이라고 Forbidden non-null assertion 경고가 발생합니다.
+  //  다른 방식으로 수정이 필요할것같습니다
   const filteredPayload = {
+    ...payload,
     userId: id,
     title: payload.title,
     isAllDay: payload.isAllDay,
@@ -22,6 +26,7 @@ export const createEvent = async (id: string, payload: ICreateEvent): Promise<Ax
     place: payload.place,
     description: payload.description,
     isRecurring: payload.isRecurring,
+    separationCount: payload.separationCount - 1, // 0일떄 매일/매주/매월/매년 반복이 됨
   }
 
   return await axios.post(API_PATHS.event, filteredPayload)

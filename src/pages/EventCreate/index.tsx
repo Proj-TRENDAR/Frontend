@@ -175,6 +175,8 @@ export default function EventCreate() {
             setEvent({ ...event, color: color })
           }}
         />
+
+        {/* 반복 타입 셀렉트 */}
         <Select
           items={recurringTypeItems}
           value={event.recurringType}
@@ -183,6 +185,7 @@ export default function EventCreate() {
             setEvent({ ...event, isRecurring: isRecurring, recurringType: recurringType })
           }}
         />
+
         {/* 반복 타입 지정시 반복상세 인풋 노출*/}
         {event.isRecurring && event.recurringType !== null && (
           <RecurringDetailInput event={event} setEvent={setEvent} recurringInitial={recurringInitial} />
@@ -213,6 +216,7 @@ export default function EventCreate() {
             if (userInfo.id) {
               if (event) {
                 // TODO: valid 필요
+                console.debug(event)
                 const result = await createEvent(userInfo.id, event)
                 if (result.status === 201) {
                   // 일정추가 닫기
