@@ -107,6 +107,7 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
       <RecurringEndTime
         startTime={event.startTime}
         endTime={event.endTime}
+        weekOfMonth={event.weekOfMonth}
         separationCount={event.separationCount}
         recurringType={event.recurringType}
         maxNumOfOccurrances={event.maxNumOfOccurrances}

@@ -10,6 +10,7 @@ import Subtract from '@assets/image/icon/ic-subtract.svg?react'
 interface Props {
   startTime: Date | null
   endTime: Date | null
+  weekOfMonth: number | null
   separationCount: number | null
   recurringType: string | null
   maxNumOfOccurrances: number | null
@@ -19,6 +20,7 @@ interface Props {
 export default function RecurringEndTime({
   startTime,
   endTime,
+  weekOfMonth,
   separationCount,
   recurringType,
   maxNumOfOccurrances,
@@ -37,25 +39,53 @@ export default function RecurringEndTime({
     setActiveOption('max-num')
   }
   const calcEndDate = (newSelectMaxNum: number) => {
-    const date = startTime
     if (recurringType === 'D') {
       const count = separationCount * newSelectMaxNum
       const newEndDate = new Date(startTime?.getFullYear(), startTime?.getMonth(), startTime?.getDate() + count)
-      console.debug('날짜 계산 테스트', separationCount, newSelectMaxNum, count)
+      console.debug('날짜 계산 테스트')
 
       return newEndDate
     }
     if (recurringType === 'W') {
       const count = separationCount * 7 * newSelectMaxNum - 1
       const newEndDate = new Date(startTime?.getFullYear(), startTime?.getMonth(), startTime?.getDate() + count)
-      console.debug('날짜 계산 테스트(주간)', separationCount, newSelectMaxNum, count)
+      console.debug('날짜 계산 테스트(주간)')
 
       return newEndDate
     }
     if (recurringType === 'M') {
+      if (weekOfMonth) {
+        // n째주 특정요일 날짜를 계산해야함
+        const count = separationCount * newSelectMaxNum
+        const selectedDay = startTime?.getDay()
+        const endMonthFirstDate = new Date(startTime?.getFullYear(), startTime?.getMonth() + count, 1)
+        const endMonthFirstDay = endMonthFirstDate.getDay()
+
+        const newEndDate = new Date(
+          endMonthFirstDate.getFullYear(),
+          endMonthFirstDate.getMonth(),
+          endMonthFirstDate.getDate() +
+            (endMonthFirstDay <= 3 ? weekOfMonth : weekOfMonth + 1) + // 수요일 기준으로 1주차로 시작 : 0주차로 시작
+            (selectedDay < endMonthFirstDay ? -1 * (endMonthFirstDay - selectedDay) : selectedDay)
+        )
+        console.debug('날짜 계산 테스트(월간 n째주)')
+
+        return newEndDate
+      } else {
+        // n달뒤 특정 날짜만 찾으면 됨
+        const count = separationCount * newSelectMaxNum
+        const newEndDate = new Date(startTime?.getFullYear(), startTime?.getMonth() + count, startTime?.getDate())
+        console.debug('날짜 계산 테스트(월간 n달뒤)')
+
+        return newEndDate
+      }
     }
     if (recurringType === 'Y') {
-      return date
+      const count = separationCount * newSelectMaxNum
+      const newEndDate = new Date(startTime?.getFullYear() + count, startTime?.getMonth(), startTime?.getDate())
+      console.debug('날짜 계산 테스트(년간)')
+
+      return newEndDate
     }
   }
 
