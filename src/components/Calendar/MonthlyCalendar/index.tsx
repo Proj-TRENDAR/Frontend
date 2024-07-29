@@ -187,6 +187,22 @@ export default function MonthlyCalendar() {
     // })
   }
 
+  // FIXME: 타입 수정 필요
+  const getNumberOfWeekEvents = (long: any[], short: any[]) => {
+    // console.debug('long', long)
+    // console.debug('short', short)
+    const longEvent = [0, 0, 0, 0, 0, 0, 0]
+    long.forEach(event => {
+      const startDay = new Date(event.startTime).getDay()
+      const endDay = new Date(event.endTime).getDay()
+      for (let i = startDay; i <= endDay; i++) {
+        longEvent[i]++
+      }
+    })
+
+    return longEvent.map((number, i) => number + short[i]?.length)
+  }
+
   return (
     <S.Monthly>
       {/* 요일 */}
@@ -244,6 +260,10 @@ export default function MonthlyCalendar() {
           )
           // 3. ul로 렌더
           .map((week, weekNum) => {
+            const longEvent = getSortedLongEvent(weekNum)
+            const shortEvent = getSortedShortEvent(weekNum)
+            const numberOfWeekEvents = getNumberOfWeekEvents(longEvent, shortEvent)
+
             return (
               <div key={`${calendarInfo.selectedDate}_${weekNum}`}>
                 {/* 주간 날짜 렌더 */}
@@ -255,7 +275,7 @@ export default function MonthlyCalendar() {
                 {/* 주간 일정 렌더 */}
                 <ul className="event-wrapper">
                   {/* 4. 여러날 이어지는 일정 먼저 렌더 */}
-                  {getSortedLongEvent(weekNum).map((event, i) => {
+                  {longEvent.map((event, i) => {
                     // console.debug(`${weekNum}째주의 하루종일 일정 ${i}`, event)
                     if (event.row < MAX_NUM_OF_EVENT_VISIBLE) {
                       return (
@@ -281,35 +301,43 @@ export default function MonthlyCalendar() {
                         )
                       )
                     } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {
-                      return <HideEventList gridColumnStart={event.start + 1} />
+                      return (
+                        <HideEventList
+                          gridColumnStart={event.start + 1}
+                          numberOfEvents={numberOfWeekEvents[i] - MAX_NUM_OF_EVENT_VISIBLE}
+                        />
+                      )
                     }
                   })}
                   {/* 5. 하루중에 일어나는 일정 렌더 */}
-                  {getSortedShortEvent(weekNum).map(
-                    (events: (IEvent & { row: number; start: number })[], i: number) => {
-                      // console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, events)
-                      if (events && events.length !== 0) {
-                        return events.map(event => {
-                          if (event.row < MAX_NUM_OF_EVENT_VISIBLE) {
-                            return (
-                              <S.EventDotList
-                                color={theme[`s${event.color}`]}
-                                key={`${event.startTime}.${event.idx}(${weekNum}-${i})`}
-                                style={{
-                                  gridColumnStart: event.start + 1,
-                                  gridRowStart: event.row + 1,
-                                }}
-                              >
-                                <span>{event.title}</span>
-                              </S.EventDotList>
-                            )
-                          } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {
-                            return <HideEventList gridColumnStart={event.start + 1} />
-                          }
-                        })
-                      }
+                  {shortEvent.map((events: (IEvent & { row: number; start: number })[], i: number) => {
+                    // console.debug(`${weekNum}째주의 ${i}요일 하루 내 일정`, events)
+                    if (events && events.length !== 0) {
+                      return events.map(event => {
+                        if (event.row < MAX_NUM_OF_EVENT_VISIBLE) {
+                          return (
+                            <S.EventDotList
+                              color={theme[`s${event.color}`]}
+                              key={`${event.startTime}.${event.idx}(${weekNum}-${i})`}
+                              style={{
+                                gridColumnStart: event.start + 1,
+                                gridRowStart: event.row + 1,
+                              }}
+                            >
+                              <span>{event.title}</span>
+                            </S.EventDotList>
+                          )
+                        } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {
+                          return (
+                            <HideEventList
+                              gridColumnStart={event.start + 1}
+                              numberOfEvents={numberOfWeekEvents[i] - MAX_NUM_OF_EVENT_VISIBLE}
+                            />
+                          )
+                        }
+                      })
                     }
-                  )}
+                  })}
                 </ul>
               </div>
             )
@@ -319,7 +347,7 @@ export default function MonthlyCalendar() {
   )
 }
 
-function HideEventList({ gridColumnStart }: { gridColumnStart: number }) {
+function HideEventList({ gridColumnStart, numberOfEvents }: { gridColumnStart: number; numberOfEvents: number }) {
   const theme = useTheme()
   // FIXME: 하루 일정수를 구하기 어려워서 우선 '더 많은 일정이 있음'으로 표시함
   return (
@@ -331,7 +359,7 @@ function HideEventList({ gridColumnStart }: { gridColumnStart: number }) {
         color: theme.textLight,
       }}
     >
-      ... 더 많은 일정이 있음
+      ...외 일정 {numberOfEvents}건
     </li>
   )
 }
