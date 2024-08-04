@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker'
 import { registerLocale } from 'react-datepicker'
 import { ko } from 'date-fns/locale/ko'
 registerLocale('ko', ko)
+
 interface Props {
   value: Date | null
   setValue: (value: Date | null) => void
@@ -31,6 +32,7 @@ export default function DatePickerInput({
         }}
         showTimeSelect={showTimeSelect}
         dateFormat={showTimeSelect ? 'yyyy년 M월 d일(E) aa h:mm' : 'yyyy년 M월 d일(E)'}
+        timeIntervals={10}
         minDate={minDate}
         maxDate={maxDate}
       />

@@ -19,6 +19,9 @@ export const DatePickerWrapper = styled.div<{ showTimeSelect: boolean }>`
     border-radius: 8px;
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, 16%);
   }
+  .react-datepicker-popper {
+    margin-left: -15px;
+  }
   .react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
     fill: ${({ theme }) => theme.pointBg};
     stroke: none;
