@@ -8,7 +8,8 @@ import ButtonsModal from '@components/common/modal/ButtonsModal'
 import ErrorAlertModal from '@components/common/modal/ErrorModal'
 import * as S from './style'
 import Dropdown, { DropdownItem, DropdownItems } from '@components/common/Dropdown'
-import { userInfoAtom } from '@/store'
+import { userInfoAtom, themeAtom } from '@/store'
+import { themeList } from '@/styles/theme'
 import { logout } from '@/api/Auth/authApi.ts'
 
 interface Props {
@@ -26,6 +27,7 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
   const [, setUserInfo] = useAtom(userInfoAtom)
   const userImage = null // TODO : 유저 이미지 받아서 출력해야함. 임의로 null
   const [openErrorModal, setOpenErrorModal] = useState<boolean>(false)
+  const [, setTheme] = useAtom(themeAtom)
 
   useEffect(() => {
     // TODO: 캘린더 공유 구현시, 캘린더 정보 받아와야함. 지금은 dummy 사용
@@ -58,6 +60,7 @@ export default function Header({ handleOpenForComingSoonModal }: Props) {
               await logout()
                 .then((res: any) => {
                   console.debug(res)
+                  setTheme(themeList[themeList.length - 1])
                   setUserInfo({
                     accessToken: null,
                     userName: null,
