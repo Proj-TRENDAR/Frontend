@@ -10,8 +10,8 @@ const rotateAnimation = keyframes`
 `
 
 interface ThemeProps {
-  isPaletteOpen: boolean
-  themeCount: number
+  $isPaletteOpen: boolean
+  $themeCount: number
 }
 
 export const Theme = styled.div<ThemeProps>`

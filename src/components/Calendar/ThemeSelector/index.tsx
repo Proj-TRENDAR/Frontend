@@ -29,7 +29,7 @@ export default function ThemeSelector() {
   }
 
   return (
-    <S.Theme isPaletteOpen={isPaletteOpen} themeCount={themeList.length}>
+    <S.Theme $isPaletteOpen={isPaletteOpen} $themeCount={themeList.length}>
       <IconButton onClick={handlePaletteClick} style={{ height: '32px', width: '32px' }}>
         <ThemeIcon className="icon" style={{ color }} />
       </IconButton>
