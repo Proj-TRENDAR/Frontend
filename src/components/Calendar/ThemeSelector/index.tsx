@@ -15,21 +15,17 @@ export default function ThemeSelector() {
   const color = nowTheme.point
   const [theme, setTheme] = useAtom(themeAtom)
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [openErrorModal, setOpenErrorModal] = useState<boolean>(false)
 
   const handlePaletteClick = () => {
     setIsPaletteOpen(!isPaletteOpen)
   }
   const clickTheme = async (idx: number) => {
-    try {
-      const result = await changeTheme(idx)
-      if (!result) {
-        throw new Error('테마 변경 실패')
-      }
-      setTheme(themeList[idx])
-    } catch (error) {
-      setErrorMessage(error.message)
+    const result = await changeTheme(idx)
+    if (!result) {
+      return setOpenErrorModal(true)
     }
+    setTheme(themeList[idx])
   }
 
   return (
@@ -51,7 +47,9 @@ export default function ThemeSelector() {
           ))}
         </div>
       )}
-      {errorMessage && <ErrorAlertModal errorMessage={errorMessage} onClose={() => setErrorMessage(null)} />}
+      {openErrorModal && (
+        <ErrorAlertModal errorMessage={'테마 변경 중 오류가 발생했습니다.'} onClose={() => setOpenErrorModal(false)} />
+      )}
     </S.Theme>
   )
 }
