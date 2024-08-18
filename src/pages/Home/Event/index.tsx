@@ -55,8 +55,12 @@ export default function Event({ id }: Props) {
           //  ex) 저장된 일정인 경우 startTime: Date
           //  ex) 수정/저장시 일정인 경우 startTime: Date | undefined (undefined 상태 일 수 있음)
           if (event.startTime && event.endTime) {
+            const year = selectedDate.getFullYear()
+            const month = selectedDate.getMonth()
+            const date = selectedDate.getDate()
+            const nextDate = new Date(year, month, date + 1)
             return (
-              new Date(event.startTime).getTime() <= selectedDate.getTime() &&
+              new Date(event.startTime).getTime() <= nextDate.getTime() &&
               new Date(event.endTime).getTime() >= selectedDate.getTime()
             )
           } else {
