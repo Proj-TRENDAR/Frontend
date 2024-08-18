@@ -38,6 +38,10 @@ export default function RecurringEndTime({
   const handleMaxNum = () => {
     setActiveOption('max-num')
   }
+  const handleEndTime = () => {
+    setActiveOption('end-time')
+  }
+
   const calcEndDate = (newSelectMaxNum: number) => {
     if (recurringType === 'D') {
       const count = separationCount * newSelectMaxNum
@@ -178,13 +182,17 @@ export default function RecurringEndTime({
           <button
             className={`option end-time ${activeOption === 'end-time' ? 'current' : ''}`}
             onClick={() => {
-              setActiveOption('end-time')
+              if (maxNumOfOccurrances && selectEndDate) {
+                setRecurringEndTime(selectEndDate, null)
+              }
+              handleEndTime()
             }}
           >
             <DatePickerInput
               value={selectEndDate}
               setValue={value => {
                 setSelectEndDate(value)
+                setRecurringEndTime(value, null)
               }}
               showTimeSelect={false}
             />
