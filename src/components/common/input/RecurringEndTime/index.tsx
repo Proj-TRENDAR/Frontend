@@ -17,6 +17,9 @@ interface Props {
   recurringEndTime: Date | null
   setRecurringEndTime: (date: Date | null, maxNum: number | null) => void
 }
+
+const initialMaxNum = 1
+
 export default function RecurringEndTime({
   startTime,
   endTime,
@@ -28,7 +31,7 @@ export default function RecurringEndTime({
   setRecurringEndTime,
 }: Props) {
   const [activeOption, setActiveOption] = useState<'keep-repeat' | 'max-num' | 'end-time'>() // 현재 활성화된 옵션
-  const [selectMaxNum, setSelectMaxNum] = useState<number>(2) // 옵션에서 표시할 MaxNum
+  const [selectMaxNum, setSelectMaxNum] = useState<number>(initialMaxNum) // 옵션에서 표시할 MaxNum (ex. 1일때 2회반복임)
   const [selectEndDate, setSelectEndDate] = useState<Date | null>(null) // 옵션에서 표시할 endDate
   // 실제 저장할 데이터는 props에 있습니다.
 
@@ -104,12 +107,12 @@ export default function RecurringEndTime({
       console.debug('계속 반복', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('keep-repeat')
       setSelectEndDate(endTime ?? startTime)
-      setSelectMaxNum(2)
+      setSelectMaxNum(initialMaxNum)
     } else if (recurringEndTime !== null) {
       console.debug('기간 정함', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('end-time')
       setSelectEndDate(recurringEndTime)
-      setSelectMaxNum(2)
+      setSelectMaxNum(initialMaxNum)
     } else if (maxNumOfOccurrances !== null) {
       console.debug('횟수 정함', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('max-num')
@@ -160,7 +163,7 @@ export default function RecurringEndTime({
             >
               <Subtract />
             </IconButton>
-            <span>{selectMaxNum}회</span>
+            <span>{selectMaxNum + 1}회</span>
             <IconButton
               onClick={e => {
                 e.stopPropagation()
