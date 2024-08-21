@@ -95,8 +95,8 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
           startDate={event.startTime}
           dayOfMonth={event.dayOfMonth}
           weekOfMonth={event.weekOfMonth}
-          setDateOrWeek={(dayOfMonth: number[] | null, weekOfMonth: number | null) => {
-            setEvent({ ...event, dayOfMonth: dayOfMonth, weekOfMonth: weekOfMonth })
+          setDateOrWeek={(dayOfMonth: number[] | null, weekOfMonth: number | null, dayOfWeek: number[] | null) => {
+            setEvent({ ...event, dayOfMonth: dayOfMonth, weekOfMonth: weekOfMonth, dayOfWeek: dayOfWeek })
           }}
         />
       )}

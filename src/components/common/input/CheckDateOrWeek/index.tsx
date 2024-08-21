@@ -7,7 +7,7 @@ interface Props {
   startDate: Date | null
   dayOfMonth: number[] | null // 월간 특정 일 설정
   weekOfMonth: number | null // 월간 특정 주 설정
-  setDateOrWeek: (dayOfMonth: number[] | null, weekOfMonth: number | null) => void
+  setDateOrWeek: (dayOfMonth: number[] | null, weekOfMonth: number | null, dayOfWeek: number[] | null) => void
 }
 export default function CheckDateOrWeek({ startDate, dayOfMonth, weekOfMonth, setDateOrWeek }: Props) {
   console.debug(startDate)
@@ -18,7 +18,7 @@ export default function CheckDateOrWeek({ startDate, dayOfMonth, weekOfMonth, se
           className={`option keep-repeat ${dayOfMonth !== null ? 'current' : ''}`}
           onClick={() => {
             if (startDate) {
-              setDateOrWeek([startDate?.getDate()], null)
+              setDateOrWeek([startDate?.getDate()], null, null)
             }
           }}
         >
@@ -28,7 +28,7 @@ export default function CheckDateOrWeek({ startDate, dayOfMonth, weekOfMonth, se
           className={`option keep-repeat ${weekOfMonth !== null ? 'current' : ''}`}
           onClick={() => {
             if (startDate) {
-              setDateOrWeek(null, Number(dateFormat(new Date(startDate), 'W')))
+              setDateOrWeek(null, Number(dateFormat(new Date(startDate), 'W')), [startDate?.getDay()])
             }
           }}
         >
