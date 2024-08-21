@@ -54,8 +54,14 @@ export default function RecurringEndTime({
       return newEndDate
     }
     if (recurringType === 'W') {
-      const count = separationCount * 7 * newSelectMaxNum - 1
-      const newEndDate = new Date(startTime?.getFullYear(), startTime?.getMonth(), startTime?.getDate() + count)
+      const count = separationCount * 7 * newSelectMaxNum
+      const fullWeekCountFromstartTimeDay = 7 - startTime?.getDay()
+      // 일주일안에서 요일 선택이 가능하므로 해당 주 끝까지 날을 계산해주어야함
+      const newEndDate = new Date(
+        startTime?.getFullYear(),
+        startTime?.getMonth(),
+        startTime?.getDate() + count + fullWeekCountFromstartTimeDay
+      )
       console.debug('날짜 계산 테스트(주간)')
 
       return newEndDate
