@@ -24,7 +24,7 @@ export const Theme = styled.div<ThemeProps>`
   position: absolute;
   bottom: 12px;
   left: calc(100% - 50px);
-  z-index: 1;
+  z-index: 2;
 
   background-color: ${({ theme }) => theme.basicBg};
   border-radius: 16px;
