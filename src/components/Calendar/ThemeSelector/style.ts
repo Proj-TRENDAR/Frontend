@@ -16,7 +16,7 @@ interface ThemeProps {
 
 export const Theme = styled.div<ThemeProps>`
   width: 32px;
-  height: ${({ isPaletteOpen, themeCount }) => (isPaletteOpen ? `${32 * (themeCount + 1)}px` : '32px')};
+  height: ${({ $isPaletteOpen, $themeCount }) => ($isPaletteOpen ? `${32 * ($themeCount + 1)}px` : '32px')};
 
   display: flex;
   flex-direction: column-reverse;
@@ -33,9 +33,9 @@ export const Theme = styled.div<ThemeProps>`
   transition: height 0.5s ease;
 
   .icon {
-    transform: ${({ isPaletteOpen }) => (isPaletteOpen ? 'rotate(360deg)' : 'rotate(0deg)')};
-    animation: ${({ isPaletteOpen }) =>
-      isPaletteOpen
+    transform: ${({ $isPaletteOpen }) => ($isPaletteOpen ? 'rotate(360deg)' : 'rotate(0deg)')};
+    animation: ${({ $isPaletteOpen }) =>
+      $isPaletteOpen
         ? css`
             ${rotateAnimation} 0.4s linear
           `
