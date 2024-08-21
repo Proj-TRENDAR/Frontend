@@ -21,7 +21,7 @@ export const Theme = styled.div<ThemeProps>`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  position: sticky;
+  position: absolute;
   bottom: 12px;
   left: calc(100% - 50px);
   z-index: 1;
