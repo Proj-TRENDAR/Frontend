@@ -184,7 +184,7 @@ export const coolGrayTheme: DefaultTheme = {
   textRedDark: '#CC1212',
 }
 
-export const themeList = [coolGrayTheme, fluorescentTheme, brownTheme, darkTheme, basicTheme]
+export const themeList = [basicTheme, darkTheme, brownTheme, fluorescentTheme, coolGrayTheme]
 
 export const fonts = css`
   @font-face {

@@ -43,7 +43,7 @@ export const Theme = styled.div<ThemeProps>`
   }
   .palette {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     position: relative;
     overflow: hidden;
   }
