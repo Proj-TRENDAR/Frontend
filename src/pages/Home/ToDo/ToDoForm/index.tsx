@@ -60,7 +60,7 @@ export function ToDoDeleteForm({ todo, index, updateTodoItem, deleteTodoItem, cl
   return (
     <>
       <button className="done-button" onClick={() => updateTodoItem(index, { isDone: !todo.isDone })}>
-        {todo.isDone ? <CheckedIcon fill={theme.checkedColor} /> : <UncheckedIcon fill={theme.grayBtLight} />}
+        {todo.isDone ? <CheckedIcon fill={theme.point2} /> : <UncheckedIcon fill={theme.grayBtLight} />}
       </button>
       <span className={todo.isDone ? 'done' : ''}>{todo.title}</span>
       <ButtonInAlert

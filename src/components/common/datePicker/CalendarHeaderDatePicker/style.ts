@@ -138,7 +138,7 @@ export const CenterButton = styled.button<Pick<Props, 'size' | '$fullwidth' | 'w
   }
 
   ${props =>
-    props.isActive &&
+    props.$isActive &&
     css`
       background: ${({ theme }) => theme.basicBg};
     `}

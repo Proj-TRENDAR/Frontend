@@ -7,6 +7,8 @@ export const TodoList = styled.ul`
 
   flex-grow: 1;
 
+  color: ${({ theme }) => theme.text};
+
   list-style: none;
   overflow-y: auto;
 
@@ -88,8 +90,9 @@ export const Todo = styled.li<{ $type?: TodoType }>`
   }
 
   .done {
-    color: ${({ theme }) => theme.checkedTextColor};
-    mix-blend-mode: multiply;
+    color: ${({ theme }) => theme.text};
+    opacity: 30%;
+    //mix-blend-mode: multiply;
     text-decoration: line-through;
   }
 `

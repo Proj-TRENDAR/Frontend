@@ -1,14 +1,15 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAtom } from 'jotai'
 
-import { userInfoAtom } from '@/store'
-import { login } from '@/api/Auth/authApi.ts'
+import { themeAtom, userInfoAtom } from '@/store'
+import { themeList } from '@/styles/theme'
+import { login } from '@/api/Auth/authApi'
 
 const KakaoLogin = () => {
   const navigate = useNavigate()
   const [userInfo, setUserInfo] = useAtom(userInfoAtom)
+  const [, setTheme] = useAtom(themeAtom)
   const [isRequest, setRequest] = useState(false)
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const KakaoLogin = () => {
           userName: result.userName,
           id: result.id,
         })
+        setTheme(themeList[result.themeColor])
       } catch (err) {
         console.debug('로그인 실패', err)
         // NOTICE: 배포 시 주석 삭제

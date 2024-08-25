@@ -1,9 +1,11 @@
 import * as S from './style'
 import React from 'react'
-import TabButton, { ITabList } from '@components/common/button/TabButton'
-import CalendarHeaderDatePicker from '@components/common/datePicker/CalendarHeaderDatePicker'
 import { useAtom } from 'jotai'
 import { calendarInfoAtom } from '@/store'
+
+import TabButton, { ITabList } from '@components/common/button/TabButton'
+import CalendarHeaderDatePicker from '@components/common/datePicker/CalendarHeaderDatePicker'
+import ThemeSelector from '@components/Calendar/ThemeSelector'
 
 interface Props {
   tabList: ITabList[]
@@ -27,7 +29,10 @@ export default function CalendarLayout({ tabList, defaultTabKey, children }: Pro
           <TabButton tabList={tabList} defaultTabKey={defaultTabKey} />
         </div>
       </div>
-      <div className="calendar-body">{children}</div>
+      <div className="calendar-body">
+        {children}
+        <ThemeSelector />
+      </div>
     </S.Calendar>
   )
 }
