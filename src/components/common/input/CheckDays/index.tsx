@@ -10,7 +10,9 @@ export default function CheckDays({ dayOfWeek, setDayOfWeek }: Props) {
   const DAYS_Of_WEEK = ['일', '월', '화', '수', '목', '금', '토']
   const handleDayButton = (dayNum: number) => {
     if (dayOfWeek?.includes(dayNum)) {
-      setDayOfWeek(dayOfWeek.filter(v => v !== dayNum))
+      if (dayOfWeek !== null && dayOfWeek?.length >= 2) {
+        setDayOfWeek(dayOfWeek.filter(v => v !== dayNum))
+      }
     } else {
       setDayOfWeek(dayOfWeek === null ? [dayNum] : [...dayOfWeek, dayNum].sort((a, b) => a - b))
     }
