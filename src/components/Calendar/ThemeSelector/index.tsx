@@ -1,5 +1,5 @@
 import * as S from './style'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useAtom } from 'jotai'
 import { useTheme } from 'styled-components'
 import { themeAtom } from '@/store'
@@ -16,10 +16,12 @@ export default function ThemeSelector() {
   const [theme, setTheme] = useAtom(themeAtom)
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
   const [openErrorModal, setOpenErrorModal] = useState<boolean>(false)
+  const paletteRef = useRef<HTMLDivElement>(null)
 
   const handlePaletteClick = () => {
     setIsPaletteOpen(!isPaletteOpen)
   }
+
   const clickTheme = async (idx: number) => {
     const result = await changeTheme(idx)
     if (!result) {
@@ -28,8 +30,26 @@ export default function ThemeSelector() {
     setTheme(themeList[idx])
   }
 
+  const handleClickOutside = (event: { target: any }) => {
+    if (paletteRef.current && !paletteRef.current.contains(event.target)) {
+      setIsPaletteOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    if (isPaletteOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isPaletteOpen])
+
   return (
-    <S.Theme $isPaletteOpen={isPaletteOpen} $themeCount={themeList.length}>
+    <S.Theme $isPaletteOpen={isPaletteOpen} $themeCount={themeList.length} ref={paletteRef}>
       <IconButton onClick={handlePaletteClick} style={{ height: '32px', width: '32px' }}>
         <ThemeIcon className="icon" style={{ color }} />
       </IconButton>
