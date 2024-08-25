@@ -1,16 +1,33 @@
+import { useEffect, useState } from 'react'
+import { getRoutineList } from '@/api/Routine/routineApi.ts'
+import { IRoutine } from '@/types'
 import Add from '@assets/image/icon/ic-add.svg?react'
+
+import * as S from './style'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import IconButton from '@components/common/button/IconButton'
-import * as S from '@pages/Home/Routine/style.ts'
 import RoutineList from '@components/Routine/RoutineList'
-import { IRoutineList } from '@/types'
 
 interface Props {
   id: string
 }
 export default function Routine({ id }: Props) {
-  const routineList = null
+  const [routineList, setRoutineList] = useState<IRoutine[]>([])
+
+  const getRoutine = async () => {
+    try {
+      const { data } = await getRoutineList()
+      setRoutineList(data)
+    } catch (error) {
+      console.error('Failed to fetch routine list', error)
+    }
+  }
+
+  useEffect(() => {
+    getRoutine()
+  }, [])
+
   return (
     <AccordionItem
       moreStyle={S.RoutineWrapper}

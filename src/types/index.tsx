@@ -10,11 +10,18 @@ export interface IEvent {
   description: string
 }
 
-export interface IRoutineList {
+export interface IRoutine {
+  idx: number
   title: string
-  isDone: boolean
-  sequence: number
-  color: 'r1' | 'r2' | 'r3' | 'r4' | 'r5' | 'r6' | 'r7'
+  color: number
+  description: string | null
+  weeklyCondition: number
+  days: number[]
+  startTime: string
+  endTime: string | null
+  completed: string[] | null
+  deletedAt: string | null
+}
 }
 
 export interface ITodoList {

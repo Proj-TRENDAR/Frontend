@@ -13,5 +13,6 @@ export const API_PATHS = {
   logout: '/auth/logout',
   todo: '/todo',
   event: '/event',
+  routine: '/routine',
   changeTheme: '/user/theme',
 }
