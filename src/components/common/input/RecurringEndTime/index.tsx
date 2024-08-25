@@ -75,16 +75,17 @@ export default function RecurringEndTime({
       if (weekOfMonth) {
         // n째주 특정요일 날짜를 계산해야함
         const count = separationCount * newSelectMaxNum
-        const selectedDay = startTime?.getDay()
+        const selectedEndTimeDay = endTime?.getDay()
         const endMonthFirstDate = new Date(startTime?.getFullYear(), startTime?.getMonth() + count, 1)
-        const endMonthFirstDay = endMonthFirstDate.getDay()
+        const endMonthFirstDay = endMonthFirstDate.getDay() // 종료날짜가 포함된 달 1일의 요일
 
         const newEndDate = new Date(
           endMonthFirstDate.getFullYear(),
           endMonthFirstDate.getMonth(),
-          endMonthFirstDate.getDate() +
-            (endMonthFirstDay <= 3 ? weekOfMonth : weekOfMonth + 1) + // 수요일 기준으로 1주차로 시작 : 0주차로 시작
-            (selectedDay < endMonthFirstDay ? -1 * (endMonthFirstDay - selectedDay) : selectedDay)
+          (endMonthFirstDay <= 3 ? weekOfMonth - 1 : weekOfMonth) * 7 + // 수요일 기준으로 1주차로 시작 : 0주차로 시작
+            (selectedEndTimeDay < endMonthFirstDay
+              ? -1 * (endMonthFirstDay - selectedEndTimeDay) + 1
+              : selectedEndTimeDay - endMonthFirstDay + 1)
         )
         console.debug('날짜 계산 테스트(월간 n째주)')
 
