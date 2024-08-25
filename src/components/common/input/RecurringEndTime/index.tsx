@@ -10,6 +10,7 @@ import Subtract from '@assets/image/icon/ic-subtract.svg?react'
 interface Props {
   startTime: Date | null
   endTime: Date | null
+  dayOfWeek: number[] | null
   weekOfMonth: number | null
   separationCount: number | null
   recurringType: string | null
@@ -23,6 +24,7 @@ const initialMaxNum = 1
 export default function RecurringEndTime({
   startTime,
   endTime,
+  dayOfWeek,
   weekOfMonth,
   separationCount,
   recurringType,
@@ -55,7 +57,10 @@ export default function RecurringEndTime({
     }
     if (recurringType === 'W') {
       const count = separationCount * 7 * newSelectMaxNum
-      const fullWeekCountFromstartTimeDay = 7 - startTime?.getDay()
+      let fullWeekCountFromstartTimeDay = 0
+      if (dayOfWeek !== null) {
+        fullWeekCountFromstartTimeDay = dayOfWeek[dayOfWeek.length - 1]
+      }
       // 일주일안에서 요일 선택이 가능하므로 해당 주 끝까지 날을 계산해주어야함
       const newEndDate = new Date(
         startTime?.getFullYear(),
@@ -101,6 +106,12 @@ export default function RecurringEndTime({
       return newEndDate
     }
   }
+
+  useEffect(() => {
+    // 요일 변경시, 그에 맞춰 '반복 종료날짜'가 바뀌어야함
+    setSelectEndDate(calcEndDate(selectMaxNum))
+    setRecurringEndTime(calcEndDate(selectMaxNum), selectMaxNum)
+  }, [dayOfWeek])
 
   useEffect(() => {
     // FIXME: 생성시와 수정시에 초기화가 달라야함. 그 경우 처리가 제대로 되지 않아 이슈 있음.
