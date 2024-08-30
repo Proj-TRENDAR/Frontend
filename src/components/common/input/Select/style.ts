@@ -11,6 +11,7 @@ export const SelectWrapper = styled.div<{ isOpenModal: boolean }>`
     padding: 8px 8px 8px 12px;
     width: 100%;
     height: 35px;
+    color: ${({ theme }) => theme.text};
 
     display: flex;
     justify-content: space-between;
@@ -26,7 +27,7 @@ export const SelectWrapper = styled.div<{ isOpenModal: boolean }>`
     border-radius: ${borderRadius} ${borderRadius} 0 0;
 
     &.closed {
-      background-color: #fff;
+      background-color: ${({ theme }) => theme.basicBg};
 
       box-shadow: none;
       border-radius: ${borderRadius};
@@ -43,6 +44,7 @@ export const SelectWrapper = styled.div<{ isOpenModal: boolean }>`
     margin: 0;
     padding: 0;
 
+    background-color: ${({ theme }) => theme.basicBg};
     position: absolute;
     top: 38px;
     left: 0;
@@ -50,9 +52,12 @@ export const SelectWrapper = styled.div<{ isOpenModal: boolean }>`
     overflow: hidden;
     z-index: 1;
 
-    background-color: #fff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
     border-radius: 0 0 ${borderRadius} ${borderRadius};
+
+    button {
+      color: ${({ theme }) => theme.text};
+    }
 
     &.closed {
       height: 0;

@@ -126,7 +126,7 @@ export default function EventCreate() {
         }}
         placeholder="제목 입력"
       />
-      <IconInputWrapper icon={<Clock />} $backgroundColor="#fff">
+      <IconInputWrapper icon={<Clock />} $backgroundColor={theme.basicBg}>
         <ToggleButton
           id="isAllDay"
           label="하루 종일"

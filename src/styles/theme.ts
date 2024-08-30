@@ -38,6 +38,12 @@ export const basicTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
+
+  labelGray: '#D0D0D0',
+  placeholder: '#CDCDCD',
+  toggleUnChecked: '#F4F4F4',
+  checkedColor: '#1DB993',
+  checkedTextColor: '#DDDDDD',
 }
 
 export const darkTheme: DefaultTheme = {
@@ -74,6 +80,12 @@ export const darkTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#F44336',
   textRedDark: '#E57373',
+
+  labelGray: '#D0D0D0',
+  placeholder: '#CDCDCD',
+  toggleUnChecked: '#333a4a',
+  checkedColor: '#1DB993',
+  checkedTextColor: '#DDDDDD',
 }
 
 export const brownTheme: DefaultTheme = {
@@ -110,6 +122,12 @@ export const brownTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
+
+  labelGray: '#D0D0D0',
+  placeholder: '#CDCDCD',
+  toggleUnChecked: '#EEEEEE',
+  checkedColor: '#1DB993',
+  checkedTextColor: '#DDDDDD',
 }
 
 export const fluorescentTheme: DefaultTheme = {
@@ -146,6 +164,12 @@ export const fluorescentTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
+
+  labelGray: '#D0D0D0',
+  placeholder: '#CDCDCD',
+  toggleUnChecked: '#F4F4F4',
+  checkedColor: '#1DB993',
+  checkedTextColor: '#DDDDDD',
 }
 
 export const coolGrayTheme: DefaultTheme = {
@@ -182,6 +206,12 @@ export const coolGrayTheme: DefaultTheme = {
   textLight: '#CBCBCB',
   textRed: '#E43636',
   textRedDark: '#CC1212',
+
+  labelGray: '#D0D0D0',
+  placeholder: '#CDCDCD',
+  toggleUnChecked: '#F4F4F4',
+  checkedColor: '#1DB993',
+  checkedTextColor: '#DDDDDD',
 }
 
 export const themeList = [basicTheme, darkTheme, brownTheme, fluorescentTheme, coolGrayTheme]

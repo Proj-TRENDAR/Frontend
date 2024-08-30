@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
     font-family: 'NanumBarunGothic', sans-serif;
     font-size: 15px;
     text-align: right;
+    color: ${({ theme }) => theme.text};
 
     border: solid 1px ${({ theme }) => theme.grayLine};
 

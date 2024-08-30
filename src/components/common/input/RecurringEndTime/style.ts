@@ -22,6 +22,9 @@ export const Wrapper = styled.div`
     }
     button {
       flex-shrink: 0;
+      svg {
+        fill: ${({ theme }) => theme.point};
+      }
     }
   }
   .end-time {
@@ -31,6 +34,8 @@ export const Wrapper = styled.div`
     padding: 0;
     margin: 0;
     width: 100%;
+
+    color: ${({ theme }) => theme.text};
 
     background-color: ${({ theme }) => theme.basicBg};
 

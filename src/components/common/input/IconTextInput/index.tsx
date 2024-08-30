@@ -7,10 +7,11 @@ interface Props {
   value: string
   setValue: (value: string) => void
   placeholder: string
+  $backgroundColor?: string
 }
-export default function IconTextInput({ icon, id, value, setValue, placeholder }: Props) {
+export default function IconTextInput({ icon, id, value, setValue, placeholder, $backgroundColor }: Props) {
   return (
-    <IconInputWrapper icon={icon}>
+    <IconInputWrapper icon={icon} $backgroundColor={$backgroundColor}>
       <S.TextInput
         id={id}
         type="text"

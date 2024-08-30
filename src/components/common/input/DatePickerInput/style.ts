@@ -8,8 +8,13 @@ export const DatePickerWrapper = styled.div<{ showTimeSelect: boolean }>`
     input {
       font-family: 'NanumBarunGothic', sans-serif;
       font-size: 15px;
+      color: ${({ theme }) => theme.text};
 
       border: solid 1px ${({ theme }) => theme.grayLine};
+
+      &::placeholder {
+        color: ${({ theme }) => theme.placeholder};
+      }
     }
   }
   .react-datepicker {
