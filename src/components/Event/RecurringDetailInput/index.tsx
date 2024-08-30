@@ -52,6 +52,10 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
       case 'Y':
         return setEvent({
           ...commonInitial,
+          ...{
+            dayOfMonth: [event.startTime?.getDate()],
+            monthOfYear: [event.startTime?.getMonth() + 1],
+          },
         })
       default:
         return setEvent(commonInitial)

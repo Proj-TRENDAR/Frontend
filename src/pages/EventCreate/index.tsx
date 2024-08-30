@@ -27,6 +27,7 @@ export interface IRecurring {
   dayOfWeek: number[] | null // 주간 특정 요일 설정
   dayOfMonth: number[] | null // 월간 특정 일 설정
   weekOfMonth: number | null // 월간 특정 주 설정
+  monthOfYear: number[] | null // 년간 특정 월 설정
   recurringEndTime: Date | null // 반복종료시간 ex) 0000년 00월 00일까지
 }
 export interface ICreateEvent extends IRecurring {
