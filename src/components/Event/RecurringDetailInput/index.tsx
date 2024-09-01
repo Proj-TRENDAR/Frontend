@@ -41,7 +41,7 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
           return setEvent({
             ...commonInitial,
             ...{
-              dayOfMonth: [event.startTime?.getDay()],
+              dateOfMonth: [event.startTime?.getDay()],
             },
           })
         } else {
@@ -53,7 +53,7 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
         return setEvent({
           ...commonInitial,
           ...{
-            dayOfMonth: [event.startTime?.getDate()],
+            dateOfMonth: [event.startTime?.getDate()],
             monthOfYear: [event.startTime?.getMonth() + 1],
           },
         })
@@ -97,10 +97,10 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
         // 월간반복 선택시
         <CheckDateOrWeek
           startDate={event.startTime}
-          dayOfMonth={event.dayOfMonth}
+          dateOfMonth={event.dateOfMonth}
           weekOfMonth={event.weekOfMonth}
-          setDateOrWeek={(dayOfMonth: number[] | null, weekOfMonth: number | null, dayOfWeek: number[] | null) => {
-            setEvent({ ...event, dayOfMonth: dayOfMonth, weekOfMonth: weekOfMonth, dayOfWeek: dayOfWeek })
+          setDateOrWeek={(dateOfMonth: number[] | null, weekOfMonth: number | null, dayOfWeek: number[] | null) => {
+            setEvent({ ...event, dateOfMonth: dateOfMonth, weekOfMonth: weekOfMonth, dayOfWeek: dayOfWeek })
           }}
         />
       )}

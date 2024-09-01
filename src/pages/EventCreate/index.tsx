@@ -25,7 +25,7 @@ export interface IRecurring {
   separationCount: number | null // 간격 주기 설정 ex) 이틀마다, 격주마다..
   maxNumOfOccurrances: number | null // 최대반복횟수 ex) n회
   dayOfWeek: number[] | null // 주간 특정 요일 설정
-  dayOfMonth: number[] | null // 월간 특정 일 설정
+  dateOfMonth: number[] | null // 월간 특정 일 설정
   weekOfMonth: number | null // 월간 특정 주 설정
   monthOfYear: number[] | null // 년간 특정 월 설정
   recurringEndTime: Date | null // 반복종료시간 ex) 0000년 00월 00일까지
@@ -52,7 +52,7 @@ export default function EventCreate() {
     separationCount: null,
     maxNumOfOccurrances: null,
     dayOfWeek: null,
-    dayOfMonth: null,
+    dateOfMonth: null,
     weekOfMonth: null,
     recurringEndTime: null,
   }
