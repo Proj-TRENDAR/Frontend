@@ -20,8 +20,8 @@ export interface IRoutine {
   startTime: string
   endTime: string | null
   completed: string[] | null
-  deletedAt: string | null
-}
+  sequence: number
+  deletedAt: string | null // FIXME: 불필요 시 삭제
 }
 
 export interface ITodoList {
