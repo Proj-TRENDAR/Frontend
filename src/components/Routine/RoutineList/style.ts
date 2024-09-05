@@ -1,8 +1,12 @@
 import { styled } from 'styled-components'
 
 export const RoutineList = styled.ul`
-  margin: 0;
+  width: 100%;
   padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
   list-style: none;
 `
 export const Routine = styled.li<{ color: string }>`
@@ -13,11 +17,7 @@ export const Routine = styled.li<{ color: string }>`
   align-items: center;
 
   background-color: ${props => {
-    if (props?.color) {
-      return props.theme[props.color] ?? props.theme.r1
-    } else {
-      return props.theme.r1
-    }
+    return props?.color ? props.theme[`r${props.color}`] : props.theme.r1
   }};
   border-radius: 8px;
 
