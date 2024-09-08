@@ -8,7 +8,7 @@ import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import IconButton from '@components/common/button/IconButton'
 import RoutineList from '@components/Routine/RoutineList'
-import { routineAtom } from '@/store'
+import { calendarInfoAtom, routineAtom } from '@/store'
 import { useAtom } from 'jotai'
 
 interface Props {
@@ -16,12 +16,16 @@ interface Props {
 }
 
 export default function Routine({ id }: Props) {
+  const [calendarInfo] = useAtom(calendarInfoAtom)
+  const selectedDate = calendarInfo.selectedDate
   const [routineList, setRoutineList] = useAtom<IRoutine[]>(routineAtom)
 
   const getRoutine = async () => {
     try {
       const { data } = await getRoutineList()
-      setRoutineList(data)
+      const filteredData = data.filter(item => !item.endTime || selectedDate < new Date(item.endTime))
+
+      setRoutineList(filteredData)
     } catch (error) {
       console.error('Failed to fetch routine list', error)
     }
@@ -29,7 +33,7 @@ export default function Routine({ id }: Props) {
 
   useEffect(() => {
     getRoutine()
-  }, [])
+  }, [selectedDate])
 
   return (
     <AccordionItem

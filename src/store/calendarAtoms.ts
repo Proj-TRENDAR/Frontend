@@ -3,12 +3,12 @@ import { atomWithStorage } from 'jotai/utils'
 import { IEvent } from '@/types'
 
 interface ICalendarInfo {
-  selectedDate: Date | null
+  selectedDate: Date
   selectedMonthInfo: IEvent[][]
 }
 
 export const calendarInfoAtom = atomWithStorage<ICalendarInfo>('calendarInfo', {
-  selectedDate: null,
+  selectedDate: new Date(),
   selectedMonthInfo: [],
 })
 
