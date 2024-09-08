@@ -199,8 +199,9 @@ export default function MonthlyCalendar() {
         longEvent[i]++
       }
     })
-
-    return longEvent.map((number, i) => number + short[i]?.length)
+    return longEvent.map((number, i) => {
+      return number + short[i]?.length ?? 0
+    })
   }
 
   return (
@@ -304,7 +305,7 @@ export default function MonthlyCalendar() {
                       return (
                         <HideEventList
                           gridColumnStart={event.start + 1}
-                          numberOfEvents={numberOfWeekEvents[i] - MAX_NUM_OF_EVENT_VISIBLE}
+                          numberOfEvents={numberOfWeekEvents[event.start] - MAX_NUM_OF_EVENT_VISIBLE}
                         />
                       )
                     }
@@ -331,7 +332,7 @@ export default function MonthlyCalendar() {
                           return (
                             <HideEventList
                               gridColumnStart={event.start + 1}
-                              numberOfEvents={numberOfWeekEvents[i] - MAX_NUM_OF_EVENT_VISIBLE}
+                              numberOfEvents={numberOfWeekEvents[event.start] - MAX_NUM_OF_EVENT_VISIBLE}
                             />
                           )
                         }
