@@ -1,3 +1,12 @@
+import { format } from 'date-fns-tz'
+
+export function convertToKSTDateTime(date: Date): string {
+  return format(new Date(date), 'yyyy-MM-dd HH:mm:ss', { timeZone: 'Asia/Seoul' })
+}
+export function convertToKSTDate(date: Date): string {
+  return format(new Date(date), 'yyyy-MM-dd', { timeZone: 'Asia/Seoul' })
+}
+
 const getWeekOfMonth = (date: Date): { year: number; month: number; week: number } => {
   const year = date.getFullYear()
   const month = date.getMonth()
