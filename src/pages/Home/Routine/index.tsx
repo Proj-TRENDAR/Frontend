@@ -8,12 +8,15 @@ import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
 import IconButton from '@components/common/button/IconButton'
 import RoutineList from '@components/Routine/RoutineList'
+import { routineAtom } from '@/store'
+import { useAtom } from 'jotai'
 
 interface Props {
   id: string
 }
+
 export default function Routine({ id }: Props) {
-  const [routineList, setRoutineList] = useState<IRoutine[]>([])
+  const [routineList, setRoutineList] = useAtom<IRoutine[]>(routineAtom)
 
   const getRoutine = async () => {
     try {
