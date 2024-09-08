@@ -304,6 +304,7 @@ export default function MonthlyCalendar() {
                     } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {
                       return (
                         <HideEventList
+                          key={`${weekNum}-${event.start}-${i}`}
                           gridColumnStart={event.start + 1}
                           numberOfEvents={numberOfWeekEvents[event.start] - MAX_NUM_OF_EVENT_VISIBLE}
                         />
@@ -331,6 +332,7 @@ export default function MonthlyCalendar() {
                         } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {
                           return (
                             <HideEventList
+                              key={`${weekNum}-${event.start}-${i}`}
                               gridColumnStart={event.start + 1}
                               numberOfEvents={numberOfWeekEvents[event.start] - MAX_NUM_OF_EVENT_VISIBLE}
                             />

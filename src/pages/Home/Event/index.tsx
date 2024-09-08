@@ -60,7 +60,7 @@ export default function Event({ id }: Props) {
             const date = selectedDate.getDate()
             const nextDate = new Date(year, month, date + 1)
             return (
-              new Date(event.startTime).getTime() <= nextDate.getTime() &&
+              new Date(event.startTime).getTime() < nextDate.getTime() &&
               new Date(event.endTime).getTime() >= selectedDate.getTime()
             )
           } else {
