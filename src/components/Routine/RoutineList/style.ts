@@ -46,4 +46,10 @@ export const Routine = styled.li<{ color: string }>`
     line-height: 1rem;
     color: ${({ theme }) => theme.basicBg};
   }
+
+  .done {
+    color: ${({ theme }) => theme.text};
+    opacity: 30%;
+    text-decoration: line-through;
+  }
 `

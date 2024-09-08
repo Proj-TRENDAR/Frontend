@@ -72,17 +72,31 @@ function EmptyContent() {
   )
 }
 
-const ExamDummy: IRoutineList[] = [
+const ExamDummy: IRoutine[] = [
   {
+    idx: 1,
     title: '아침 운동하기',
-    isDone: false,
+    color: 1,
+    description: '살을 빼자!',
+    weeklyCondition: 3,
+    days: [1, 3, 5],
+    startTime: '2024-09-01 11:25:00',
+    endTime: '2024-10-30 23:59:59',
+    completed: null,
     sequence: 1,
-    color: 'r1',
+    deletedAt: null,
   },
   {
+    idx: 2,
     title: '독서하기',
-    isDone: false,
+    color: 3,
+    description: null,
+    weeklyCondition: 3,
+    days: [2, 4],
+    startTime: '2024-09-01 00:00:00',
+    endTime: null,
+    completed: null,
     sequence: 2,
-    color: 'r3',
+    deletedAt: null,
   },
 ]
