@@ -15,10 +15,10 @@ export default function EventList({ list }: Props) {
   const theme = useTheme()
   return (
     <S.EventList>
-      {list.map(event => {
+      {list.map((event, index) => {
         const selectedDate = new Date(calendarInfo.selectedDate)
         return event.being !== null ? (
-          <li key={event.idx} className={`long-event ${event.isAllDay ? '' : 'long-time'}`}>
+          <li key={`${index}-${event.idx}`} className={`long-event ${event.isAllDay ? '' : 'long-time'}`}>
             {event.isAllDay ? (
               <span className="time">하루</span>
             ) : (
@@ -46,7 +46,7 @@ export default function EventList({ list }: Props) {
             </button>
           </li>
         ) : (
-          <li>
+          <li key={`${index}-${event.idx}`}>
             <span className="time">
               {dateFormat(new Date(event.startTime), 'hh:mm')} ~ {dateFormat(new Date(event.endTime), 'hh:mm')}
             </span>
