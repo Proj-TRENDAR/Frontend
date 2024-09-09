@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { getRoutineList } from '@/api/Routine/routineApi.ts'
 import { IRoutine } from '@/types'
 import Add from '@assets/image/icon/ic-add.svg?react'
@@ -64,7 +64,7 @@ function EmptyContent() {
   return (
     <S.EmptyContent>
       <p className="description">
-        저장한 루틴이 없습니다.
+        저장된 루틴이 없습니다.
         <br />
         루틴을 설정하고 좋은 습관을 들여보세요
       </p>
