@@ -104,29 +104,27 @@ function TodoItem({ index, todo, updateTodoItem, deleteTodoItem }: TodoItemProps
         {todo.isDone ? <CheckedIcon fill={theme.point2} /> : <UncheckedIcon fill={theme.grayBtLight} />}
       </button>
       <span className={todo.isDone ? 'done' : ''}>{todo.title}</span>
-      <div>
-        <ButtonsModal button={<MoreIcon fill={theme.grayBtLight} />} position={{ left: '-30px' }}>
-          <li>
-            <button
-              onClick={() => {
-                setType('edit')
-              }}
-            >
-              수정
-            </button>
-          </li>
-          <li>
-            <button
-              className="red"
-              onClick={() => {
-                setType('delete')
-              }}
-            >
-              삭제
-            </button>
-          </li>
-        </ButtonsModal>
-      </div>
+      <ButtonsModal button={<MoreIcon fill={theme.grayBtLight} />} position={{ left: '-30px' }}>
+        <li>
+          <button
+            onClick={() => {
+              setType('edit')
+            }}
+          >
+            수정
+          </button>
+        </li>
+        <li>
+          <button
+            className="red"
+            onClick={() => {
+              setType('delete')
+            }}
+          >
+            삭제
+          </button>
+        </li>
+      </ButtonsModal>
     </S.Todo>
   )
 }
