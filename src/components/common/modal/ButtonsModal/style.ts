@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 
 export const ModalWrapper = styled.div`
+  display: flex;
   position: relative;
 `
 export const Modal = styled.ul`
