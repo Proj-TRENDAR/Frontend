@@ -100,11 +100,13 @@ function RoutineItem({ index, routine, updateRoutineItem, isDone }: RoutineItemP
   if (type === 'delete') {
     return (
       <S.Routine key={routine.sequence} color={routine.color} type={type}>
-        <span>
-          <b>'{routine.title}'</b>을(를) 삭제하시겠습니까?
-          <br />
-          삭제 시 루틴 기록도 함께 삭제됩니다.
+        <div className="delete-message">
           <div>
+            <b>'{routine.title}'</b>을(를) 삭제하시겠습니까?
+            <br />
+            삭제 시 루틴 기록도 함께 삭제됩니다.
+          </div>
+          <div className="button-wrapper">
             <ButtonInAlert
               type="cancel"
               onClick={() => {
@@ -118,7 +120,7 @@ function RoutineItem({ index, routine, updateRoutineItem, isDone }: RoutineItemP
               }}
             />
           </div>
-        </span>
+        </div>
       </S.Routine>
     )
   }

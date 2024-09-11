@@ -39,6 +39,25 @@ export const Routine = styled.li<{ color: number; type?: RoutineType }>`
     margin-bottom: 8px;
   }
 
+  .delete-message {
+    gap: 10px;
+
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    color: ${({ theme }) => theme.basicBg};
+  }
+
+  .button-wrapper {
+    gap: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
   .done-button {
     margin: 0;
     padding: 0;
