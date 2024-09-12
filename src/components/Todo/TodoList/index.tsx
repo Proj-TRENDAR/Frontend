@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { useTheme } from 'styled-components'
 import { getTodoList, updateTodo, deleteTodo } from '@/api/Todo/todoApi.ts'
 import { ITodoList } from '@/types'
@@ -9,12 +10,16 @@ import CheckedIcon from '@assets/image/icon/check/ic-checked.svg?react'
 import UncheckedIcon from '@assets/image/icon/check/ic-unchecked.svg?react'
 import MoreIcon from '@assets/image/icon/ic-more.svg?react'
 import { ToDoDeleteForm, ToDoInputForm } from '@pages/Home/ToDo/ToDoForm'
+import ErrorAlertModal from '@components/common/modal/ErrorModal'
 
 interface Props {
   list: ITodoList[]
   setTodoList?: React.Dispatch<React.SetStateAction<ITodoList[]>>
 }
 export default function TodoList({ list = [], setTodoList }: Props) {
+  const [openErrorModal, setOpenErrorModal] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>('')
+
   const updateTodoItem = async (index: number, newData: { isDone?: boolean; title?: string }) => {
     list.map(async (todo: ITodoList, i: number) => {
       if (i === index) {
@@ -29,25 +34,37 @@ export default function TodoList({ list = [], setTodoList }: Props) {
   }
 
   const deleteTodoItem = async (idx: number) => {
-    const result = await deleteTodo(idx)
-    if (result.status === 200) {
-      const { data } = await getTodoList()
-      setTodoList && setTodoList(data)
+    try {
+      const result = await deleteTodo(idx)
+      if (result.status === 204) {
+        const { data } = await getTodoList()
+        setTodoList && setTodoList(data)
+      }
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        setErrorMessage(err.response.data.message || '삭제 중 오류가 발생했습니다.')
+      } else {
+        setErrorMessage('예상치 못한 오류가 발생했습니다.')
+      }
+      setOpenErrorModal(true)
     }
   }
 
   return (
-    <S.TodoList>
-      {list.map((todo, index) => (
-        <TodoItem
-          key={todo.idx}
-          index={index}
-          todo={todo}
-          updateTodoItem={updateTodoItem}
-          deleteTodoItem={deleteTodoItem}
-        />
-      ))}
-    </S.TodoList>
+    <>
+      <S.TodoList>
+        {list.map((todo, index) => (
+          <TodoItem
+            key={todo.idx}
+            index={index}
+            todo={todo}
+            updateTodoItem={updateTodoItem}
+            deleteTodoItem={deleteTodoItem}
+          />
+        ))}
+      </S.TodoList>
+      {openErrorModal && <ErrorAlertModal errorMessage={errorMessage} onClose={() => setOpenErrorModal(false)} />}
+    </>
   )
 }
 
