@@ -30,7 +30,7 @@ export default function RoutineList({ list, setRoutineList }: Props) {
   const selectedDate = calendarInfo.selectedDate
 
   const [isDone, setIsDone] = useState<boolean[]>([])
-  const [types, setTypes] = useState<'basic' | 'edit' | 'stop' | 'delete'[]>([])
+  const [types, setTypes] = useState<('basic' | 'edit' | 'stop' | 'delete')[]>([])
   const [openErrorModal, setOpenErrorModal] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
 
