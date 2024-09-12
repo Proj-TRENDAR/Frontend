@@ -9,6 +9,20 @@ export const RoutineList = styled.ul`
   display: flex;
   flex-direction: column;
   list-style: none;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #cdcdcd;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
 `
 type RoutineType = 'basic' | 'edit' | 'stop' | 'delete'
 

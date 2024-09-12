@@ -6,6 +6,10 @@ export const getRoutineList = async (): Promise<AxiosResponse<IRoutine[]>> => {
   return await axios.get(API_PATHS.routine)
 }
 
+export const deleteRoutine = async (routineIdx: number) => {
+  return await axios.delete(`${API_PATHS.routine}/hard/${routineIdx}`)
+}
+
 export const postRoutineCompleted = async (routineIdx: number, completedAt: string) => {
   return await axios.post(`${API_PATHS.routine}/completed`, {
     routineIdx,

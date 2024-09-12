@@ -55,7 +55,7 @@ export default function Routine({ id }: Props) {
       }
     >
       {/* TODO: 루틴 목록 여부에 따라 출력이 달라져야함. 지금은 우선 목록이 없는 경우로만 출력함 */}
-      {routineList ? <RoutineList list={routineList} /> : <EmptyContent />}
+      {routineList ? <RoutineList list={routineList} setRoutineList={setRoutineList} /> : <EmptyContent />}
     </AccordionItem>
   )
 }
