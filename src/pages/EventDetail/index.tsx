@@ -36,7 +36,13 @@ export default function EventDetail() {
 
   return (
     <S.Wrapper className="detail">
-      <PageLayout title="일정 보기" backgroundColor={theme.basicBg}>
+      <PageLayout
+        title="일정 보기"
+        backgroundColor={theme.basicBg}
+        onClose={() => {
+          navigate('/')
+        }}
+      >
         <div className="line">
           <S.Title>
             {selectedEvent?.being !== null ? (

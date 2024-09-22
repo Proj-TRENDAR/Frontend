@@ -8,9 +8,10 @@ interface Props {
   title: string
   backgroundColor: string
   children: React.ReactNode
+  onClose?: () => void
 }
 
-export default function PageLayout({ title, backgroundColor, children }: Props) {
+export default function PageLayout({ title, backgroundColor, children, onClose }: Props) {
   const navigate = useNavigate()
   return (
     // 아래 style에서 height계산 중 '64px'은 유저 Header height임
@@ -25,7 +26,11 @@ export default function PageLayout({ title, backgroundColor, children }: Props) 
           button={
             <IconButton
               onClick={() => {
-                navigate(-1)
+                if (onClose) {
+                  onClose()
+                } else {
+                  navigate(-1)
+                }
               }}
             >
               <X />
