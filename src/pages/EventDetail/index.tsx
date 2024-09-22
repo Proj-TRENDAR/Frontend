@@ -34,7 +34,6 @@ export default function EventDetail() {
   return (
     <S.Wrapper className="detail">
       <PageLayout title="일정 보기2" backgroundColor={theme.basicBg}>
-        {/*TODO: selectedEvent.color, isAllDay에 따라 보여주어야함 */}
         <div className="line">
           <S.Title>
             {selectedEvent.being !== null ? (
