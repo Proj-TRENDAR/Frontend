@@ -2,9 +2,12 @@ export interface IEvent {
   idx: string
   title: string
   isAllDay: boolean
+  isRecurringData: boolean
   being: number | null
   startTime: string
   endTime: string
+  originStartTime?: string
+  originEndTime?: string
   color: number
   place: string
   description: string

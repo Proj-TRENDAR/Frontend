@@ -4,6 +4,8 @@ import { useTheme } from 'styled-components'
 import dateFormat from '@/utils/dateFormat.ts'
 import { useAtom } from 'jotai/index'
 import { calendarInfoAtom } from '@/store'
+import { useNavigate } from 'react-router'
+import { eventInfoAtom } from '@/store/eventAtoms.ts'
 
 interface Props {
   list: IEvent[]
@@ -11,8 +13,15 @@ interface Props {
 
 export default function EventList({ list }: Props) {
   const [calendarInfo] = useAtom(calendarInfoAtom)
-
+  const navigate = useNavigate()
   const theme = useTheme()
+  const [_eventAtom, setEventAtom] = useAtom(eventInfoAtom)
+
+  const navigateDetailPage = (selectedEvent: IEvent) => {
+    setEventAtom({ selectedEvent })
+    navigate(`/event/${selectedEvent.idx}`)
+  }
+
   return (
     <S.EventList>
       {list.map((event, index) => {
@@ -38,8 +47,11 @@ export default function EventList({ list }: Props) {
                     }
                   : {
                       backgroundColor: 'unset',
-                      border: `solid 2px ${theme.grayLine}`,
+                      border: `solid 2px ${theme[`s${event.color}`]}`,
                     }),
+              }}
+              onClick={() => {
+                navigateDetailPage(event)
               }}
             >
               {event.title}
@@ -50,7 +62,13 @@ export default function EventList({ list }: Props) {
             <span className="time">
               {dateFormat(new Date(event.startTime), 'hh:mm')} ~ {dateFormat(new Date(event.endTime), 'hh:mm')}
             </span>
-            <button>{event.title}</button>
+            <button
+              onClick={() => {
+                navigateDetailPage(event)
+              }}
+            >
+              {event.title}
+            </button>
           </li>
         )
       })}
