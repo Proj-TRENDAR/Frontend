@@ -7,6 +7,7 @@ import { useAtom } from 'jotai'
 import HandleDate from '@/utils/calcDate'
 import { IEvent } from '@/types'
 import { getEventList } from '@/api/Event/eventApi.ts'
+import useNavigateEventDetailPage from '@/Hooks/useNavigateEventDetailPage.ts'
 
 const MAX_NUM_OF_EVENT_VISIBLE = 3
 
@@ -25,6 +26,8 @@ export default function MonthlyCalendar() {
   const theme = useTheme()
   const today = new Date()
   const handleDate = new HandleDate()
+
+  const [navigateDetailPage] = useNavigateEventDetailPage()
 
   useEffect(() => {
     if (calendarInfo.selectedDate !== null) {
@@ -287,17 +290,26 @@ export default function MonthlyCalendar() {
                             style={{
                               // gridArea: gridRowStart / 시작일 / gridRowStart + 1 / 종료일
                               gridArea: `${event.row + 1} / ${event.start + 1} / ${event.row + 2} / ${event.start + 1 + (event.being ?? 0)}`,
-                              ...(event.isAllDay
-                                ? {
-                                    backgroundColor: theme[`s${event.color}`],
-                                  }
-                                : {
-                                    backgroundColor: 'unset',
-                                    border: `solid 2px ${theme[`s${event.color}`]}`,
-                                  }),
                             }}
                           >
-                            <span>{event.title}</span>
+                            <button
+                              style={{
+                                ...(event.isAllDay
+                                  ? {
+                                      backgroundColor: theme[`s${event.color}`],
+                                      border: `solid 2px ${theme[`s${event.color}`]}`,
+                                    }
+                                  : {
+                                      backgroundColor: 'unset',
+                                      border: `solid 2px ${theme[`s${event.color}`]}`,
+                                    }),
+                              }}
+                              onClick={() => {
+                                navigateDetailPage(event)
+                              }}
+                            >
+                              {event.title}
+                            </button>
                           </li>
                         )
                       )
@@ -326,7 +338,13 @@ export default function MonthlyCalendar() {
                                 gridRowStart: event.row + 1,
                               }}
                             >
-                              <span>{event.title}</span>
+                              <button
+                                onClick={() => {
+                                  navigateDetailPage(event)
+                                }}
+                              >
+                                {event.title}
+                              </button>
                             </S.EventDotList>
                           )
                         } else if (event.row === MAX_NUM_OF_EVENT_VISIBLE) {

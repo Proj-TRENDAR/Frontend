@@ -6,6 +6,7 @@ import { useAtom } from 'jotai/index'
 import { calendarInfoAtom } from '@/store'
 import { useNavigate } from 'react-router'
 import { eventInfoAtom } from '@/store/eventAtoms.ts'
+import useNavigateEventDetailPage from '@/Hooks/useNavigateEventDetailPage.ts'
 
 interface Props {
   list: IEvent[]
@@ -16,11 +17,7 @@ export default function EventList({ list }: Props) {
   const navigate = useNavigate()
   const theme = useTheme()
   const [_eventAtom, setEventAtom] = useAtom(eventInfoAtom)
-
-  const navigateDetailPage = (selectedEvent: IEvent) => {
-    setEventAtom({ selectedEvent })
-    navigate(`/event/${selectedEvent.idx}`)
-  }
+  const [navigateDetailPage] = useNavigateEventDetailPage()
 
   return (
     <S.EventList>

@@ -11,6 +11,7 @@ import Clock from '@assets/image/icon/event/ic-clock.svg?react'
 import Button from '@components/common/button/Button'
 import dateFormat from '@/utils/dateFormat.ts'
 import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
 
 //0 = 일요일, 1 = 월요일, 2 = 화요일, 3 = 수요일, 4 = 목요일, 5 = 금요일, 6 = 토요일
 
@@ -27,29 +28,31 @@ export default function EventDetail() {
   // const [event, setEvent] = useState<ICreateEvent>(initial)
   const theme = useTheme()
 
-  if (selectedEvent === undefined) {
-    navigate('/')
-  }
+  useEffect(() => {
+    if (selectedEvent === undefined || selectedEvent === null) {
+      navigate('/')
+    }
+  }, [selectedEvent])
 
   return (
     <S.Wrapper className="detail">
-      <PageLayout title="일정 보기2" backgroundColor={theme.basicBg}>
+      <PageLayout title="일정 보기" backgroundColor={theme.basicBg}>
         <div className="line">
           <S.Title>
-            {selectedEvent.being !== null ? (
+            {selectedEvent?.being !== null ? (
               <div
                 style={{
-                  ...(selectedEvent.isAllDay
+                  ...(selectedEvent?.isAllDay
                     ? {
-                        backgroundColor: theme[`s${selectedEvent.color}`],
+                        backgroundColor: theme[`s${selectedEvent?.color}`],
                       }
                     : {
                         backgroundColor: 'unset',
-                        border: `solid 2px ${theme[`s${selectedEvent.color}`]}`,
+                        border: `solid 2px ${theme[`s${selectedEvent?.color}`]}`,
                       }),
                 }}
               >
-                {selectedEvent.title}
+                {selectedEvent?.title}
               </div>
             ) : (
               selectedEvent?.title

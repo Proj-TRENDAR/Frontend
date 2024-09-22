@@ -111,29 +111,23 @@ export const Week = styled.div`
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(7, 1fr);
     & > li {
-      padding: 0 8px;
-
       display: flex;
-      align-items: center;
+      align-items: stretch;
       position: relative;
       z-index: 1;
 
-      font-size: 11px;
+      border-radius: 20px;
+
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
 
-      border: solid 1px transparent;
-      border-radius: 20px;
-
-      cursor: pointer;
       transition:
         box-shadow 0.2s ease-in-out,
         border 0.2s ease-in-out;
 
       &:hover,
       &:active {
-        border: solid 1px ${({ theme }) => theme.grayBt + 50};
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
       }
       & > span {
@@ -141,8 +135,25 @@ export const Week = styled.div`
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+      & > button {
+        margin: 0;
+        padding: 0 8px;
+        width: 100%;
+
+        text-align: left;
+
+        border: solid 1px transparent;
+        border-radius: 20px;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        cursor: pointer;
+        outline: none;
+      }
     }
-    & > .long-event {
+    & > .long-event > button {
       // 컬러가 없는 경우 기본으로 아래 컬러가 출력됩니다.
       // 실제 컬러는 MonthlyCalendar 컴포넌트에서 인라인으로 관리됩니다.
       background-color: ${({ theme }) => theme.s1};
@@ -156,13 +167,13 @@ export const Week = styled.div`
     .date-wrapper {
       & > li {
         &::before {
-          height: 118px;
+          height: 126px;
         }
       }
     }
     .event-wrapper {
-      height: 118px;
-      & > li {
+      height: 126px;
+      & > li > button {
         font-size: 13px;
       }
     }
@@ -170,20 +181,23 @@ export const Week = styled.div`
 `
 
 export const EventDotList = styled.li<{ color: string }>`
-  &:before {
-    width: 5px;
-    height: 5px;
-    margin-right: 4px;
-    margin-left: -4px;
-    transform: translateY(-1px);
+  & > button {
+    background-color: unset;
+    &:before {
+      width: 5px;
+      height: 5px;
+      margin-right: 4px;
+      margin-left: -4px;
+      transform: translateY(5px);
 
-    display: inline-block;
+      display: inline-block;
 
-    background-color: ${props => props.color ?? props.theme.grayBt + 50};
-    border-radius: 3px;
+      background-color: ${props => props.color ?? props.theme.grayBt + 50};
+      border-radius: 3px;
 
-    vertical-align: top;
+      vertical-align: top;
 
-    content: '';
+      content: '';
+    }
   }
 `
