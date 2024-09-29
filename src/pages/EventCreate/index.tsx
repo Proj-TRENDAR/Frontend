@@ -48,12 +48,13 @@ export default function EventCreate() {
   const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
   const navigate = useNavigate()
 
-  const recurringInitial = {
+  const recurringInitial: IRecurring = {
     separationCount: null,
     maxNumOfOccurrances: null,
     dayOfWeek: null,
     dateOfMonth: null,
     weekOfMonth: null,
+    monthOfYear: null,
     recurringEndTime: null,
   }
 
