@@ -87,10 +87,28 @@ export default function MonthlyCalendar() {
           //  조건에서 event.isAllDay를 추가해줌. 추후 being이 1로 온다면 조건에서 event.isAllDay를 제외해도됨.
           // being 조건은 남겨야함. 하루종일이 아닌 일정이어도 여러날 걸친 일정이 long에 포함되어야함.
           long.push(event)
+        } else if (event.recurringStartTime !== undefined) {
+          // event.being === null 이어도 긴 일정이면서(다음주로 길게 이어지는 일정인데 하루 단위로 나눠진 경우)
+          // 반복 일정인경우
+          if (event.recurringStartTime === event.startTime && event.recurringEndTime === event.endTime) {
+            short.push(event)
+          } else {
+            long.push(event)
+          }
+        } else if (event.originStartTime !== undefined) {
+          // event.being === null 이어도 긴 일정이면서(다음주로 길게 이어지는 일정인데 하루 단위로 나눠진 경우)
+          // 반복 일정이 아닌경우
+          if (event.originStartTime === event.startTime && event.originEndTime === event.endTime) {
+            short.push(event)
+          } else {
+            long.push(event)
+          }
         } else {
+          // 그외 모든 일정은 짧은 일정
           short.push(event)
         }
       })
+      // console.debug(long, short)
       longEvent.push(long)
       shortEvent.push(short)
     })

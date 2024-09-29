@@ -23,7 +23,7 @@ export default function EventDetail() {
   const [{ selectedEvent }] = useAtom(eventInfoAtom)
   const navigate = useNavigate()
 
-  console.debug(selectedEvent)
+  // console.debug(selectedEvent)
 
   // const [event, setEvent] = useState<ICreateEvent>(initial)
   const theme = useTheme()
@@ -68,39 +68,53 @@ export default function EventDetail() {
         <div className="line">
           {selectedEvent?.isAllDay ? (
             <IconInputWrapper icon={<Clock />}>
-              <S.Text>
-                {dateFormat(new Date(selectedEvent?.startTime), 'YYYY년 MM월 DD일(d요일)')}
-                <br /> ~ {dateFormat(new Date(selectedEvent?.endTime), 'YYYY년 MM월 DD일(d요일)')}
-                {!selectedEvent?.isRecurringData && (
-                  <>
-                    <br />
-                    <span className="no-content">반복 없음</span>
-                  </>
-                )}
-              </S.Text>
+              {selectedEvent?.isRecurringData ? (
+                <S.Text>
+                  {dateFormat(new Date(selectedEvent.recurringStartTime), 'YYYY년 MM월 DD일(d요일)')}
+                  <br /> ~ {dateFormat(new Date(selectedEvent.recurringEndTime), 'YYYY년 MM월 DD일(d요일)')}
+                </S.Text>
+              ) : (
+                <S.Text>
+                  {dateFormat(new Date(selectedEvent.originStartTime), 'YYYY년 MM월 DD일(d요일)')}
+                  <br /> ~ {dateFormat(new Date(selectedEvent.originEndTime), 'YYYY년 MM월 DD일(d요일)')}
+                  <br />
+                  <span className="no-content">반복 없음</span>
+                </S.Text>
+              )}
             </IconInputWrapper>
           ) : (
             <IconInputWrapper icon={<Clock />}>
-              <S.Text>
-                {dateFormat(new Date(selectedEvent?.startTime), 'YYYY년 MM월 DD일(d요일) hh:mm')}
-                <br /> ~ {dateFormat(new Date(selectedEvent?.endTime), 'YYYY년 MM월 DD일(d요일) hh:mm')}
-                {!selectedEvent?.isRecurringData && (
-                  <>
-                    <br />
-                    <span className="no-content">반복 없음</span>
-                  </>
-                )}
-              </S.Text>
+              {selectedEvent?.isRecurringData ? (
+                <S.Text>
+                  {dateFormat(new Date(selectedEvent.recurringStartTime), 'YYYY년 MM월 DD일(d요일) hh:mm')}
+                  <br /> ~ {dateFormat(new Date(selectedEvent.recurringEndTime), 'YYYY년 MM월 DD일(d요일) hh:mm')}
+                </S.Text>
+              ) : (
+                <S.Text>
+                  {dateFormat(new Date(selectedEvent.originStartTime), 'YYYY년 MM월 DD일(d요일)')}
+                  <br /> ~ {dateFormat(new Date(selectedEvent.originEndTime), 'YYYY년 MM월 DD일(d요일)')}
+                  <br />
+                  <span className="no-content">반복 없음</span>
+                </S.Text>
+              )}
             </IconInputWrapper>
           )}
         </div>
         <div className="line">
           <IconInputWrapper icon={<Place />}>
-            <S.Text>{selectedEvent?.place ?? <span className="no-content">내용없음</span>}</S.Text>
+            <S.Text>
+              {selectedEvent?.place.length > 0 ? selectedEvent?.place : <span className="no-content">내용없음</span>}
+            </S.Text>
           </IconInputWrapper>
         </div>
         <IconInputWrapper icon={<Memo />}>
-          <S.Text>{selectedEvent?.description ?? <span className="no-content">내용없음</span>}</S.Text>
+          <S.Text>
+            {selectedEvent?.description.length > 0 ? (
+              selectedEvent?.place
+            ) : (
+              <span className="no-content">내용없음</span>
+            )}
+          </S.Text>
         </IconInputWrapper>
         <S.ButtonWrapper>
           <Button

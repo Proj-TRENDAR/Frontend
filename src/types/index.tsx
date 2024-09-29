@@ -1,17 +1,27 @@
-export interface IEvent {
+interface ICommonEvent {
   idx: string
   title: string
   isAllDay: boolean
-  isRecurringData: boolean
   being: number | null
   startTime: string
   endTime: string
-  originStartTime?: string
-  originEndTime?: string
+  originStartTime: string
+  originEndTime: string
   color: number
   place: string
   description: string
 }
+
+export interface IRecurringEvent extends ICommonEvent {
+  isRecurringData: true
+  recurringStartTime: string
+  recurringEndTime: string
+}
+export interface INonRecurringEvent extends ICommonEvent {
+  isRecurringData: false
+}
+
+export type IEvent = IRecurringEvent | INonRecurringEvent
 
 export interface IRoutineList {
   title: string

@@ -23,17 +23,25 @@ export default function EventList({ list }: Props) {
     <S.EventList>
       {list.map((event, index) => {
         const selectedDate = new Date(calendarInfo.selectedDate)
+
+        // 반복일정이거나 장기 일정인 경우에 따라 알맞게 일정을 보여줘야함
+        const thisEventStartTime =
+          (event.isRecurringData ? event.recurringStartTime : event.originStartTime) ?? event.startTime
+        const thisEventEndTime = (event.isRecurringData ? event.recurringEndTime : event.originEndTime) ?? event.endTime
+
+        // console.debug('check', event, thisEventStartTime, thisEventEndTime)
+
         return event.being !== null ? (
           <li key={`${index}-${event.idx}`} className={`long-event ${event.isAllDay ? '' : 'long-time'}`}>
             {event.isAllDay ? (
               <span className="time">하루</span>
             ) : (
               <span className="time">
-                {new Date(event.startTime).getTime() >= selectedDate.getTime() &&
-                  dateFormat(new Date(event.startTime), 'hh:mm')}{' '}
+                {new Date(thisEventStartTime).getTime() >= selectedDate.getTime() &&
+                  dateFormat(new Date(thisEventStartTime), 'hh:mm')}{' '}
                 ~{' '}
-                {new Date(event.endTime).getTime() <= selectedDate.getTime() + 1000 * 60 * 60 * 24 &&
-                  dateFormat(new Date(event.endTime), 'hh:mm')}
+                {new Date(thisEventEndTime).getTime() <= selectedDate.getTime() + 1000 * 60 * 60 * 24 &&
+                  dateFormat(new Date(thisEventEndTime), 'hh:mm')}
               </span>
             )}
             <button
@@ -57,7 +65,11 @@ export default function EventList({ list }: Props) {
         ) : (
           <li key={`${index}-${event.idx}`}>
             <span className="time">
-              {dateFormat(new Date(event.startTime), 'hh:mm')} ~ {dateFormat(new Date(event.endTime), 'hh:mm')}
+              {new Date(thisEventStartTime).getTime() >= selectedDate.getTime() &&
+                dateFormat(new Date(thisEventStartTime), 'hh:mm')}{' '}
+              ~{' '}
+              {new Date(thisEventEndTime).getTime() <= selectedDate.getTime() + 1000 * 60 * 60 * 24 &&
+                dateFormat(new Date(thisEventEndTime), 'hh:mm')}
             </span>
             <button
               onClick={() => {
