@@ -19,20 +19,27 @@ type Types = {
   }
 }
 
+const baseStyles = {
+  color: css`
+    ${({ theme }) => theme.basicBg}
+  `,
+  backgroundColor: css`
+    ${({ theme }) => theme.point}
+  `,
+  hoveredColor: css`
+    ${({ theme }) => theme.basicBg}
+  `,
+  hoveredBackgroundColor: css`
+    ${({ theme }) => theme.pointHover}
+  `,
+}
+
 export const types: Types = {
   save: {
-    color: css`
-      ${({ theme }) => theme.basicBg}
-    `,
-    backgroundColor: css`
-      ${({ theme }) => theme.point}
-    `,
-    hoveredColor: css`
-      ${({ theme }) => theme.basicBg}
-    `,
-    hoveredBackgroundColor: css`
-      ${({ theme }) => theme.pointHover}
-    `,
+    ...baseStyles,
+  },
+  stop: {
+    ...baseStyles,
   },
   cancel: {
     color: css`
@@ -47,15 +54,11 @@ export const types: Types = {
     `,
   },
   delete: {
-    color: css`
-      ${({ theme }) => theme.basicBg}
-    `,
+    color: baseStyles.color,
     backgroundColor: css`
       ${({ theme }) => theme.textRed}
     `,
-    hoveredColor: css`
-      ${({ theme }) => theme.basicBg}
-    `,
+    hoveredColor: baseStyles.hoveredColor,
     hoveredBackgroundColor: css`
       ${({ theme }) => theme.textRedDark}
     `,

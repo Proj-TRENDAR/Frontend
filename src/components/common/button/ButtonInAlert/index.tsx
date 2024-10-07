@@ -12,6 +12,7 @@ export const BUTTON_TYPE = {
   save: '저장',
   cancel: '취소',
   delete: '삭제',
+  stop: '중지',
 }
 
 export default function ButtonInAlert({ type, text, size = 'small', disabled = false, onClick }: Props) {

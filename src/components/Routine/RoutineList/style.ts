@@ -41,6 +41,10 @@ export const Routine = styled.li<{ color: number; type?: RoutineType }>`
         return `
           background-color: #4F4F4F;
         `
+      case 'stop':
+        return `
+          background-color: ${theme.basicBg};
+        `
       case 'basic':
       default:
         return `
@@ -53,7 +57,7 @@ export const Routine = styled.li<{ color: number; type?: RoutineType }>`
     margin-bottom: 8px;
   }
 
-  .delete-message {
+  .message {
     gap: 10px;
 
     flex-grow: 1;
@@ -61,7 +65,10 @@ export const Routine = styled.li<{ color: number; type?: RoutineType }>`
     display: flex;
     flex-direction: column;
 
-    color: ${({ theme }) => theme.basicBg};
+    color: ${({ type, theme }) => {
+      if (type === 'delete') return `${theme.basicBg}`
+      else return `${theme.text}`
+    }};
   }
 
   .button-wrapper {

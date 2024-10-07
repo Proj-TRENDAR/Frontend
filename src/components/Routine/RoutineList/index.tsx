@@ -153,7 +153,7 @@ function RoutineItem({
   if (type === 'delete') {
     return (
       <S.Routine key={routine.sequence} color={routine.color} type={type}>
-        <div className="delete-message">
+        <div className="message">
           <div>
             <b>'{routine.title}'</b>을(를) 삭제하시겠습니까?
             <br />
@@ -162,6 +162,22 @@ function RoutineItem({
           <div className="button-wrapper">
             <ButtonInAlert type="cancel" onClick={() => setType('basic')} />
             <ButtonInAlert type="delete" onClick={() => deleteRoutineItem(routine.idx)} />
+          </div>
+        </div>
+      </S.Routine>
+    )
+  } else if (type === 'stop') {
+    return (
+      <S.Routine key={routine.sequence} color={routine.color} type={type}>
+        <div className="message">
+          <div>
+            <b>'{routine.title}'</b>을(를) 중지하시겠습니까?
+            <br />
+            루틴 기록은 삭제되지 않습니다.
+          </div>
+          <div className="button-wrapper">
+            <ButtonInAlert type="cancel" onClick={() => setType('basic')} />
+            <ButtonInAlert type="stop" onClick={() => console.log('중지 구현 필요')} />
           </div>
         </div>
       </S.Routine>
@@ -179,7 +195,7 @@ function RoutineItem({
           <button onClick={() => console.log('수정')}>수정</button>
         </li>
         <li>
-          <button onClick={() => console.log('중지')}>중지</button>
+          <button onClick={() => setType('stop')}>중지</button>
         </li>
         <li>
           <button className="red" onClick={() => setType('delete')}>
