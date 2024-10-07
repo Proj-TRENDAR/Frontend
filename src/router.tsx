@@ -21,6 +21,7 @@ const router = createBrowserRouter(
         <Route path="routine-list" element={<RoutineList />} />
         <Route path="to-do-list" element={<WeeklyTodoList />} />
         <Route path="event-create" element={<EventCreate />} />
+        <Route path="event-edit" element={<EventCreate />} />
         <Route path="event/:idx" element={<EventDetail />} />
       </Route>
       <Route element={<LoginLayout />}>

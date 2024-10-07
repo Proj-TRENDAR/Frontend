@@ -119,8 +119,8 @@ export default function EventDetail() {
         <S.ButtonWrapper>
           <Button
             size="small"
-            onCLick={() => {
-              //   TODO: 수정 페이지로 이동
+            onClick={() => {
+              navigate('/event-edit')
             }}
           >
             수정
@@ -128,7 +128,7 @@ export default function EventDetail() {
           <Button
             color={theme.grayBt}
             size="small"
-            onCLick={() => {
+            onClick={() => {
               //   TODO: 삭제 모달 추가(API 추가)
             }}
           >

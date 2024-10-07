@@ -18,7 +18,8 @@ import { useAtom } from 'jotai/index'
 import { calendarInfoAtom, userInfoAtom } from '@/store'
 import Button from '@components/common/button/Button'
 import { createEvent, getEventList } from '@/api/Event/eventApi.ts'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
+import { eventInfoAtom } from '@/store/eventAtoms.ts'
 //0 = 일요일, 1 = 월요일, 2 = 화요일, 3 = 수요일, 4 = 목요일, 5 = 금요일, 6 = 토요일
 
 export interface IRecurring {
@@ -47,6 +48,7 @@ export default function EventCreate() {
   const [userInfo] = useAtom(userInfoAtom)
   const [calendarInfo, setCalendarInfo] = useAtom(calendarInfoAtom)
   const navigate = useNavigate()
+  const location = useLocation()
 
   const recurringInitial: IRecurring = {
     separationCount: null,
@@ -57,7 +59,6 @@ export default function EventCreate() {
     monthOfYear: null,
     recurringEndTime: null,
   }
-
   const initial: ICreateEvent = {
     title: '',
     place: '',
@@ -95,24 +96,45 @@ export default function EventCreate() {
     },
   ]
 
+  const [eventInfo] = useAtom(eventInfoAtom)
   const [event, setEvent] = useState<ICreateEvent>(initial)
   const theme = useTheme()
 
   useEffect(() => {
-    if (event.startTime === null) {
-      // 시작시간이 없다면 === 선택된 시간이 없다면
-      // 시작시간 = 현재시간
-      // 종료시간 = 시작시간 + 1시간
-      const currentTime: Date = new Date()
-      const oneHourLater: Date = new Date()
-      oneHourLater.setHours(oneHourLater.getHours() + 1)
-      setEvent({ ...event, startTime: currentTime, endTime: oneHourLater })
+    const selected = eventInfo?.selectedEvent
+    if (location.pathname.includes('event-edit') && selected) {
+      // 수정인 경우 초기화
+      const selectedEvent = initial
+      Object.keys(selectedEvent).forEach((key: keyof ICreateEvent) => {
+        if (key === 'color') {
+          selectedEvent[key] = `s${selected[key]}`
+        } else if (key === 'startTime' || key === 'endTime') {
+          selectedEvent[key] = new Date(selected[key])
+        } else {
+          selectedEvent[key] = selected[key]
+        }
+      })
+
+      // FIXME: 수정 시 데이터 체크 중 확인 필요..
+      console.debug({ ...event, ...selectedEvent, isRecurring: selected.isRecurringData })
+      setEvent({ ...event, ...selectedEvent, isRecurring: selected.isRecurringData })
     } else {
-      // 시작시간이 있다면 (초기화 된 상태: 시작시간 = 선택된 시간)
-      // 종료시간 = 시작시간 + 1시간
-      const oneHourLater: Date = new Date(event.startTime)
-      oneHourLater.setHours(oneHourLater.getHours() + 1)
-      setEvent({ ...event, endTime: oneHourLater })
+      // 생성인 경우 초기화
+      if (event.startTime === null) {
+        // 시작시간이 없다면 === 선택된 시간이 없다면
+        // 시작시간 = 현재시간
+        // 종료시간 = 시작시간 + 1시간
+        const currentTime: Date = new Date()
+        const oneHourLater: Date = new Date()
+        oneHourLater.setHours(oneHourLater.getHours() + 1)
+        setEvent({ ...event, startTime: currentTime, endTime: oneHourLater })
+      } else {
+        // 시작시간이 있다면 (초기화 된 상태: 시작시간 = 선택된 시간)
+        // 종료시간 = 시작시간 + 1시간
+        const oneHourLater: Date = new Date(event.startTime)
+        oneHourLater.setHours(oneHourLater.getHours() + 1)
+        setEvent({ ...event, endTime: oneHourLater })
+      }
     }
   }, [])
 
@@ -219,8 +241,17 @@ export default function EventCreate() {
               if (event) {
                 // TODO: valid 필요
                 console.debug(event)
-                const result = await createEvent(userInfo.id, event)
-                if (result.status === 201) {
+
+                let result
+                if (location.pathname.includes('event-edit')) {
+                  // 수정
+                  // TODO: 수정 API 연동
+                } else {
+                  // 생성
+                  result = await createEvent(userInfo.id, event)
+                }
+
+                if (result?.status === 201) {
                   // 일정추가 닫기
                   navigate('/')
                   // 일정 목록 가져오기
