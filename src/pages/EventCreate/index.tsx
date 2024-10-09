@@ -17,7 +17,7 @@ import RecurringDetailInput from '@components/Event/RecurringDetailInput'
 import { useAtom } from 'jotai/index'
 import { calendarInfoAtom, userInfoAtom } from '@/store'
 import Button from '@components/common/button/Button'
-import { createEvent, getEventList } from '@/api/Event/eventApi.ts'
+import { createEvent, getEventList, updateEvent } from '@/api/Event/eventApi.ts'
 import { useLocation, useNavigate } from 'react-router'
 import { eventInfoAtom } from '@/store/eventAtoms.ts'
 //0 = 일요일, 1 = 월요일, 2 = 화요일, 3 = 수요일, 4 = 목요일, 5 = 금요일, 6 = 토요일
@@ -246,6 +246,7 @@ export default function EventCreate() {
                 if (location.pathname.includes('event-edit')) {
                   // 수정
                   // TODO: 수정 API 연동
+                  result = await updateEvent(userInfo.id, event)
                 } else {
                   // 생성
                   result = await createEvent(userInfo.id, event)
@@ -256,13 +257,15 @@ export default function EventCreate() {
                   navigate('/')
                   // 일정 목록 가져오기
                   const selectedDate = calendarInfo.selectedDate
-                  getEventList(selectedDate.getFullYear(), selectedDate.getMonth() + 1).then(res => {
-                    if (calendarInfo.selectedDate) {
-                      setCalendarInfo({ ...calendarInfo, selectedMonthInfo: res.data })
-                    } else {
-                      setCalendarInfo({ selectedDate: selectedDate, selectedMonthInfo: res.data })
-                    }
-                  })
+                  if (selectedDate) {
+                    getEventList(selectedDate.getFullYear(), selectedDate.getMonth() + 1).then(res => {
+                      if (calendarInfo.selectedDate) {
+                        setCalendarInfo({ ...calendarInfo, selectedMonthInfo: res.data })
+                      } else {
+                        setCalendarInfo({ selectedDate: selectedDate, selectedMonthInfo: res.data })
+                      }
+                    })
+                  }
                 } else {
                   //  TODO: 실패 알림 필요
                 }

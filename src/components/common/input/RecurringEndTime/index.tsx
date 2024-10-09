@@ -37,16 +37,6 @@ export default function RecurringEndTime({
   const [selectEndDate, setSelectEndDate] = useState<Date | null>(null) // 옵션에서 표시할 endDate
   // 실제 저장할 데이터는 props에 있습니다.
 
-  const handleKeepRepeat = () => {
-    setActiveOption('keep-repeat')
-  }
-  const handleMaxNum = () => {
-    setActiveOption('max-num')
-  }
-  const handleEndTime = () => {
-    setActiveOption('end-time')
-  }
-
   const calcEndDate = (newSelectMaxNum: number) => {
     if (recurringType === 'D') {
       const count = separationCount * newSelectMaxNum
@@ -126,16 +116,16 @@ export default function RecurringEndTime({
       setActiveOption('keep-repeat')
       setSelectEndDate(endTime ?? startTime)
       setSelectMaxNum(initialMaxNum)
-    } else if (recurringEndTime !== null) {
-      console.debug('기간 정함', recurringEndTime, maxNumOfOccurrances)
-      setActiveOption('end-time')
-      setSelectEndDate(recurringEndTime)
-      setSelectMaxNum(initialMaxNum)
     } else if (maxNumOfOccurrances !== null) {
       console.debug('횟수 정함', recurringEndTime, maxNumOfOccurrances)
       setActiveOption('max-num')
       setSelectEndDate(endTime ?? startTime)
       setSelectMaxNum(maxNumOfOccurrances)
+    } else if (recurringEndTime !== null) {
+      console.debug('기간 정함', recurringEndTime, maxNumOfOccurrances)
+      setActiveOption('end-time')
+      setSelectEndDate(recurringEndTime)
+      setSelectMaxNum(initialMaxNum)
     }
   }, [recurringType])
 
@@ -153,7 +143,7 @@ export default function RecurringEndTime({
           <button
             className={`option keep-repeat ${activeOption === 'keep-repeat' ? 'current' : ''}`}
             onClick={() => {
-              handleKeepRepeat()
+              setActiveOption('keep-repeat')
             }}
           >
             계속 반복
@@ -164,7 +154,7 @@ export default function RecurringEndTime({
               console.debug('b', selectMaxNum)
               setSelectEndDate(calcEndDate(selectMaxNum))
               setRecurringEndTime(calcEndDate(selectMaxNum), selectMaxNum)
-              handleMaxNum()
+              setActiveOption('max-num')
             }}
           >
             <IconButton
@@ -206,7 +196,7 @@ export default function RecurringEndTime({
               if (maxNumOfOccurrances && selectEndDate) {
                 setRecurringEndTime(selectEndDate, null)
               }
-              handleEndTime()
+              setActiveOption('end-time')
             }}
           >
             <DatePickerInput

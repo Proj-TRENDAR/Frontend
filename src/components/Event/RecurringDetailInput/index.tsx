@@ -79,7 +79,7 @@ export default function RecurringDetailInput({ event, setEvent, recurringInitial
     <S.Wrapper>
       <SeparationCountInput
         recurringType={event.recurringType}
-        value={event.separationCount}
+        value={event.separationCount === 0 ? 1 : event.separationCount}
         setValue={(separationCount: number | null) => {
           setEvent({ ...event, separationCount: separationCount })
         }}
