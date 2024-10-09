@@ -5,6 +5,7 @@ import {
   deleteRoutine,
   deleteRoutineCompleted,
   postRoutineCompleted,
+  stopRoutine,
 } from '@/api/Routine/routineApi.ts'
 import { useAtom } from 'jotai/index'
 import { calendarInfoAtom } from '@/store'
@@ -85,9 +86,10 @@ export default function RoutineList({ list, setRoutineList }: Props) {
     setIsDone(newIsDone)
   }
 
-  const deleteRoutineItem = async (routineIdx: number) => {
+  const deactivateRoutine = async (routineIdx: number, actionType: 'stop' | 'delete') => {
     try {
-      const result = await deleteRoutine(routineIdx)
+      const result = actionType === 'delete' ? await deleteRoutine(routineIdx) : await stopRoutine(routineIdx)
+
       if (result.status === 204) {
         const { data } = await getRoutineList()
         const filteredData = data.filter(item => !item.endTime || selectedDate < new Date(item.endTime))
@@ -96,7 +98,9 @@ export default function RoutineList({ list, setRoutineList }: Props) {
       }
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
-        setErrorMessage(err.response.data.message || '삭제 중 오류가 발생했습니다.')
+        setErrorMessage(
+          err.response.data.message || `${actionType === 'delete' ? '삭제' : '중지'} 중 오류가 발생했습니다.`
+        )
       } else {
         setErrorMessage('예상치 못한 오류가 발생했습니다.')
       }
@@ -113,7 +117,7 @@ export default function RoutineList({ list, setRoutineList }: Props) {
             index={index}
             routine={routine}
             updateRoutineItem={updateRoutineItem}
-            deleteRoutineItem={deleteRoutineItem}
+            deactivateRoutine={deactivateRoutine}
             isDone={isDone[index]}
             type={types[index]}
             setType={newType => {
@@ -133,7 +137,7 @@ interface RoutineItemProps {
   index: number
   routine: IRoutine
   updateRoutineItem: (index: number) => Promise<void>
-  deleteRoutineItem: (index: number) => Promise<void>
+  deactivateRoutine: (index: number, actionType: 'stop' | 'delete') => Promise<void>
   isDone: boolean
   type: 'basic' | 'edit' | 'stop' | 'delete'
   setType: (type: 'basic' | 'edit' | 'stop' | 'delete') => void
@@ -143,7 +147,7 @@ function RoutineItem({
   index,
   routine,
   updateRoutineItem,
-  deleteRoutineItem,
+  deactivateRoutine,
   isDone,
   type,
   setType,
@@ -161,7 +165,7 @@ function RoutineItem({
           </div>
           <div className="button-wrapper">
             <ButtonInAlert type="cancel" onClick={() => setType('basic')} />
-            <ButtonInAlert type="delete" onClick={() => deleteRoutineItem(routine.idx)} />
+            <ButtonInAlert type="delete" onClick={() => deactivateRoutine(routine.idx, 'delete')} />
           </div>
         </div>
       </S.Routine>
@@ -177,7 +181,7 @@ function RoutineItem({
           </div>
           <div className="button-wrapper">
             <ButtonInAlert type="cancel" onClick={() => setType('basic')} />
-            <ButtonInAlert type="stop" onClick={() => console.log('중지 구현 필요')} />
+            <ButtonInAlert type="stop" onClick={() => deactivateRoutine(routine.idx, stop)} />
           </div>
         </div>
       </S.Routine>
