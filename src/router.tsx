@@ -11,6 +11,7 @@ import Guide from '@pages/Guide'
 import ComponentsGuide from '@pages/ComponentsGuide'
 import WeeklyTodoList from '@pages/WeeklyTodoList'
 import EventCreate from '@pages/EventCreate'
+import RoutineCreate from '@pages/RoutineCreate'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route element={<MainLayout />}>
         <Route path="" element={<Home />} />
         <Route path="routine-list" element={<RoutineList />} />
+        <Route path="routine-create" element={<RoutineCreate />} />
         <Route path="to-do-list" element={<WeeklyTodoList />} />
         <Route path="event-create" element={<EventCreate />} />
       </Route>

@@ -24,6 +24,8 @@ export interface IRoutine {
   deletedAt: string | null // FIXME: 불필요 시 삭제
 }
 
+export type ICreateRoutine = Omit<IRoutine, 'idx' | 'sequence' | 'completed' | 'deletedAt'>
+
 export interface ITodoList {
   idx: number
   title: string

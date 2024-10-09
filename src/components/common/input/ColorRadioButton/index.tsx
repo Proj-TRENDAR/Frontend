@@ -1,12 +1,15 @@
 import * as S from './style.ts'
 import { useTheme } from 'styled-components'
+import React from 'react'
+
 interface Props {
+  icon?: React.ReactNode
   color: 'routine' | 'event'
   value: string
   setValue: (value: string) => void
 }
 
-export default function ColorRadioButton({ color, value, setValue }: Props) {
+export default function ColorRadioButton({ icon, color, value, setValue }: Props) {
   const colorList = {
     routine: ['r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7'],
     event: ['s1', 's2', 's3', 's4', 's5', 's6', 's7'],
@@ -14,7 +17,13 @@ export default function ColorRadioButton({ color, value, setValue }: Props) {
 
   return (
     <S.ColorRadioButtonWrapper>
-      <label htmlFor="color">색상</label>
+      {icon ? (
+        icon
+      ) : (
+        <>
+          <label htmlFor="color">색상</label>
+        </>
+      )}
       {colorList[color].map(v => (
         <ColorRadioInput
           key={v}

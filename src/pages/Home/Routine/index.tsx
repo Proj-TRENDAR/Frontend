@@ -6,10 +6,10 @@ import Add from '@assets/image/icon/ic-add.svg?react'
 import * as S from './style'
 import { AccordionItem } from '@layouts/Accordion'
 import { PageHeader } from '@layouts/PageHeader'
-import IconButton from '@components/common/button/IconButton'
 import RoutineList from '@components/Routine/RoutineList'
 import { calendarInfoAtom, routineAtom } from '@/store'
 import { useAtom } from 'jotai'
+import IconLink from '@components/common/link/IconLink'
 
 interface Props {
   id: string
@@ -43,13 +43,9 @@ export default function Routine({ id }: Props) {
         <PageHeader
           title={<PageHeader.InnerListTitle title="ROUTINE" url="routine-list" />}
           button={
-            <IconButton
-              onClick={() => {
-                // TODO: 루틴 추가 기능 구현
-              }}
-            >
+            <IconLink url="routine-create">
               <Add />
-            </IconButton>
+            </IconLink>
           }
         />
       }
