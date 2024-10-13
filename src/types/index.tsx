@@ -16,7 +16,7 @@ export interface IRoutine {
   color: number
   description: string | null
   weeklyCondition: number
-  days: number[]
+  days: number[] | null
   startTime: string
   endTime: string | null
   completed: string[] | null

@@ -43,6 +43,8 @@ export const ColorRadioButton = styled.input<{ color: string }>`
         width: 16px;
         height: 16px;
         background-image: url(${CheckIcon});
+        background-position: 50% 50%;
+        border: 1px solid ${({ theme }) => theme.basicBg};
         border-radius: 14px;
         position: absolute;
         top: 50%;
