@@ -7,9 +7,12 @@ import IconTextInput from '@components/common/input/IconTextInput'
 import Title from '@assets/image/icon/event/ic-title.svg?react'
 import Color from '@assets/image/icon/event/ic-color.svg?react'
 import Memo from '@assets/image/icon/event/ic-memo.svg?react'
+import Check from '@assets/image/icon/event/ic-check.svg?react'
+
 import { ICreateRoutine } from '@/types'
 import ColorRadioButton from '@components/common/input/ColorRadioButton'
 import IconTextArea from '@components/common/input/IconTextArea'
+import CheckDaysOrFrequency from '@components/common/input/CheckDaysOrFrequency'
 
 export default function RoutineCreate() {
   const initial: ICreateRoutine = {
@@ -25,6 +28,7 @@ export default function RoutineCreate() {
   const [routine, setRoutine] = useState<ICreateRoutine>(initial)
 
   const theme = useTheme()
+
   return (
     <PageLayout title="루틴 추가" backgroundColor={theme.pointBg}>
       <S.RoutineCreateWrapper color={`r${routine.color}`}>
@@ -36,6 +40,13 @@ export default function RoutineCreate() {
             setRoutine({ ...routine, title: title })
           }}
           placeholder="제목 입력"
+        />
+        <CheckDaysOrFrequency
+          icon={<Check fill={theme.basicBg} style={{ opacity: 0.6 }} />}
+          dayOfWeek={routine.days}
+          setDayOfWeek={(days: number[] | null) => {
+            setRoutine({ ...routine, days })
+          }}
         />
         <ColorRadioButton
           icon={<Color fill={theme.basicBg} style={{ opacity: 0.6 }} />}
