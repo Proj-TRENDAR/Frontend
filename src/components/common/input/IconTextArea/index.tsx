@@ -7,8 +7,9 @@ interface Props {
   value: string
   setValue: (value: string) => void
   placeholder: string
+  rows: number
 }
-export default function IconTextArea({ icon, id, value, setValue, placeholder }: Props) {
+export default function IconTextArea({ icon, id, value, setValue, placeholder, rows = 5 }: Props) {
   return (
     <IconInputWrapper icon={icon}>
       <S.TextArea
@@ -18,6 +19,7 @@ export default function IconTextArea({ icon, id, value, setValue, placeholder }:
           setValue(e.target.value)
         }}
         placeholder={placeholder}
+        rows={rows}
       />
     </IconInputWrapper>
   )

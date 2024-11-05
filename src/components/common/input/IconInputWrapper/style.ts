@@ -48,7 +48,6 @@ export const IconInputWrapper = styled.div<{ $backgroundColor: string }>`
       word-break: break-all;
       ${inputStyle};
       resize: none;
-      height: 7em;
       line-height: 1.3em;
 
       &::-webkit-scrollbar {

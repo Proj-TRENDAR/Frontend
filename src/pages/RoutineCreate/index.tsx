@@ -64,6 +64,7 @@ export default function RoutineCreate() {
             setRoutine({ ...routine, description: description })
           }}
           placeholder="루틴 설명 또는 계획을 작성해보세요."
+          rows={8}
         />
       </S.RoutineCreateWrapper>
     </PageLayout>
